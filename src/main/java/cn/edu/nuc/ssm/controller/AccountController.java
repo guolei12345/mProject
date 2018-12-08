@@ -18,7 +18,7 @@ public class AccountController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login2(){
-		
+		//todo
 		return "login";
 	}
 	
