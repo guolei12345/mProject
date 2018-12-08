@@ -17,7 +17,7 @@ public class AccountController {
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login2(){
-		//todo  mysql
+		//todo  mysq
 		return "login";
 	}
 	
