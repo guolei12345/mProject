@@ -10,7 +10,7 @@
    
   <logger name="logback"/>   
    
-  <root level="DEBUG">             
+  <root level="INFO">
     <appender-ref ref="STDOUT" />   
   </root>     
      
