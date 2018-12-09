@@ -1,7 +1,5 @@
 package cn.edu.nuc.ssm.service.interfaces;
 
-import cn.edu.nuc.ssm.entity.Account;
-
 public interface AccountService {
 	
 	/**

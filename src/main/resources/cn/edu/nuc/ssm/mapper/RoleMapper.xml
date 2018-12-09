@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.nuc.ssm.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.Role">
+    <id column="roleID" jdbcType="VARCHAR" property="roleid" />
+    <result column="roleName" jdbcType="VARCHAR" property="rolename" />
+    <result column="createTime" jdbcType="VARCHAR" property="createtime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="isCheck" jdbcType="VARCHAR" property="ischeck" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="colum1" jdbcType="VARCHAR" property="colum1" />
+    <result column="colum2" jdbcType="VARCHAR" property="colum2" />
+    <result column="colum3" jdbcType="VARCHAR" property="colum3" />
+    <result column="colum4" jdbcType="VARCHAR" property="colum4" />
+    <result column="colum5" jdbcType="VARCHAR" property="colum5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    roleID, roleName, createTime, description, isCheck, status, type, colum1, colum2, 
+    colum3, colum4, colum5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from role
+    where roleID = #{roleid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from role
+    where roleID = #{roleid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.Role">
+    insert into role (roleID, roleName, createTime, 
+      description, isCheck, status, 
+      type, colum1, colum2, 
+      colum3, colum4, colum5
+      )
+    values (#{roleid,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{createtime,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{ischeck,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{colum1,jdbcType=VARCHAR}, #{colum2,jdbcType=VARCHAR}, 
+      #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, #{colum5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.Role">
+    insert into role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        roleID,
+      </if>
+      <if test="rolename != null">
+        roleName,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="ischeck != null">
+        isCheck,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="colum1 != null">
+        colum1,
+      </if>
+      <if test="colum2 != null">
+        colum2,
+      </if>
+      <if test="colum3 != null">
+        colum3,
+      </if>
+      <if test="colum4 != null">
+        colum4,
+      </if>
+      <if test="colum5 != null">
+        colum5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roleid != null">
+        #{roleid,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null">
+        #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null">
+        #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null">
+        #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null">
+        #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null">
+        #{colum5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.Role">
+    update role
+    <set>
+      <if test="rolename != null">
+        roleName = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        isCheck = #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null">
+        colum1 = #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null">
+        colum2 = #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null">
+        colum3 = #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null">
+        colum4 = #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null">
+        colum5 = #{colum5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where roleID = #{roleid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.Role">
+    update role
+    set roleName = #{rolename,jdbcType=VARCHAR},
+      createTime = #{createtime,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      isCheck = #{ischeck,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      colum1 = #{colum1,jdbcType=VARCHAR},
+      colum2 = #{colum2,jdbcType=VARCHAR},
+      colum3 = #{colum3,jdbcType=VARCHAR},
+      colum4 = #{colum4,jdbcType=VARCHAR},
+      colum5 = #{colum5,jdbcType=VARCHAR}
+    where roleID = #{roleid,jdbcType=VARCHAR}
+  </update>
+</mapper>

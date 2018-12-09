@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.nuc.ssm.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.User">
+    <id column="userId" jdbcType="VARCHAR" property="userid" />
+    <result column="userName" jdbcType="VARCHAR" property="username" />
+    <result column="loginName" jdbcType="VARCHAR" property="loginname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="tell" jdbcType="VARCHAR" property="tell" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="creatTime" jdbcType="VARCHAR" property="creattime" />
+    <result column="loginTime" jdbcType="VARCHAR" property="logintime" />
+    <result column="lastLoginTime" jdbcType="VARCHAR" property="lastlogintime" />
+    <result column="count" jdbcType="VARCHAR" property="count" />
+    <result column="isCheck" jdbcType="VARCHAR" property="ischeck" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="colum1" jdbcType="VARCHAR" property="colum1" />
+    <result column="colum2" jdbcType="VARCHAR" property="colum2" />
+    <result column="colum3" jdbcType="VARCHAR" property="colum3" />
+    <result column="colum4" jdbcType="VARCHAR" property="colum4" />
+    <result column="colum5" jdbcType="VARCHAR" property="colum5" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    userId, userName, loginName, password, tell, email, creatTime, loginTime, lastLoginTime, 
+    count, isCheck, status, type, colum1, colum2, colum3, colum4, colum5
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userId = #{userid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where userId = #{userid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.User">
+    insert into user (userId, userName, loginName, 
+      password, tell, email, 
+      creatTime, loginTime, lastLoginTime, 
+      count, isCheck, status, 
+      type, colum1, colum2, 
+      colum3, colum4, colum5
+      )
+    values (#{userid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{loginname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{tell,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{creattime,jdbcType=VARCHAR}, #{logintime,jdbcType=VARCHAR}, #{lastlogintime,jdbcType=VARCHAR}, 
+      #{count,jdbcType=VARCHAR}, #{ischeck,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{colum1,jdbcType=VARCHAR}, #{colum2,jdbcType=VARCHAR}, 
+      #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, #{colum5,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userId,
+      </if>
+      <if test="username != null">
+        userName,
+      </if>
+      <if test="loginname != null">
+        loginName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="tell != null">
+        tell,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="creattime != null">
+        creatTime,
+      </if>
+      <if test="logintime != null">
+        loginTime,
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="ischeck != null">
+        isCheck,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="colum1 != null">
+        colum1,
+      </if>
+      <if test="colum2 != null">
+        colum2,
+      </if>
+      <if test="colum3 != null">
+        colum3,
+      </if>
+      <if test="colum4 != null">
+        colum4,
+      </if>
+      <if test="colum5 != null">
+        colum5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tell != null">
+        #{tell,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        #{creattime,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        #{logintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null">
+        #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null">
+        #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null">
+        #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null">
+        #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null">
+        #{colum5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.User">
+    update user
+    <set>
+      <if test="username != null">
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="loginname != null">
+        loginName = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="tell != null">
+        tell = #{tell,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creattime != null">
+        creatTime = #{creattime,jdbcType=VARCHAR},
+      </if>
+      <if test="logintime != null">
+        loginTime = #{logintime,jdbcType=VARCHAR},
+      </if>
+      <if test="lastlogintime != null">
+        lastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=VARCHAR},
+      </if>
+      <if test="ischeck != null">
+        isCheck = #{ischeck,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null">
+        colum1 = #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null">
+        colum2 = #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null">
+        colum3 = #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null">
+        colum4 = #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null">
+        colum5 = #{colum5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.User">
+    update user
+    set userName = #{username,jdbcType=VARCHAR},
+      loginName = #{loginname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      tell = #{tell,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      creatTime = #{creattime,jdbcType=VARCHAR},
+      loginTime = #{logintime,jdbcType=VARCHAR},
+      lastLoginTime = #{lastlogintime,jdbcType=VARCHAR},
+      count = #{count,jdbcType=VARCHAR},
+      isCheck = #{ischeck,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      colum1 = #{colum1,jdbcType=VARCHAR},
+      colum2 = #{colum2,jdbcType=VARCHAR},
+      colum3 = #{colum3,jdbcType=VARCHAR},
+      colum4 = #{colum4,jdbcType=VARCHAR},
+      colum5 = #{colum5,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=VARCHAR}
+  </update>
+</mapper>

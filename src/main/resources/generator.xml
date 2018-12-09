@@ -24,16 +24,16 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
         <!-- 生成实体类的包名和位置，这里配置将生成的实体类放在me.gacl.domain这个包下 springmvc_spring_mybatis-->
-        <javaModelGenerator targetPackage="cn.edu.nuc.ssm.entity" targetProject="mProject\src\main\java">
+        <javaModelGenerator targetPackage="cn.edu.nuc.ssm.entity" targetProject="E:\GitWork\mProject\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
         <!-- 生成的SQL映射文件包名和位置，这里配置将生成的SQL映射文件放在me.gacl.mapping这个包下 -->
-        <sqlMapGenerator targetPackage="cn.edu.nuc.ssm.mapper" targetProject="mProject\src\main\java">
+        <sqlMapGenerator targetPackage="cn.edu.nuc.ssm.mapper" targetProject="E:\GitWork\mProject\src\main\java">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置，这里配置将生成的dao类放在me.gacl.dao这个包下 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.nuc.ssm.dao" targetProject="mProject\src\main\resources">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.nuc.ssm.dao" targetProject="E:\GitWork\mProject\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->

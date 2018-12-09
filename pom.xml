@@ -173,7 +173,12 @@
 	    <artifactId>logback-access</artifactId>
 	    <version>1.1.7</version>
 	</dependency>
-	
+	  <!-- https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core -->
+	  <dependency>
+		  <groupId>org.mybatis.generator</groupId>
+		  <artifactId>mybatis-generator-core</artifactId>
+		  <version>1.3.7</version>
+	  </dependency>
   </dependencies>
   <build>
     <finalName>springmvc_spring_mybatis</finalName>

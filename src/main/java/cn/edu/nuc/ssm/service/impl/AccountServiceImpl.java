@@ -3,8 +3,6 @@ package cn.edu.nuc.ssm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import cn.edu.nuc.ssm.dao.AccountMapper;
-import cn.edu.nuc.ssm.entity.Account;
 import cn.edu.nuc.ssm.service.interfaces.AccountService;
 
 @Service
