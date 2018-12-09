@@ -130,4 +130,23 @@ public class Power {
     public void setColum5(String colum5) {
         this.colum5 = colum5 == null ? null : colum5.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Power{" +
+                "powerid='" + powerid + '\'' +
+                ", prapoerid='" + prapoerid + '\'' +
+                ", powername='" + powername + '\'' +
+                ", url='" + url + '\'' +
+                ", ischeck='" + ischeck + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", type='" + type + '\'' +
+                ", colum1='" + colum1 + '\'' +
+                ", colum2='" + colum2 + '\'' +
+                ", colum3='" + colum3 + '\'' +
+                ", colum4='" + colum4 + '\'' +
+                ", colum5='" + colum5 + '\'' +
+                '}';
+    }
 }
