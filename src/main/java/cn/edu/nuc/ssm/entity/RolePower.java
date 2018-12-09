@@ -5,7 +5,7 @@ public class RolePower {
 
     private String roleid;
 
-    private String userid;
+    private String powerid;
 
     public String getId() {
         return id;
@@ -23,11 +23,11 @@ public class RolePower {
         this.roleid = roleid == null ? null : roleid.trim();
     }
 
-    public String getUserid() {
-        return userid;
+    public String getPowerid() {
+        return powerid;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid == null ? null : userid.trim();
+    public void setPowerid(String powerid) {
+        this.powerid = powerid == null ? null : powerid.trim();
     }
 }

@@ -4,10 +4,10 @@
   <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.RolePower">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="roleid" jdbcType="VARCHAR" property="roleid" />
-    <result column="userid" jdbcType="VARCHAR" property="userid" />
+    <result column="powerid" jdbcType="VARCHAR" property="powerid" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, roleid, userid
+    id, roleid, powerid
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
@@ -20,9 +20,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.RolePower">
-    insert into rolepower (id, roleid, userid
+    insert into rolepower (id, roleid, powerid
       )
-    values (#{id,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}
+    values (#{id,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}, #{powerid,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.RolePower">
@@ -34,8 +34,8 @@
       <if test="roleid != null">
         roleid,
       </if>
-      <if test="userid != null">
-        userid,
+      <if test="powerid != null">
+        powerid,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -45,8 +45,8 @@
       <if test="roleid != null">
         #{roleid,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        #{userid,jdbcType=VARCHAR},
+      <if test="powerid != null">
+        #{powerid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -56,8 +56,8 @@
       <if test="roleid != null">
         roleid = #{roleid,jdbcType=VARCHAR},
       </if>
-      <if test="userid != null">
-        userid = #{userid,jdbcType=VARCHAR},
+      <if test="powerid != null">
+        powerid = #{powerid,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
@@ -65,7 +65,7 @@
   <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.RolePower">
     update rolepower
     set roleid = #{roleid,jdbcType=VARCHAR},
-      userid = #{userid,jdbcType=VARCHAR}
+      powerid = #{powerid,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
 </mapper>
