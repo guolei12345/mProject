@@ -36,6 +36,16 @@ public class User {
     private String colum4;
 
     private String colum5;
+    //验证码
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 
     public String getUserid() {
         return userid;

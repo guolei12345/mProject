@@ -1,5 +1,6 @@
 package cn.edu.nuc.ssm.service.impl;
 
+import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.dao.PowerMapper;
 import cn.edu.nuc.ssm.dao.UserMapper;
 import cn.edu.nuc.ssm.entity.Power;
@@ -46,4 +47,23 @@ public class UserServiceImpl implements UserService {
     public int updateByPrimaryKey(User record) {
         return userMapper.updateByPrimaryKey(record);
     }
+
+    /**
+     * 校验登陆状态
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean login(User user) {
+        boolean loginFlag = false;
+        String tell = user.getTell();
+        User userLogin = userMapper.selectByTell(tell);
+        if(userLogin != null && user.getPassword().equals(userLogin.getPassword())){
+            loginFlag = true;
+            user = userLogin;
+        }
+        return loginFlag;
+    }
+
+
 }
