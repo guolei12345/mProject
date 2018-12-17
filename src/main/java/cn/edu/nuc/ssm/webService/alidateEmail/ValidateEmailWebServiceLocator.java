@@ -7,7 +7,7 @@
 
 package cn.edu.nuc.ssm.webService.alidateEmail;
 
-public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Service implements ValidateEmailWebService {
+public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Service implements cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebService {
 
 /**
  * <a href="http://www.webxml.com.cn/" target="_blank">WebXml.com.cn</a>
@@ -47,7 +47,7 @@ public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Servi
         ValidateEmailWebServiceSoapWSDDServiceName = name;
     }
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap() throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(ValidateEmailWebServiceSoap_address);
@@ -58,9 +58,9 @@ public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Servi
         return getValidateEmailWebServiceSoap(endpoint);
     }
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            ValidateEmailWebServiceSoap_BindingStub _stub = new ValidateEmailWebServiceSoap_BindingStub(portAddress, this);
+            cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_BindingStub _stub = new cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_BindingStub(portAddress, this);
             _stub.setPortName(getValidateEmailWebServiceSoapWSDDServiceName());
             return _stub;
         }
@@ -92,7 +92,7 @@ public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Servi
         ValidateEmailWebServiceSoap12WSDDServiceName = name;
     }
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12() throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(ValidateEmailWebServiceSoap12_address);
@@ -103,9 +103,9 @@ public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Servi
         return getValidateEmailWebServiceSoap12(endpoint);
     }
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            ValidateEmailWebServiceSoap12Stub _stub = new ValidateEmailWebServiceSoap12Stub(portAddress, this);
+            cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap12Stub _stub = new cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap12Stub(portAddress, this);
             _stub.setPortName(getValidateEmailWebServiceSoap12WSDDServiceName());
             return _stub;
         }
@@ -127,13 +127,13 @@ public class ValidateEmailWebServiceLocator extends org.apache.axis.client.Servi
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (ValidateEmailWebServiceSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                ValidateEmailWebServiceSoap_BindingStub _stub = new ValidateEmailWebServiceSoap_BindingStub(new java.net.URL(ValidateEmailWebServiceSoap_address), this);
+            if (cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_BindingStub _stub = new cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_BindingStub(new java.net.URL(ValidateEmailWebServiceSoap_address), this);
                 _stub.setPortName(getValidateEmailWebServiceSoapWSDDServiceName());
                 return _stub;
             }
-            if (ValidateEmailWebServiceSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                ValidateEmailWebServiceSoap12Stub _stub = new ValidateEmailWebServiceSoap12Stub(new java.net.URL(ValidateEmailWebServiceSoap12_address), this);
+            if (cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap12Stub _stub = new cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap12Stub(new java.net.URL(ValidateEmailWebServiceSoap12_address), this);
                 _stub.setPortName(getValidateEmailWebServiceSoap12WSDDServiceName());
                 return _stub;
             }

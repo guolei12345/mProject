@@ -7,7 +7,7 @@
 
 package cn.edu.nuc.ssm.webService.mobil;
 
-public class MobileCodeWSLocator extends org.apache.axis.client.Service implements MobileCodeWS {
+public class MobileCodeWSLocator extends org.apache.axis.client.Service implements cn.edu.nuc.ssm.webService.mobil.MobileCodeWS {
 
 /**
  * <a href="http://www.webxml.com.cn/" target="_blank">WebXml.com.cn</a>
@@ -46,7 +46,7 @@ public class MobileCodeWSLocator extends org.apache.axis.client.Service implemen
         MobileCodeWSSoapWSDDServiceName = name;
     }
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap() throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(MobileCodeWSSoap_address);
@@ -57,9 +57,9 @@ public class MobileCodeWSLocator extends org.apache.axis.client.Service implemen
         return getMobileCodeWSSoap(endpoint);
     }
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            MobileCodeWSSoap_BindingStub _stub = new MobileCodeWSSoap_BindingStub(portAddress, this);
+            cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_BindingStub _stub = new cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_BindingStub(portAddress, this);
             _stub.setPortName(getMobileCodeWSSoapWSDDServiceName());
             return _stub;
         }
@@ -91,7 +91,7 @@ public class MobileCodeWSLocator extends org.apache.axis.client.Service implemen
         MobileCodeWSSoap12WSDDServiceName = name;
     }
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap12() throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap12() throws javax.xml.rpc.ServiceException {
        java.net.URL endpoint;
         try {
             endpoint = new java.net.URL(MobileCodeWSSoap12_address);
@@ -102,9 +102,9 @@ public class MobileCodeWSLocator extends org.apache.axis.client.Service implemen
         return getMobileCodeWSSoap12(endpoint);
     }
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException {
         try {
-            MobileCodeWSSoap12Stub _stub = new MobileCodeWSSoap12Stub(portAddress, this);
+            cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap12Stub _stub = new cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap12Stub(portAddress, this);
             _stub.setPortName(getMobileCodeWSSoap12WSDDServiceName());
             return _stub;
         }
@@ -126,13 +126,13 @@ public class MobileCodeWSLocator extends org.apache.axis.client.Service implemen
      */
     public java.rmi.Remote getPort(Class serviceEndpointInterface) throws javax.xml.rpc.ServiceException {
         try {
-            if (MobileCodeWSSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                MobileCodeWSSoap_BindingStub _stub = new MobileCodeWSSoap_BindingStub(new java.net.URL(MobileCodeWSSoap_address), this);
+            if (cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_BindingStub _stub = new cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_BindingStub(new java.net.URL(MobileCodeWSSoap_address), this);
                 _stub.setPortName(getMobileCodeWSSoapWSDDServiceName());
                 return _stub;
             }
-            if (MobileCodeWSSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
-                MobileCodeWSSoap12Stub _stub = new MobileCodeWSSoap12Stub(new java.net.URL(MobileCodeWSSoap12_address), this);
+            if (cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType.class.isAssignableFrom(serviceEndpointInterface)) {
+                cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap12Stub _stub = new cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap12Stub(new java.net.URL(MobileCodeWSSoap12_address), this);
                 _stub.setPortName(getMobileCodeWSSoap12WSDDServiceName());
                 return _stub;
             }

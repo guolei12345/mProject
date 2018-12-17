@@ -7,7 +7,7 @@
 
 package cn.edu.nuc.ssm.webService.alidateEmail;
 
-public class ValidateEmailWebServiceSoap12Stub extends org.apache.axis.client.Stub implements ValidateEmailWebServiceSoap_PortType {
+public class ValidateEmailWebServiceSoap12Stub extends org.apache.axis.client.Stub implements cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();

@@ -18,12 +18,12 @@ public interface ValidateEmailWebService extends javax.xml.rpc.Service {
  */
     public java.lang.String getValidateEmailWebServiceSoapAddress();
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap() throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap() throws javax.xml.rpc.ServiceException;
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
     public java.lang.String getValidateEmailWebServiceSoap12Address();
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12() throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12() throws javax.xml.rpc.ServiceException;
 
-    public ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.alidateEmail.ValidateEmailWebServiceSoap_PortType getValidateEmailWebServiceSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 }

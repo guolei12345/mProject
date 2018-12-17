@@ -7,7 +7,7 @@
 
 package cn.edu.nuc.ssm.webService.mobil;
 
-public class MobileCodeWSSoap_BindingStub extends org.apache.axis.client.Stub implements MobileCodeWSSoap_PortType {
+public class MobileCodeWSSoap_BindingStub extends org.apache.axis.client.Stub implements cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType {
     private java.util.Vector cachedSerClasses = new java.util.Vector();
     private java.util.Vector cachedSerQNames = new java.util.Vector();
     private java.util.Vector cachedSerFactories = new java.util.Vector();

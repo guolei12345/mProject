@@ -5,11 +5,9 @@ import cn.edu.nuc.ssm.webService.validateCode.ValidateCodeWebServiceLocator;
 import cn.edu.nuc.ssm.webService.validateCode.ValidateCodeWebServiceSoap_PortType;
 import org.springframework.stereotype.Service;
 
-import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.rpc.ServiceException;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.rmi.RemoteException;
 
@@ -87,8 +85,8 @@ public abstract class ValidateCodeService {
             response.setContentType("image/png");
             OutputStream outputStream = response.getOutputStream();
             InputStream inputStream = new ByteArrayInputStream(data);
-            int len;  
-            byte[] buf = new byte[1024];  
+            int len;
+            byte[] buf = new byte[1024];
             while ((len = inputStream.read(buf)) != -1) {
                 outputStream.write(buf, 0, len);
             }

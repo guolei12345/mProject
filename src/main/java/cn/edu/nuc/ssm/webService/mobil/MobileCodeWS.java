@@ -17,12 +17,12 @@ public interface MobileCodeWS extends javax.xml.rpc.Service {
  */
     public java.lang.String getMobileCodeWSSoapAddress();
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap() throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap() throws javax.xml.rpc.ServiceException;
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
     public java.lang.String getMobileCodeWSSoap12Address();
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap12() throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap12() throws javax.xml.rpc.ServiceException;
 
-    public MobileCodeWSSoap_PortType getMobileCodeWSSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
+    public cn.edu.nuc.ssm.webService.mobil.MobileCodeWSSoap_PortType getMobileCodeWSSoap12(java.net.URL portAddress) throws javax.xml.rpc.ServiceException;
 }
