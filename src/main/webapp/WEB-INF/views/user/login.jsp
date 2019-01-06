@@ -99,10 +99,7 @@
 </script>
 <%--自己的方法--%>
 <script type="text/javascript">
-    function reloadImage(){
-        $("#btn").disabled=true;
-        $("#identity").onload("/user/getVerify");
-    }
+
 </script>
 </body>
 </html>
