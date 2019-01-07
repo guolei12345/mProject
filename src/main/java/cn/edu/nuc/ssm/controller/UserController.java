@@ -61,23 +61,29 @@ public class UserController extends BaseController {
     public String postLogin(User user, Model model, HttpSession session){
         logger.info("to post login");
         String msg = "";
-        //校验是否为手机号
+        String code = session.getAttribute("code").toString().toUpperCase();
+        //没有输入信息返回
         if(user == null) return "/user/login";
         String tell = user.getTell();
         boolean loginFlag = false;
+        //校验是否为手机号
         boolean tellFlag = CheckUtil.isMobilephone(tell);
         if(tellFlag){
             msg = "tell ok,check login";
             logger.info(msg);
-            loginFlag = userService.login(user);
-            msg = "user login :"+loginFlag;
+            if(code.equals(user.getCode().toUpperCase())) {
+                loginFlag = userService.login(user);
+                msg = "user login :"+loginFlag;
+            }else{
+                msg = "user login: checkCode Error";
+            }
         }else {
             msg = "error tell number";
         }
         logger.info(msg);
         if(loginFlag){
             session.setAttribute("user",user);
-            return "/index.jsp";
+            return "/index";
         }else{
             return "/user/login";
         }

@@ -5,14 +5,14 @@
 		<meta charset="utf-8" />
 		<title>控制台</title>
 		
-		<link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+		<link href="/assets/ace/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="/assets/ace/css/font-awesome.min.css" />
 
-		<link rel="stylesheet" href="/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="/assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="/assets/ace/css/ace.min.css" />
+		<link rel="stylesheet" href="/assets/ace/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="/assets/ace/css/ace-skins.min.css" />
 
-		<script src="/assets/js/ace-extra.min.js"></script>
+		<script src="/assets/ace/js/ace-extra.min.js"></script>
 	</head>
 
 	<body>
@@ -244,7 +244,7 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="/assets/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="/assets/ace/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
 									Jason
@@ -418,29 +418,29 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/ace/js/jquery.min.js"></script>
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+			window.jQuery || document.write("<script src='/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"script>");
 		</script>
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>
-		<script src="/assets/js/bootstrap.min.js"></script>
-		<script src="/assets/js/typeahead-bs2.min.js"></script>
+		<script src="/assets/ace/js/bootstrap.min.js"></script>
+		<script src="/assets/ace/js/typeahead-bs2.min.js"></script>
 
-		<script src="/assets/js/jquery-ui-1.10.3.custom.min.js"></script>
-		<script src="/assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="/assets/js/jquery.slimscroll.min.js"></script>
-		<script src="/assets/js/jquery.easy-pie-chart.min.js"></script>
-		<!--<script src="/assets/js/jquery.sparkline.min.js"></script>-->
-		<script src="/assets/js/flot/jquery.flot.min.js"></script>
-		<script src="/assets/js/flot/jquery.flot.pie.min.js"></script>
-		<script src="/assets/js/flot/jquery.flot.resize.min.js"></script>
+		<script src="/assets/ace/js/jquery-ui-1.10.3.custom.min.js"></script>
+		<script src="/assets/ace/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="/assets/ace/js/jquery.slimscroll.min.js"></script>
+		<script src="/assets/ace/js/jquery.easy-pie-chart.min.js"></script>
+		<!--<script src="/assets/ace/js/jquery.sparkline.min.js"></script>-->
+		<script src="/assets/ace/js/flot/jquery.flot.min.js"></script>
+		<script src="/assets/ace/js/flot/jquery.flot.pie.min.js"></script>
+		<script src="/assets/ace/js/flot/jquery.flot.resize.min.js"></script>
 
-		<script src="/assets/js/ace-elements.min.js"></script>
-		<script src="/assets/js/ace.min.js"></script>
+		<script src="/assets/ace/js/ace-elements.min.js"></script>
+		<script src="/assets/ace/js/ace.min.js"></script>
 
 		<script type="text/javascript">
 				

@@ -36,11 +36,12 @@
                             请输入用户名跟密码
                         </h4>
                         <div class="space-6"></div>
-                        <form action="login" method="post">
+                        <form action="/user/login" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
-                                        <input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />
+                                        <%--<input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />--%>
+                                        <input type="text" id="tell" name="tell" class="form-control" placeholder="手机号" />
                                         <i class="icon-user"></i>
                                     </span>
                                 </label>
