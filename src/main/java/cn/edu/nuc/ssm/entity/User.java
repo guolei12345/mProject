@@ -8,6 +8,8 @@ public class User {
     private String loginname;
 
     private String password;
+    //注册时候确认密码用
+    private String password2;
 
     private String tell;
 
@@ -38,6 +40,14 @@ public class User {
     private String colum5;
     //验证码
     private String code;
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
 
     public String getCode() {
         return code;
@@ -198,6 +208,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", loginname='" + loginname + '\'' +
                 ", password='" + password + '\'' +
+                ", password2='" + password2 + '\'' +
                 ", tell='" + tell + '\'' +
                 ", email='" + email + '\'' +
                 ", creattime='" + creattime + '\'' +
@@ -212,6 +223,7 @@ public class User {
                 ", colum3='" + colum3 + '\'' +
                 ", colum4='" + colum4 + '\'' +
                 ", colum5='" + colum5 + '\'' +
+                ", code='" + code + '\'' +
                 '}';
     }
 }
