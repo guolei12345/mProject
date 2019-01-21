@@ -20,4 +20,8 @@ public interface UserService {
     int login(User user, String code, HttpSession session);
 
     int regist(User user,String code);
+
+    int sendCheck(String num) throws Exception;
+
+    int updatePassWord(User user);
 }

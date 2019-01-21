@@ -25,6 +25,12 @@
     userId, userName, loginName, password, tell, email, creatTime, loginTime, lastLoginTime, 
     count, isCheck, status, type, colum1, colum2, colum3, colum4, colum5
   </sql>
+  <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
   <select id="selectByTell" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

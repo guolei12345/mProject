@@ -11,6 +11,8 @@ public class User {
     //注册时候确认密码用
     private String password2;
 
+    private String password3;
+
     private String tell;
 
     private String email;
@@ -38,8 +40,28 @@ public class User {
     private String colum4;
 
     private String colum5;
+    //手机号/邮箱
+    private String num;
     //验证码
     private String code;
+
+    private String checkCode;
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getCheckCode() {
+        return checkCode;
+    }
+
+    public void setCheckCode(String checkCode) {
+        this.checkCode = checkCode;
+    }
 
     public String getPassword2() {
         return password2;
@@ -47,6 +69,14 @@ public class User {
 
     public void setPassword2(String password2) {
         this.password2 = password2;
+    }
+
+    public String getPassword3() {
+        return password3;
+    }
+
+    public void setPassword3(String password3) {
+        this.password3 = password3;
     }
 
     public String getCode() {

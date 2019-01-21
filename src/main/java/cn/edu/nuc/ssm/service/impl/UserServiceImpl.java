@@ -1,17 +1,19 @@
 package cn.edu.nuc.ssm.service.impl;
 
 import cn.edu.nuc.ssm.CheckUtil;
-import cn.edu.nuc.ssm.dao.PowerMapper;
 import cn.edu.nuc.ssm.dao.UserMapper;
-import cn.edu.nuc.ssm.entity.Power;
 import cn.edu.nuc.ssm.entity.User;
+import cn.edu.nuc.ssm.enums.EmailCodeEnum;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
+import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.logger.BaseLog;
-import cn.edu.nuc.ssm.service.interfaces.PowerService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
+import cn.edu.nuc.ssm.util.MailUtil;
+import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.StringUtil;
-import org.apache.ibatis.annotations.Mapper;
+import cn.edu.nuc.ssm.webService.util.ValidateEmailService;
+import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,8 @@ import java.util.UUID;
 public class UserServiceImpl extends BaseLog implements UserService {
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    ValidateEmailService validateEmailService;
     @Override
     public int deleteByPrimaryKey(String userid) {
         return userMapper.deleteByPrimaryKey(userid);
@@ -140,6 +144,95 @@ public class UserServiceImpl extends BaseLog implements UserService {
         logger.info("注册end info：{}",RegistCodeEnum.getRegistValue(rtn));
         return rtn;
     }
+    //发送验证码
+    @Override
+    public int sendCheck(String num) throws Exception {
+        int rtn = 0;
+        User user;
+        String code = StringUtil.getCheckNum4();
+        //如果是手机号发送短信验证码
+        if(CheckUtil.isMobilephone(num)){
+            //发送短信验证码
+        }else if(CheckUtil.isEmail(num)){
+            //发送邮箱验证码
+            user = userMapper.selectByEmail(num);
+            if(user == null){
+                rtn = 3;
+            }else {
+                MailUtil.sendMail(user.getEmail(), "您好，修改密码，验证码：" + code);
+                //设置缓存
+                RedisUtil.getJedis().set(user.getEmail(), code);
+            }
+        }else{
+            //不是邮箱也不是手机号
+        }
+        return rtn;
+    }
+
+    /**
+     * 修改密码
+     * @param user
+     * @return
+     */
+    @Override
+    public int updatePassWord(User user) {
+        int rtn = updateCheck(user);
+        User updUser;
+        //如果是手机号发送短信验证码
+        if(CheckUtil.isMobilephone(user.getNum())){
+            //发送短信验证码
+            updUser = userMapper.selectByTell(user.getNum());
+        }else if(CheckUtil.isEmail(user.getNum())){
+            //发送邮箱验证码
+            updUser = userMapper.selectByEmail(user.getNum());
+        }else{
+            //不是邮箱也不是手机号
+            updUser = new User();
+        }
+        updUser.setPassword(user.getPassword());
+        rtn = userMapper.updateByPrimaryKeySelective(updUser);
+        return rtn;
+    }
+
+    /**
+     * 修改密码校验
+     * @param user
+     * @return
+     */
+    private int updateCheck(User user) {
+        logger.info("注册校验 start");
+        int rtn = 0;
+        String code = RedisUtil.getJedis().get(user.getNum());
+        //验证码
+        if(!code.equals(user.getCode())){
+            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.验证码不正确.toString());
+        }
+
+        if(!user.getNum().toUpperCase().equals(user.getCode().toUpperCase())){
+            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.验证码不正确.toString());
+        }
+        //是否是手机号&&是否是正确的邮箱
+        else if(!CheckUtil.isMobilephone(user.getTell())&&!CheckUtil.isEmail(user.getEmail())){
+            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱格式不正确.toString());
+        }
+        //两次密码不一致
+        else if(!user.getPassword().equals(user.getPassword2())){
+            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.两次输入密码不一致.toString());
+        }
+        //查询手机号是否已经注册
+        else{
+            //查询手机号是否已经注册
+            User tellUser = userMapper.selectByTell(user.getNum());
+            User emailUser = userMapper.selectByEmail(user.getNum());
+            if(tellUser == null && emailUser == null){
+                rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱未注册.toString());
+            }else{
+                rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.校验通过.toString());
+            }
+        }
+        logger.info("注册校验 end ，结果："+ UpdatePassCodeEnum.getUpdateValue(rtn));
+        return rtn;
+    }
 
     /**
      * 注册校验
@@ -158,6 +251,10 @@ public class UserServiceImpl extends BaseLog implements UserService {
         else if(!CheckUtil.isMobilephone(user.getTell())){
             rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.手机号格式不正确.toString());
         }
+        //是否是正确的邮箱
+        else if(!CheckUtil.isEmail(user.getEmail())){
+            rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.不是正确的邮箱地址.toString());
+        }
         //两次密码不一致
         else if(!user.getPassword().equals(user.getPassword2())){
             rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.两次输入密码不一致.toString());
@@ -169,7 +266,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
             if(oldUser != null){
                 rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.手机号已经被注册.toString());
             }else{
-                rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.注册成功.toString());
+                rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.校验通过.toString());
             }
         }
         logger.info("注册校验 end ，结果："+ RegistCodeEnum.getRegistValue(rtn));

@@ -1,5 +1,6 @@
 package cn.edu.nuc.ssm.util;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class StringUtil {
@@ -27,5 +28,20 @@ public class StringUtil {
             flag = true;
         }
         return flag;
+    }
+
+    /**
+     * 获取4位随机验证码
+     * @return
+     */
+    public static String getCheckNum4(){
+        return String.valueOf((new Random().nextInt(8999) + 1000));
+    }
+    /**
+     * 获取6位随机验证码
+     * @return
+     */
+    public static String getCheckNum6(){
+        return String.valueOf((new Random().nextInt(899999) + 100000));
     }
 }

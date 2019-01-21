@@ -4,7 +4,9 @@ import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
+import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
+import cn.edu.nuc.ssm.util.MailUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import sun.rmi.runtime.Log;
-import sun.security.provider.VerificationProvider;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Random;
 
 @Controller
 @RequestMapping("/user")
@@ -35,7 +34,6 @@ public class UserController extends BaseController {
         logger.info("to get login");
         return "/user/login";
     }
-
     /**
      * 登陆
      * @param user
@@ -97,8 +95,36 @@ public class UserController extends BaseController {
             return "/user/regist";
         }
     }
+
     /**
-     * 获取验证码的
+     * 请求修改密码页面
+     * @return
+     */
+    @RequestMapping(value = "/updatePass",method = RequestMethod.GET)
+    public String getUpdatePass() throws Exception {
+        logger.info("to get updatePass");
+        //发送验证码
+        MailUtil.sendMail("240372795@qq.com","有人修改密码");
+        return "/user/updatePass";
+    }
+    /**
+     * 请求修改密码页面
+     * @return
+     */
+    @RequestMapping(value = "/updatePass",method = RequestMethod.POST)
+    public String postUpdatePassByEmail(User user) throws Exception {
+        logger.info("to post updatePass");
+        //发送验证码
+        int rtn = userService.updatePassWord(user);
+        if(rtn == UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.修改密码成功.toString())){
+            return "/user/login";
+        }else{
+            return "/user/updatePass";
+        }
+    }
+
+    /**
+     * 获取图片验证码并输出到界面
      * @param session
      * @param response
      * @throws Exception
@@ -113,5 +139,17 @@ public class UserController extends BaseController {
         //获取验证码接口
         byte[] bytes = validateCodeService.enGetVerify(code);
         validateCodeService.outPutToClient(bytes,response);
+    }
+
+    /**
+     * 发送验证码
+     * @param session
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/sendCheck",method = RequestMethod.GET)
+    public void getSendCheck(HttpSession session, HttpServletResponse response,String num) throws Exception {
+        logger.info("to sendCheck：num："+num);
+        userService.sendCheck(num);
     }
 }
