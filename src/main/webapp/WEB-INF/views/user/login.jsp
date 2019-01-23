@@ -66,7 +66,7 @@
                     <%--忘记密码 / 注册--%>
                     <div class="toolbar clearfix">
                         <div>
-                            <a href="#" onclick="('forgot-box'); return false;" class="forgot-password-link">
+                            <a href="/user/updatePass" class="forgot-password-link">
                                 <i class="icon-arrow-left"></i>
                                 忘记密码
                             </a>

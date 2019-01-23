@@ -3,13 +3,11 @@ package cn.edu.nuc.ssm.service.impl;
 import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.dao.UserMapper;
 import cn.edu.nuc.ssm.entity.User;
-import cn.edu.nuc.ssm.enums.EmailCodeEnum;
-import cn.edu.nuc.ssm.enums.LoginCodeEnum;
-import cn.edu.nuc.ssm.enums.RegistCodeEnum;
-import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
+import cn.edu.nuc.ssm.enums.*;
 import cn.edu.nuc.ssm.logger.BaseLog;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
 import cn.edu.nuc.ssm.util.MailUtil;
+import cn.edu.nuc.ssm.util.PhoneUtil;
 import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateEmailService;
@@ -151,21 +149,27 @@ public class UserServiceImpl extends BaseLog implements UserService {
         User user;
         String code = StringUtil.getCheckNum4();
         //如果是手机号发送短信验证码
-        if(CheckUtil.isMobilephone(num)){
+        if(getNumType(num) == NumTypeEnum.手机号){
             //发送短信验证码
-        }else if(CheckUtil.isEmail(num)){
+            user = userMapper.selectByTell(num);
+            if(user == null){
+                rtn = 4;
+            }else{
+                PhoneUtil.sendCode(code);
+            }
+        }else if(getNumType(num) == NumTypeEnum.邮箱){
             //发送邮箱验证码
             user = userMapper.selectByEmail(num);
             if(user == null){
                 rtn = 3;
             }else {
-                MailUtil.sendMail(user.getEmail(), "您好，修改密码，验证码：" + code);
-                //设置缓存
-                RedisUtil.getJedis().set(user.getEmail(), code);
+                MailUtil.sendMail(user.getEmail(), "pleast input code:" + code);
             }
         }else{
             //不是邮箱也不是手机号
         }
+        //设置缓存
+        RedisUtil.getJedis().set(num, code);
         return rtn;
     }
 
@@ -178,22 +182,46 @@ public class UserServiceImpl extends BaseLog implements UserService {
     public int updatePassWord(User user) {
         int rtn = updateCheck(user);
         User updUser;
-        //如果是手机号发送短信验证码
-        if(CheckUtil.isMobilephone(user.getNum())){
-            //发送短信验证码
-            updUser = userMapper.selectByTell(user.getNum());
-        }else if(CheckUtil.isEmail(user.getNum())){
-            //发送邮箱验证码
-            updUser = userMapper.selectByEmail(user.getNum());
+        if(rtn == UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.校验通过.toString())){
+            //如果是手机号发送短信验证码
+            if(CheckUtil.isMobilephone(user.getNum())){
+                //根据电话号查询用户
+                updUser = userMapper.selectByTell(user.getNum());
+            }else if(CheckUtil.isEmail(user.getNum())){
+                //根据邮箱查询用户
+                updUser = userMapper.selectByEmail(user.getNum());
+            }else{
+                //不是邮箱也不是手机号
+                updUser = new User();
+            }
+            updUser.setPassword(user.getPassword());
+            rtn = userMapper.updateByPrimaryKeySelective(updUser);
         }else{
-            //不是邮箱也不是手机号
-            updUser = new User();
+            //校验不通过
         }
-        updUser.setPassword(user.getPassword());
-        rtn = userMapper.updateByPrimaryKeySelective(updUser);
         return rtn;
     }
 
+    /**
+     * 判断用户输入的是手机号、邮箱、用户名
+     * @param num
+     * @return
+     */
+    public NumTypeEnum getNumType(String num){
+        NumTypeEnum numTypeEnum;
+        //如果是手机号发送短信验证码
+        if(CheckUtil.isMobilephone(num)){
+            //num为手机号
+            numTypeEnum = NumTypeEnum.手机号;
+        }else if(CheckUtil.isEmail(num)){
+            //num为手机号
+            numTypeEnum = NumTypeEnum.邮箱;
+        }else{
+            //不是邮箱也不是手机号
+            numTypeEnum = NumTypeEnum.其他;
+        }
+        return numTypeEnum;
+    }
     /**
      * 修改密码校验
      * @param user
@@ -207,12 +235,8 @@ public class UserServiceImpl extends BaseLog implements UserService {
         if(!code.equals(user.getCode())){
             rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.验证码不正确.toString());
         }
-
-        if(!user.getNum().toUpperCase().equals(user.getCode().toUpperCase())){
-            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.验证码不正确.toString());
-        }
         //是否是手机号&&是否是正确的邮箱
-        else if(!CheckUtil.isMobilephone(user.getTell())&&!CheckUtil.isEmail(user.getEmail())){
+        else if(!CheckUtil.isMobilephone(user.getNum())&&!CheckUtil.isEmail(user.getNum())){
             rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱格式不正确.toString());
         }
         //两次密码不一致

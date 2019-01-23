@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>注册页面</title>
+    <title>修改密码页面</title>
     <link href="/assets/ace/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/ace/css/font-awesome.min.css" />
     <!-- ace styles -->
@@ -22,39 +22,39 @@
                 <span class="red">XX</span>
                 <span class="blue">后台管理系统</span>
             </h1>
-            <h4 class="blue">&copy; 注册</h4>
+            <h4 class="blue">&copy; 修改密码</h4>
         </div>
 
         <div class="space-6"></div>
-        <%--注册--%>
+        <%--修改密码--%>
         <div class="position-relative">
             <div id="login-box" class="login-box visible widget-box no-border">
                 <div class="widget-body">
                     <div class="widget-main">
                         <h4 class="header blue lighter bigger">
                             <i class="icon-coffee green"></i>
-                            请输入注册信息
+                            请输入密码信息
                         </h4>
                         <div class="space-6"></div>
-                        <form action="/user/regist" method="post">
+                        <form action="/user/updatePass" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
                                         <%--<input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />--%>
-                                        <input type="text" id="email" name="email" class="form-control" placeholder="邮箱" />
+                                        <input type="text" id="num" name="num" class="form-control" placeholder="邮箱" />
                                         <i class="icon-user"></i>
                                     </span>
                                 </label>
                                 <label class="block clearfix">
-                                    <span class="block input-icon input-icon-right">
-                                        <%--<input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />--%>
-                                        <input type="text" id="tell" name="tell" class="form-control" placeholder="手机号" />
-                                        <i class="icon-user"></i>
+                                    <span class="block input-icon input-icon-right input-group">
+                                        <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
+                                               style="width: 145px"/>
+                                        <a href="#" class="input-icon input-icon-right" width="145" height="33" onclick="sendCheck()">发送验证码</a>
                                     </span>
                                 </label>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" id="password" name="password" class="form-control" placeholder="密码" />
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="新密码" />
                                         <i class="icon-lock"></i>
                                     </span>
                                 </label>
@@ -64,23 +64,15 @@
                                         <i class="icon-lock"></i>
                                     </span>
                                 </label>
-                                <label class="block clearfix">
-                                    <span class="block input-icon input-icon-right input-group">
-                                        <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
-                                            style="width: 145px"/>
-                                        <img src="/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity" onload="btn.disabled=true;"
-                                             onclick="this.src='/user/getVerify?'+Math.random();"/>
-                                    </span>
-                                </label>
-                                <input type="submit" class="form-control" value="登录" />
+                                <input type="submit" class="form-control" value="修改" />
                             </fieldset>
                         </form>
                     </div><!-- /widget-main -->
-                    <%--注册--%>
+                    <%--登陆--%>
                     <div class="toolbar clearfix">
                         <div>
                             <a href="/user/login" class="user-signup-link">
-                                注册
+                                登陆
                                 <i class="icon-arrow-left"></i>
                             </a>
                         </div>
@@ -107,7 +99,12 @@
 </script>
 <%--自己的方法--%>
 <script type="text/javascript">
-
+    function sendCheck(){
+        var num = $("#num").val();
+        $.ajax({url:"/user/sendCheck?num="+num,success:function(result){
+                alert("发送成功！")
+            }});
+    }
 </script>
 </body>
 </html>

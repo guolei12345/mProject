@@ -43,8 +43,8 @@
 	    <artifactId>spring-core</artifactId>
 	    <version>${spring.version}</version>
 	</dependency>
-	
-	<dependency>
+
+	  <dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-aop</artifactId>
 	    <version>${spring.version}</version>
@@ -55,7 +55,89 @@
 	    <artifactId>spring-context</artifactId>
 	    <version>${spring.version}</version>
 	</dependency>
-	
+	  <dependency>
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-context-support</artifactId>
+		  <version>${spring.version}</version>
+	  </dependency>
+	  <!--Wsdl-->
+	  <!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+	  <dependency>
+		  <groupId>org.apache.axis</groupId>
+		  <artifactId>axis</artifactId>
+		  <version>1.4</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/axis/axis-jaxrpc -->
+	  <dependency>
+		  <groupId>axis</groupId>
+		  <artifactId>axis-jaxrpc</artifactId>
+		  <version>1.4</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/org.apache.axis/axis-saaj -->
+	  <dependency>
+		  <groupId>org.apache.axis</groupId>
+		  <artifactId>axis-saaj</artifactId>
+		  <version>1.4</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
+	  <dependency>
+		  <groupId>commons-discovery</groupId>
+		  <artifactId>commons-discovery</artifactId>
+		  <version>0.5</version>
+	  </dependency>
+
+	  <!-- https://mvnrepository.com/artifact/axis/axis-wsdl4j -->
+	  <dependency>
+		  <groupId>axis</groupId>
+		  <artifactId>axis-wsdl4j</artifactId>
+		  <version>1.5.1</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+	  <dependency>
+		  <groupId>org.apache.logging.log4j</groupId>
+		  <artifactId>log4j-core</artifactId>
+		  <version>2.11.1</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+	  <dependency>
+		  <groupId>commons-logging</groupId>
+		  <artifactId>commons-logging</artifactId>
+		  <version>1.2</version>
+	  </dependency>
+		<!--发送短信验证码-->
+	  <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+	  <dependency>
+		  <groupId>commons-codec</groupId>
+		  <artifactId>commons-codec</artifactId>
+		  <version>1.11</version>
+	  </dependency>
+	  <!-- https://mvnrepository.com/artifact/commons-httpclient/commons-httpclient -->
+	  <dependency>
+		  <groupId>commons-httpclient</groupId>
+		  <artifactId>commons-httpclient</artifactId>
+		  <version>3.1</version>
+	  </dependency>
+
+
+	  <!--邮件发送-->
+	  <dependency>
+		  <groupId>com.sun.mail</groupId>
+		  <artifactId>javax.mail</artifactId>
+		  <version>1.6.1</version>
+	  </dependency>
+	  <!--缓存-->
+	  <dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-pool2</artifactId>
+		  <version>2.4.2</version>
+	  </dependency>
+	  <dependency>
+		  <groupId>redis.clients</groupId>
+		  <artifactId>jedis</artifactId>
+		  <version>2.8.0</version>
+		  <type>jar</type>
+		  <scope>compile</scope>
+	  </dependency>
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-web</artifactId>
@@ -72,7 +154,7 @@
 	    <artifactId>spring-oxm</artifactId>
 		<version>${spring.version}</version>
 	</dependency>
-	
+
 		<!-- jackson json -->
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>

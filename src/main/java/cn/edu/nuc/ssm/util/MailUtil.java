@@ -30,6 +30,7 @@ public class MailUtil {
         props.setProperty("mail.transport.protocol", "smtp");
         //设置发件人的SMTP服务器地址
         props.setProperty("mail.smtp.host", "smtp.163.com");
+//        props.setProperty("mail.smtp.host", "smtp.digu.com");
         //2、创建定义整个应用程序所需的环境信息的 Session 对象
         Session session = Session.getInstance(props);
         //设置调试信息在控制台打印出来

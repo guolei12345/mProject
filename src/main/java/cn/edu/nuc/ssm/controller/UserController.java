@@ -3,6 +3,7 @@ package cn.edu.nuc.ssm.controller;
 import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
+import cn.edu.nuc.ssm.enums.NumTypeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
@@ -101,10 +102,14 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/updatePass",method = RequestMethod.GET)
-    public String getUpdatePass() throws Exception {
+    public String getUpdatePass() {
         logger.info("to get updatePass");
         //发送验证码
-        MailUtil.sendMail("240372795@qq.com","有人修改密码");
+//        try {
+//            MailUtil.sendMail("240372795@qq.com","has some penple update password!!!");
+//        } catch (Exception e) {
+//            logger.info("发送验证码失败！");
+//        }
         return "/user/updatePass";
     }
     /**
