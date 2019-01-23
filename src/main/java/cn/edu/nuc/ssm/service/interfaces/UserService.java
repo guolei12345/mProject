@@ -23,5 +23,6 @@ public interface UserService {
 
     int sendCheck(String num) throws Exception;
 
-    int updatePassWord(User user);
+    int updatePassWord(User user, boolean hasOld);
+
 }

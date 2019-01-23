@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -246,8 +247,8 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<img class="nav-user-photo" src="/assets/ace/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>欢迎光临,</small>
-									Jason
+									<small> 欢迎光临,</small>
+									<c:out value="${user.tell}"></c:out>
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -255,23 +256,23 @@
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="#" onclick="load('/user/update')">
 										<i class="icon-cog"></i>
-										设置
+										修改密码
 									</a>
 								</li>
 
 								<li>
 									<a href="#">
 										<i class="icon-user"></i>
-										个人资料
+										个人资料<c:out value="${user.tell}"></c:out>
 									</a>
 								</li>
 
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="/user/login">
 										<i class="icon-off"></i>
 										退出
 									</a>
@@ -353,6 +354,7 @@
 					<script type="text/javascript">
 						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
 					</script>
+					</ul>
 				</div>
 
 				<div class="main-content">
@@ -376,6 +378,9 @@
 									<i class="icon-search nav-search-icon"></i>
 								</span>
 							</form>
+							<div>
+								${msg}
+							</div>
 						</div><!-- #nav-search -->
 					</div>
 
@@ -389,24 +394,8 @@
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-
-						<div class="row">
-						
-						
-						
-						
-						
-						
-						
+						<div class="row" id="load">
 							<!--   要加载的界面内容 -->
-							
-							
-							
-							
-							
-							
-							
-
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
@@ -442,11 +431,14 @@
 		<script src="/assets/ace/js/ace-elements.min.js"></script>
 		<script src="/assets/ace/js/ace.min.js"></script>
 
+		<%--自己的方法--%>
 		<script type="text/javascript">
-				
+			function load(url){
+				$("#load").load(url)
+			}
 		</script>
 		<div style="text-align:center;">
-</div>
+	</div>
 	</body>
 </html>
 

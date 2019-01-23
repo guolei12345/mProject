@@ -80,7 +80,7 @@
                     <div class="toolbar clearfix">
                         <div>
                             <a href="/user/login" class="user-signup-link">
-                                注册
+                                登陆
                                 <i class="icon-arrow-left"></i>
                             </a>
                         </div>

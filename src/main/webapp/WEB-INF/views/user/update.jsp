@@ -16,14 +16,6 @@
 
 <div class="col-sm-10 col-sm-offset-1">
     <div class="login-container">
-        <%--标题--%>
-        <div class="center">
-            <h1>
-                <span class="red">XX</span>
-                <span class="blue">后台管理系统</span>
-            </h1>
-            <h4 class="blue">&copy; 修改密码</h4>
-        </div>
 
         <div class="space-6"></div>
         <%--修改密码--%>
@@ -36,31 +28,29 @@
                             请输入密码信息
                         </h4>
                         <div class="space-6"></div>
-                        <form action="/user/updatePass" method="post">
+                        <form action="/user/update" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
-                                        <%--<input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />--%>
-                                        <input type="text" id="num" name="num" class="form-control" placeholder="邮箱" />
+                                        <input type="text" id="num" name="num" class="form-control" value="${user.tell}" placeholder="用户名" />
                                         <i class="icon-user"></i>
                                     </span>
                                 </label>
                                 <label class="block clearfix">
-                                    <span class="block input-icon input-icon-right input-group">
-                                        <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
-                                               style="width: 145px"/>
-                                        <a href="#" class="input-icon input-icon-right" width="145" height="33" onclick="sendCheck()">发送验证码</a>
-                                    </span>
-                                </label>
-                                <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" id="password3" name="password3" class="form-control" placeholder="新密码" />
+                                        <input type="password" id="password" name="password" class="form-control" placeholder="旧密码" />
                                         <i class="icon-lock"></i>
                                     </span>
                                 </label>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
-                                        <input type="password" id="password2" name="password2" class="form-control" placeholder="确认密码" />
+                                        <input type="password" id="password2" name="password2" class="form-control" placeholder="新密码" />
+                                        <i class="icon-lock"></i>
+                                    </span>
+                                </label>
+                                <label class="block clearfix">
+                                    <span class="block input-icon input-icon-right">
+                                        <input type="password" id="password3" name="password3" class="form-control" placeholder="确认密码" />
                                         <i class="icon-lock"></i>
                                     </span>
                                 </label>
@@ -68,15 +58,6 @@
                             </fieldset>
                         </form>
                     </div><!-- /widget-main -->
-                    <%--登陆--%>
-                    <div class="toolbar clearfix">
-                        <div>
-                            <a href="/user/login" class="user-signup-link">
-                                登陆
-                                <i class="icon-arrow-left"></i>
-                            </a>
-                        </div>
-                    </div>
                 </div><!-- /widget-body -->
             </div><!-- /login-box -->
         </div><!-- /position-relative -->
@@ -95,15 +76,6 @@
     function show_box(id) {
         jQuery('.widget-box.visible').removeClass('visible');
         jQuery('#'+id).addClass('visible');
-    }
-</script>
-<%--自己的方法--%>
-<script type="text/javascript">
-    function sendCheck(){
-        var num = $("#num").val();
-        $.ajax({url:"/user/sendCheck?num="+num,success:function(result){
-                alert("发送成功！")
-            }});
     }
 </script>
 </body>

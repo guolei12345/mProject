@@ -56,7 +56,6 @@ public class UserController extends BaseController {
         model.addAttribute("msg",msg);
         logger.info(msg);
         if(rtn == LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString())){
-            session.setAttribute("user",user);
             return "/index";
         }else{
             return "/user/login";
@@ -104,12 +103,6 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/updatePass",method = RequestMethod.GET)
     public String getUpdatePass() {
         logger.info("to get updatePass");
-        //发送验证码
-//        try {
-//            MailUtil.sendMail("240372795@qq.com","has some penple update password!!!");
-//        } catch (Exception e) {
-//            logger.info("发送验证码失败！");
-//        }
         return "/user/updatePass";
     }
     /**
@@ -120,7 +113,7 @@ public class UserController extends BaseController {
     public String postUpdatePassByEmail(User user) throws Exception {
         logger.info("to post updatePass");
         //发送验证码
-        int rtn = userService.updatePassWord(user);
+        int rtn = userService.updatePassWord(user, false);
         if(rtn == UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.修改密码成功.toString())){
             return "/user/login";
         }else{
@@ -128,6 +121,29 @@ public class UserController extends BaseController {
         }
     }
 
+    /**
+     * 请求修改密码页面
+     * 登陆以后修改
+     * @return
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.GET)
+    public String getUpdate() {
+        logger.info("to get update");
+        return "/user/update";
+    }
+    /**
+     * 请求修改密码页面
+     * 登陆以后修改
+     * @return
+     */
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String postUpdatePassByOld(User user,Model model) throws Exception {
+        logger.info("to post updatePass");
+        //发送验证码
+        int rtn = userService.updatePassWord(user, true);
+        model.addAttribute("msg",UpdatePassCodeEnum.getUpdateValue(rtn));
+        return "/index";
+    }
     /**
      * 获取图片验证码并输出到界面
      * @param session

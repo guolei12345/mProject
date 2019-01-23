@@ -69,7 +69,12 @@ public class UserServiceImpl extends BaseLog implements UserService {
         //校验通过
         if(rtn ==  LoginCodeEnum.getLoginCode(LoginCodeEnum.校验通过.toString())){
             logger.info("登陆 start info：{}",user.toString());
-            User userInfo = userMapper.selectByTell(user.getTell());
+            User userInfo;
+            if(getNumType(user.getNum())==NumTypeEnum.手机号){
+                userInfo = userMapper.selectByTell(user.getNum());
+            }else{
+                userInfo = userMapper.selectByEmail(user.getNum());
+            }
             //有该手机号
             if(userInfo!=null){
                 //密码校验
@@ -80,7 +85,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
                     rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString());
                 }
             }else{
-                rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.手机号未注册.toString());
+                rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.用户名不正确.toString());
             }
         }
         logger.info("登陆end info：{}",LoginCodeEnum.getLoginValue(rtn));
@@ -101,8 +106,8 @@ public class UserServiceImpl extends BaseLog implements UserService {
             rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.验证码不正确.toString());
         }
         //是否是手机号
-        else if(!CheckUtil.isMobilephone(user.getTell())){
-            rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.手机号格式不正确.toString());
+        else if(getNumType(user.getNum()) == NumTypeEnum.其他){
+            rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.用户名不正确.toString());
         }
         else {
             rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.校验通过.toString());
@@ -179,25 +184,39 @@ public class UserServiceImpl extends BaseLog implements UserService {
      * @return
      */
     @Override
-    public int updatePassWord(User user) {
-        int rtn = updateCheck(user);
-        User updUser;
+    public int updatePassWord(User user,boolean hasOld) {
+        int rtn = updateCheck(user,hasOld);
+        User updUser = null;
         if(rtn == UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.校验通过.toString())){
             //如果是手机号发送短信验证码
-            if(CheckUtil.isMobilephone(user.getNum())){
+            NumTypeEnum numTypeEnum = getNumType(user.getNum());
+            if(numTypeEnum == NumTypeEnum.手机号){
                 //根据电话号查询用户
                 updUser = userMapper.selectByTell(user.getNum());
-            }else if(CheckUtil.isEmail(user.getNum())){
+            }else if(numTypeEnum == NumTypeEnum.邮箱){
                 //根据邮箱查询用户
                 updUser = userMapper.selectByEmail(user.getNum());
             }else{
-                //不是邮箱也不是手机号
-                updUser = new User();
+                user = null;
             }
-            updUser.setPassword(user.getPassword());
-            rtn = userMapper.updateByPrimaryKeySelective(updUser);
+            if(updUser == null){
+                rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱未注册.toString());
+            }else{
+                //如果用旧密码修改
+                if(hasOld){
+                    if(user.getPassword().equals(updUser.getPassword())){
+                        updUser.setPassword(user.getPassword2());
+                        rtn = userMapper.updateByPrimaryKeySelective(updUser);
+                    }else{
+                        rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.原始密码不正确.toString());
+                    }
+                }else{
+                    updUser.setPassword(user.getPassword2());
+                    rtn = userMapper.updateByPrimaryKeySelective(updUser);
+                }
+            }
         }else{
-            //校验不通过
+
         }
         return rtn;
     }
@@ -222,17 +241,18 @@ public class UserServiceImpl extends BaseLog implements UserService {
         }
         return numTypeEnum;
     }
+
     /**
      * 修改密码校验
      * @param user
      * @return
      */
-    private int updateCheck(User user) {
+    private int updateCheck(User user,boolean hasOld) {
         logger.info("注册校验 start");
         int rtn = 0;
         String code = RedisUtil.getJedis().get(user.getNum());
         //验证码
-        if(!code.equals(user.getCode())){
+        if(!hasOld&&!code.equals(user.getCode())){
             rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.验证码不正确.toString());
         }
         //是否是手机号&&是否是正确的邮箱
@@ -240,19 +260,12 @@ public class UserServiceImpl extends BaseLog implements UserService {
             rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱格式不正确.toString());
         }
         //两次密码不一致
-        else if(!user.getPassword().equals(user.getPassword2())){
+        else if(!user.getPassword3().equals(user.getPassword2())){
             rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.两次输入密码不一致.toString());
         }
         //查询手机号是否已经注册
         else{
-            //查询手机号是否已经注册
-            User tellUser = userMapper.selectByTell(user.getNum());
-            User emailUser = userMapper.selectByEmail(user.getNum());
-            if(tellUser == null && emailUser == null){
-                rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.手机号或者邮箱未注册.toString());
-            }else{
-                rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.校验通过.toString());
-            }
+            rtn = UpdatePassCodeEnum.getUpdateCode(UpdatePassCodeEnum.校验通过.toString());
         }
         logger.info("注册校验 end ，结果："+ UpdatePassCodeEnum.getUpdateValue(rtn));
         return rtn;

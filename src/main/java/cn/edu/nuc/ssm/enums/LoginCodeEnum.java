@@ -7,6 +7,7 @@ public enum LoginCodeEnum {
     手机号未注册(20,"手机号未注册"),
     密码不正确(60,"密码不正确"),
     校验通过(100,"校验通过"),
+    用户名不正确(30,"用户名不正确"),
     验证码不正确(30,"验证码不正确");
     private int code;
     private String value;

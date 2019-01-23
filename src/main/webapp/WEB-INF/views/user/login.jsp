@@ -41,7 +41,7 @@
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
                                         <%--<input type="text" id="loginname" name="loginname" class="form-control" placeholder="用户名" />--%>
-                                        <input type="text" id="tell" name="tell" class="form-control" placeholder="手机号" />
+                                        <input type="text" id="num" name="num" class="form-control" placeholder="手机号" />
                                         <i class="icon-user"></i>
                                     </span>
                                 </label>
@@ -91,10 +91,6 @@
 <script type="text/javascript">
     if("ontouchend" in document) document.write("<script src='/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
-</script>
-<%--自己的方法--%>
-<script type="text/javascript">
 
-</script>
 </body>
 </html>
