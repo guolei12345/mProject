@@ -185,7 +185,7 @@
 
 								<li>
 									<a href="#">
-										<img src="/assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+										<img src="/assets/ace/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Alex:</span>
@@ -202,7 +202,7 @@
 
 								<li>
 									<a href="#">
-										<img src="/assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+										<img src="/assets/ace/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Susan:</span>
@@ -219,7 +219,7 @@
 
 								<li>
 									<a href="#">
-										<img src="/assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+										<img src="/assets/ace/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">Bob:</span>
@@ -263,9 +263,9 @@
 								</li>
 
 								<li>
-									<a href="#">
+									<a href="#" onclick="load('/user/userInfo')">
 										<i class="icon-user"></i>
-										个人资料<c:out value="${user.tell}"></c:out>
+										个人资料
 									</a>
 								</li>
 
@@ -302,9 +302,9 @@
 					<ul class="nav nav-list">
 
 						<li>
-							<a href="index.jsp">
+							<a href="#" onclick="load('/user/select')">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 控制台 </span>
+								<span class="menu-text"> 用户管理 </span>
 							</a>
 						</li>
 						
@@ -437,8 +437,6 @@
 				$("#load").load(url)
 			}
 		</script>
-		<div style="text-align:center;">
-	</div>
 	</body>
 </html>
 

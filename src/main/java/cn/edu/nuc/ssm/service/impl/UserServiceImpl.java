@@ -11,12 +11,11 @@ import cn.edu.nuc.ssm.util.PhoneUtil;
 import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateEmailService;
-import org.hibernate.validator.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.UUID;
+import java.util.List;
 
 /**
  * 用户表操作的实现类
@@ -42,6 +41,10 @@ public class UserServiceImpl extends BaseLog implements UserService {
         return userMapper.insertSelective(record);
     }
 
+    @Override
+    public List<User> selectAllUser() {
+        return userMapper.selectAllUser();
+    }
     @Override
     public User selectByPrimaryKey(String userid) {
         return userMapper.selectByPrimaryKey(userid);

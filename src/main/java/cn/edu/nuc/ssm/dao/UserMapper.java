@@ -2,6 +2,8 @@ package cn.edu.nuc.ssm.dao;
 
 import cn.edu.nuc.ssm.entity.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(String userid);
 
@@ -18,4 +20,6 @@ public interface UserMapper {
     User selectByTell(String tell);
 
     User selectByEmail(String email);
+
+    List<User> selectAllUser();
 }

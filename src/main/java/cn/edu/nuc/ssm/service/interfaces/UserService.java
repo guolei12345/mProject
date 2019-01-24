@@ -3,6 +3,7 @@ package cn.edu.nuc.ssm.service.interfaces;
 import cn.edu.nuc.ssm.entity.User;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface UserService {
     int deleteByPrimaryKey(String userid);
@@ -25,4 +26,5 @@ public interface UserService {
 
     int updatePassWord(User user, boolean hasOld);
 
+    List<User> selectAllUser();
 }

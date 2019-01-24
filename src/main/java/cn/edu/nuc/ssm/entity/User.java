@@ -1,8 +1,12 @@
 package cn.edu.nuc.ssm.entity;
 
+import cn.edu.nuc.ssm.util.StringUtil;
+
 public class User {
     private String userid;
-
+    private String birthday;
+    private String sex;
+    private String sign;
     private String username;
 
     private String loginname;
@@ -30,11 +34,11 @@ public class User {
     private String status;
 
     private String type;
-
+    //生日
     private String colum1;
-
+    //性别
     private String colum2;
-
+    //个性签名
     private String colum3;
 
     private String colum4;
@@ -46,6 +50,53 @@ public class User {
     private String code;
 
     private String checkCode;
+
+    private String firstName;
+
+    private String lastName;
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+        this.colum1 = birthday;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+        this.colum2 = sex;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
+        this.colum3 = sign;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getNum() {
         return num;
@@ -96,7 +147,10 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        if(!StringUtil.isNotEmpty(username)){
+            username = firstName+lastName;
+        }
+        return username.trim();
     }
 
     public void setUsername(String username) {
@@ -192,7 +246,7 @@ public class User {
     }
 
     public String getColum1() {
-        return colum1;
+        return birthday;
     }
 
     public void setColum1(String colum1) {
@@ -200,7 +254,7 @@ public class User {
     }
 
     public String getColum2() {
-        return colum2;
+        return sex;
     }
 
     public void setColum2(String colum2) {
@@ -208,7 +262,7 @@ public class User {
     }
 
     public String getColum3() {
-        return colum3;
+        return sign;
     }
 
     public void setColum3(String colum3) {

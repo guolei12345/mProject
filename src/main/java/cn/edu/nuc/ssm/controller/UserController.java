@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/user")
@@ -172,5 +173,46 @@ public class UserController extends BaseController {
     public void getSendCheck(HttpSession session, HttpServletResponse response,String num) throws Exception {
         logger.info("to sendCheck：num："+num);
         userService.sendCheck(num);
+    }
+
+    /**
+     * 用户信息
+     * @return
+     */
+    @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
+    public String getUserInfo(){
+        logger.info("to get userInfo");
+        return "/user/userInfo";
+    }
+
+    /**
+     * 请求查询用户
+     * @return
+     */
+    @RequestMapping(value = "/select",method = RequestMethod.GET)
+    public String getSelect(Model model){
+        logger.info("to get select");
+        List<User> userList = userService.selectAllUser();
+        model.addAttribute("userList",userList);
+        return "/user/select";
+    }
+
+    /**
+     * 完善用户信息
+     * @param user
+     * @return
+     */
+    @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
+    public String postUpdateUser(User user,Model model){
+        logger.info("Controller 开始调用完善用户信息 Service start info{}",user.toString());
+        String msg = "";
+        int rtn = userService.updateByPrimaryKeySelective(user);
+        if(rtn == 1){
+            msg = "完善信息成功";
+        }else {
+            msg = "完善信息失败";
+        }
+        model.addAttribute("msg",msg);
+        return "/index";
     }
 }
