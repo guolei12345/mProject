@@ -27,4 +27,6 @@ public interface UserService {
     int updatePassWord(User user, boolean hasOld);
 
     List<User> selectAllUser();
+
+    void resetUser(HttpSession session,String tell);
 }

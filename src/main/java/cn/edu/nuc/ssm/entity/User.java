@@ -51,10 +51,6 @@ public class User {
 
     private String checkCode;
 
-    private String firstName;
-
-    private String lastName;
-
     public String getBirthday() {
         return birthday;
     }
@@ -80,22 +76,6 @@ public class User {
     public void setSign(String sign) {
         this.sign = sign;
         this.colum3 = sign;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getNum() {
@@ -147,10 +127,7 @@ public class User {
     }
 
     public String getUsername() {
-        if(!StringUtil.isNotEmpty(username)){
-            username = firstName+lastName;
-        }
-        return username.trim();
+        return username;
     }
 
     public void setUsername(String username) {
@@ -251,6 +228,7 @@ public class User {
 
     public void setColum1(String colum1) {
         this.colum1 = colum1 == null ? null : colum1.trim();
+        this.birthday = colum1;
     }
 
     public String getColum2() {
@@ -259,6 +237,7 @@ public class User {
 
     public void setColum2(String colum2) {
         this.colum2 = colum2 == null ? null : colum2.trim();
+        this.sex = colum2;
     }
 
     public String getColum3() {
@@ -267,6 +246,7 @@ public class User {
 
     public void setColum3(String colum3) {
         this.colum3 = colum3 == null ? null : colum3.trim();
+        this.sign = colum3;
     }
 
     public String getColum4() {

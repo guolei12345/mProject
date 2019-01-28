@@ -45,6 +45,14 @@ public class UserServiceImpl extends BaseLog implements UserService {
     public List<User> selectAllUser() {
         return userMapper.selectAllUser();
     }
+
+    @Override
+    public void resetUser(HttpSession session,String tell) {
+        User user = userMapper.selectByTell(tell);
+        session.removeAttribute("user");
+        session.setAttribute("user",user);
+    }
+
     @Override
     public User selectByPrimaryKey(String userid) {
         return userMapper.selectByPrimaryKey(userid);
@@ -84,7 +92,6 @@ public class UserServiceImpl extends BaseLog implements UserService {
                 if(!user.getPassword().equals(userInfo.getPassword())){
                     rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.手机号格式不正确.toString());
                 }else{
-                    session.setAttribute("user",userInfo);
                     rtn = LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString());
                 }
             }else{

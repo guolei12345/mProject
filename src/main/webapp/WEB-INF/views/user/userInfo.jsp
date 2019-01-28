@@ -21,20 +21,6 @@
 								基础信息
 							</a>
 						</li>
-
-						<li>
-							<a data-toggle="tab" href="#edit-settings">
-								<i class="purple icon-cog bigger-125"></i>
-								设置
-							</a>
-						</li>
-
-						<li>
-							<a data-toggle="tab" href="#edit-password">
-								<i class="blue icon-key bigger-125"></i>
-								密码管理
-							</a>
-						</li>
 					</ul>
 
 					<div class="tab-content profile-edit-tab-content">
@@ -45,7 +31,6 @@
 								<div class="col-xs-12 col-sm-4">
 									<input type="file" />
 								</div>
-
 								<div class="vspace-xs"></div>
 
 								<div class="col-xs-12 col-sm-8">
@@ -53,7 +38,7 @@
 										<label class="col-sm-4 control-label no-padding-right" for="form-field-username">昵称</label>
 
 										<div class="col-sm-8">
-											<input class="col-xs-12 col-sm-10" type="text" name="loginname" id="form-field-username" placeholder="loginname" value="${user.loginname}" />
+											<input class="col-xs-12 col-sm-10" type="text" name="loginname" id="form-field-username" value="${user.loginname}" />
 											<input type="hidden" name="userid" value="${user.userid}"/>
 										</div>
 									</div>
@@ -64,8 +49,7 @@
 										<label class="col-sm-4 control-label no-padding-right" for="form-field-first">姓名</label>
 
 										<div class="col-sm-8">
-											<input class="input-small" type="text" name="firstName" id="form-field-first" placeholder="First Name" value="${user.username}" />
-											<input class="input-small" type="text" name="lastName" id="form-field-last" placeholder="Last Name" value="${user.username}" />
+											<input class="col-xs-12 col-sm-10" type="text" name="username" id="form-field-first" value="${user.username}" />
 										</div>
 									</div>
 								</div>
@@ -78,7 +62,7 @@
 								<div class="col-sm-9">
 									<div class="input-medium">
 										<div class="input-group">
-											<input class="input-medium date-picker" name="birthday" id="form-field-date" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
+											<input class="input-medium date-picker" name="birthday" value="${user.birthday}" id="form-field-date" type="text" data-date-format="yyyy-mm-dd"/>
 											<span class="input-group-addon" id="schedule-boxS">
 											<i class="icon-calendar"></i>
 										</span>
@@ -94,13 +78,13 @@
 
 								<div class="col-sm-9">
 									<label class="inline">
-										<input name="sex" type="radio" class="ace" />
+										<input name="sex" type="radio" class="ace" value="1" />
 										<span class="lbl"> 男生</span>
 									</label>
 
 									&nbsp; &nbsp; &nbsp;
 									<label class="inline">
-										<input name="sex" type="radio" class="ace" />
+										<input name="sex" type="radio" class="ace" value="0"/>
 										<span class="lbl"> 女生</span>
 									</label>
 								</div>
@@ -112,7 +96,7 @@
 								<label class="col-sm-3 control-label no-padding-right" for="form-field-comment">个性签名</label>
 
 								<div class="col-sm-9">
-									<textarea id="form-field-comment" name="sign"></textarea>
+									<textarea id="form-field-comment" name="sign">${user.sign}</textarea>
 								</div>
 							</div>
 

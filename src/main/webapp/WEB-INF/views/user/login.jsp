@@ -55,7 +55,7 @@
                                     <span class="block input-icon input-icon-right input-group">
                                         <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
                                             style="width: 145px"/>
-                                        <img src="/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity" onload="btn.disabled=true;"
+                                        <img src="/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity"
                                              onclick="this.src='/user/getVerify?'+Math.random();"/>
                                     </span>
                                 </label>

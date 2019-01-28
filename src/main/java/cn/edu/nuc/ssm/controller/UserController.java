@@ -1,13 +1,11 @@
 package cn.edu.nuc.ssm.controller;
 
-import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
-import cn.edu.nuc.ssm.enums.NumTypeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
-import cn.edu.nuc.ssm.util.MailUtil;
+import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +46,7 @@ public class UserController extends BaseController {
         logger.info("Controller 开始调用登陆 Service start info{}",user.toString());
         String msg = "";
         int rtn = 0;
-        String code = session.getAttribute("code").toString().toUpperCase();
+        String code = RedisUtil.getJedis().get("code").toUpperCase();
         //没有输入信息返回
         if(user == null) return "/user/login";
         rtn = userService.login(user,code,session);
@@ -57,6 +55,7 @@ public class UserController extends BaseController {
         model.addAttribute("msg",msg);
         logger.info(msg);
         if(rtn == LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString())){
+            userService.resetUser(session,user.getNum());
             return "/index";
         }else{
             return "/user/login";
@@ -111,7 +110,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/updatePass",method = RequestMethod.POST)
-    public String postUpdatePassByEmail(User user) throws Exception {
+    public String postUpdatePassByEmail(User user,HttpSession session) throws Exception {
         logger.info("to post updatePass");
         //发送验证码
         int rtn = userService.updatePassWord(user, false);
@@ -156,8 +155,9 @@ public class UserController extends BaseController {
         logger.info("to getVerify");
         //登陆页面验证码缓存到session
         String code = VerifyUtil.getVerifyCode1();
-        session.removeAttribute("code");
-        session.setAttribute("code",code);
+        //设置缓存
+        RedisUtil.getJedis().set("code", code);
+        logger.info("code:{}",code);
         //获取验证码接口
         byte[] bytes = validateCodeService.enGetVerify(code);
         validateCodeService.outPutToClient(bytes,response);
@@ -180,7 +180,7 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
-    public String getUserInfo(){
+    public String getUserInfo(HttpSession session){
         logger.info("to get userInfo");
         return "/user/userInfo";
     }
@@ -203,11 +203,13 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
-    public String postUpdateUser(User user,Model model){
+    public String postUpdateUser(User user,Model model,HttpSession session){
         logger.info("Controller 开始调用完善用户信息 Service start info{}",user.toString());
         String msg = "";
         int rtn = userService.updateByPrimaryKeySelective(user);
         if(rtn == 1){
+            //重置session中user
+            userService.resetUser(session,user.getTell());
             msg = "完善信息成功";
         }else {
             msg = "完善信息失败";
