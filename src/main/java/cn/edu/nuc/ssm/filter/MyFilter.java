@@ -3,6 +3,8 @@ package cn.edu.nuc.ssm.filter;
 import cn.edu.nuc.ssm.logger.BaseLog;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -30,7 +32,7 @@ public class MyFilter extends BaseLog implements Filter{
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         logger.info("MyFilter：doFilter");
-        request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("utf-8");
         chain.doFilter(request,response);
     }
 
