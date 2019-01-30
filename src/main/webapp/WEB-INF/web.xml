@@ -20,10 +20,10 @@
 		WebSphere  默认 Servlet的名字  "SimpleFileServlet"
   	]]>
    -->
-  <servlet-mapping>
-  	<servlet-name>default</servlet-name>
-  	<url-pattern>/assets/*</url-pattern>
-  </servlet-mapping>
+  <!--<servlet-mapping>-->
+  	<!--<servlet-name>default</servlet-name>-->
+  	<!--<url-pattern>/*</url-pattern>-->
+  <!--</servlet-mapping>-->
     <filter>
         <filter-name>myFilter</filter-name>
         <filter-class>cn.edu.nuc.ssm.filter.MyFilter</filter-class>
