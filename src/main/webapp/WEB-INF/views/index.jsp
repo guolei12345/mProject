@@ -302,10 +302,19 @@
 					<ul class="nav nav-list">
 
 						<li>
-							<a href="#" onclick="load('/user/select')">
+							<a href="#" class="dropdown-toggle">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 用户管理 </span>
+								<b class="arrow icon-angle-down"></b>
 							</a>
+							<ul class="submenu">
+								<li>
+									<a href="#" onclick="load('/user/select')">
+										<i class="icon-double-angle-right"></i>
+										表单组件
+									</a>
+								</li>
+							</ul>
 						</li>
 						
 						<li>
