@@ -1,8 +1,9 @@
-package cn.edu.nuc.ssm.dao;
+package cn.edu.nuc.ssm.service.interfaces;
 
+import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.entity.UserRole;
 
-public interface UserRoleMapper {
+public interface UserRoleService {
     int deleteByPrimaryKey(String id);
 
     int insert(UserRole record);
@@ -16,4 +17,6 @@ public interface UserRoleMapper {
     int updateByPrimaryKey(UserRole record);
 
     UserRole selectByUserId(String userid);
+
+    int saveOrUpdateUserRole(User user);
 }

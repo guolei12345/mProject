@@ -19,6 +19,11 @@
     roleID, roleName, createTime, description, isCheck, status, type, colum1, colum2, 
     colum3, colum4, colum5
   </sql>
+  <select id="selectAllRole" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

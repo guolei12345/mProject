@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * 角色表操作的实现类
  */
@@ -44,5 +46,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public int updateByPrimaryKey(Role record) {
         return roleMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Role> selectAllRole() {
+        return roleMapper.selectAllRole();
     }
 }

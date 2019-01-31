@@ -2,6 +2,8 @@ package cn.edu.nuc.ssm.dao;
 
 import cn.edu.nuc.ssm.entity.Role;
 
+import java.util.List;
+
 public interface RoleMapper {
     int deleteByPrimaryKey(String roleid);
 
@@ -14,4 +16,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> selectAllRole();
 }

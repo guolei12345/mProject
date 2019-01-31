@@ -29,4 +29,6 @@ public interface UserService {
     List<User> selectAllUser();
 
     void resetUser(HttpSession session,String tell);
+
+    int deleteUser(String userid);
 }

@@ -1,9 +1,13 @@
 package cn.edu.nuc.ssm.controller;
 
+import cn.edu.nuc.ssm.entity.Role;
 import cn.edu.nuc.ssm.entity.User;
+import cn.edu.nuc.ssm.entity.UserRole;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
+import cn.edu.nuc.ssm.service.interfaces.RoleService;
+import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
 import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
@@ -25,6 +29,10 @@ public class UserController extends BaseController {
     private UserService userService;
     @Autowired
     private ValidateCodeService validateCodeService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private UserRoleService userRoleService;
     /**
      * 请求登陆页面
      * @return
@@ -82,7 +90,7 @@ public class UserController extends BaseController {
         logger.info("Controller 开始调用注册 Service start info{}",user.toString());
         String msg = "";
         int rtn = 0;
-        String code = session.getAttribute("code").toString().toUpperCase();
+        String code = RedisUtil.getJedis().get("code").toUpperCase();
         //没有输入信息返回
         if(user == null) return "/user/regist";
         rtn = userService.regist(user,code);
@@ -215,6 +223,48 @@ public class UserController extends BaseController {
             msg = "完善信息失败";
         }
         model.addAttribute("msg",msg);
+        return "/index";
+    }
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    public String getEdit(String userid, Model model){
+        logger.info("to get edit");
+        User user = userService.selectByPrimaryKey(userid);
+        List<Role> roleList = roleService.selectAllRole();
+        model.addAttribute("userEdit",user);
+        model.addAttribute("roleList",roleList);
+        return "/user/edit";
+    }
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public String postEdit(User user, Model model){
+        logger.info("to post edit,userInfo :");
+        String msg = "";
+        int rtn = userRoleService.saveOrUpdateUserRole(user);
+        if(rtn == 1){
+            msg = "修改用户权限成功！";
+        }
+        model.addAttribute("msg",msg);
+        return "/index";
+    }
+    /**
+     * 请求查询用户
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public String getDelete(String userid, Model model){
+        logger.info("to get delete");
+        int rtn = userService.deleteUser(userid);
+        String msg = "";
+        if(rtn == 1){
+            msg = "删除用户成功！";
+        }
         return "/index";
     }
 }

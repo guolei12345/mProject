@@ -5,13 +5,13 @@ import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.PostMethod;
 public class PhoneUtil {
 
-    public static void sendCode(String code) throws Exception{
+    public static void sendCode(String code, String tell) throws Exception{
         HttpClient client = new HttpClient();
         //http://utf8.api.smschinese.cn/
         //http://gbk.api.smschinese.cn
         PostMethod post = new PostMethod("http://utf8.api.smschinese.cn");
         post.addRequestHeader("Content-Type","application/x-www-form-urlencoded;charset=utf-8");//在头文件中设置转码
-        NameValuePair[] data ={ new NameValuePair("Uid", "guolei1"),new NameValuePair("Key", "d41d8cd98f00b204e980"),new NameValuePair("smsMob","18435186589"),new NameValuePair("smsText","验证码："+code+"【个人中心】")};
+        NameValuePair[] data ={ new NameValuePair("Uid", "guolei1"),new NameValuePair("Key", "d41d8cd98f00b204e980"),new NameValuePair("smsMob",tell),new NameValuePair("smsText","验证码："+code+"【个人中心】")};
         post.setRequestBody(data);
 
         client.executeMethod(post);

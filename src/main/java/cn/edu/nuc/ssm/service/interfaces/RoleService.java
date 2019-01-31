@@ -2,6 +2,8 @@ package cn.edu.nuc.ssm.service.interfaces;
 
 import cn.edu.nuc.ssm.entity.Role;
 
+import java.util.List;
+
 public interface RoleService {
     int deleteByPrimaryKey(String roleid);
 
@@ -14,4 +16,6 @@ public interface RoleService {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> selectAllRole();
 }

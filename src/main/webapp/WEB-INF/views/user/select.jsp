@@ -24,9 +24,9 @@
                     <label>Display
                         <select size="1" name="sample-table-2_length" aria-controls="sample-table-2">
                         <option value="10" selected="selected">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
                         </select> records</label>
                     </div>
                 </div>
@@ -75,51 +75,14 @@
                             <td class="hidden-320">${user.sign}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
-                                    <a class="blue" href="#">
-                                        <i class="icon-zoom-in bigger-130"></i>
-                                    </a>
 
-                                    <a class="green" href="#">
+                                    <a class="green" href="#" onclick="option('/user/edit',${user.userid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#">
+                                    <a class="red" href="#" onclick="option('/user/delete',${user.userid})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
-                                </div>
-
-                                <div class="visible-xs visible-sm hidden-md hidden-lg">
-                                    <div class="inline position-relative">
-                                        <button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
-                                            <i class="icon-caret-down icon-only bigger-120"></i>
-                                        </button>
-
-                                        <ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
-                                            <li>
-                                                <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                                                <span class="blue">
-                                                                    <i class="icon-zoom-in bigger-120"></i>
-                                                                </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                                                <span class="green">
-                                                                    <i class="icon-edit bigger-120"></i>
-                                                                </span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                                                <span class="red">
-                                                                    <i class="icon-trash bigger-120"></i>
-                                                                </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -163,7 +126,6 @@
 </div><!-- /.main-container -->
 
 <script src="/assets/ace/js/jquery.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
@@ -183,40 +145,11 @@
 <script src="/assets/ace/js/ace.min.js"></script>
 
 <script type="text/javascript">
-    jQuery(function($) {
-        var oTable1 = $('#sample-table-2').dataTable( {
-            "aoColumns": [
-                { "bSortable": false },
-                null, null,null, null, null,
-                { "bSortable": false }
-            ] } );
 
-
-        $('table th input:checkbox').on('click' , function(){
-            var that = this;
-            $(this).closest('table').find('tr > td:first-child input:checkbox')
-                .each(function(){
-                    this.checked = that.checked;
-                    $(this).closest('tr').toggleClass('selected');
-                });
-
-        });
-
-
-        $('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
-        function tooltip_placement(context, source) {
-            var $source = $(source);
-            var $parent = $source.closest('table')
-            var off1 = $parent.offset();
-            var w1 = $parent.width();
-
-            var off2 = $source.offset();
-            var w2 = $source.width();
-
-            if( parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2) ) return 'right';
-            return 'left';
-        }
-    })
+    function option(url,userid){
+        var urls = url+"?userid="+userid;
+        $("#load").load(urls)
+    }
 </script>
 </body>
 </html>

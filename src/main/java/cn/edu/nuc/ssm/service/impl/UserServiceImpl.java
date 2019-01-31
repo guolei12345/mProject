@@ -2,9 +2,12 @@ package cn.edu.nuc.ssm.service.impl;
 
 import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.dao.UserMapper;
+import cn.edu.nuc.ssm.dao.UserRoleMapper;
 import cn.edu.nuc.ssm.entity.User;
+import cn.edu.nuc.ssm.entity.UserRole;
 import cn.edu.nuc.ssm.enums.*;
 import cn.edu.nuc.ssm.logger.BaseLog;
+import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
 import cn.edu.nuc.ssm.util.MailUtil;
 import cn.edu.nuc.ssm.util.PhoneUtil;
@@ -26,6 +29,8 @@ public class UserServiceImpl extends BaseLog implements UserService {
     UserMapper userMapper;
     @Autowired
     ValidateEmailService validateEmailService;
+    @Autowired
+    UserRoleMapper userRoleMapper;
     @Override
     public int deleteByPrimaryKey(String userid) {
         return userMapper.deleteByPrimaryKey(userid);
@@ -51,6 +56,15 @@ public class UserServiceImpl extends BaseLog implements UserService {
         User user = userMapper.selectByTell(tell);
         session.removeAttribute("user");
         session.setAttribute("user",user);
+    }
+
+    @Override
+    public int deleteUser(String userid) {
+        UserRole userRole = userRoleMapper.selectByUserId(userid);
+        if(userRole != null && !"".equals(userRole.getId())){
+            userRoleMapper.deleteByPrimaryKey(userRole.getId());
+        }
+        return userMapper.deleteByPrimaryKey(userid);
     }
 
     @Override
@@ -170,7 +184,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
             if(user == null){
                 rtn = 4;
             }else{
-                PhoneUtil.sendCode(code);
+                PhoneUtil.sendCode(code,num);
             }
         }else if(getNumType(num) == NumTypeEnum.邮箱){
             //发送邮箱验证码

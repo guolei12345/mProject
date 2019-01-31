@@ -4,6 +4,7 @@ import cn.edu.nuc.ssm.util.StringUtil;
 
 public class User {
     private String userid;
+    private String roleid;
     private String birthday;
     private String sex;
     private String sign;
@@ -50,6 +51,14 @@ public class User {
     private String code;
 
     private String checkCode;
+
+    public String getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(String roleid) {
+        this.roleid = roleid;
+    }
 
     public String getBirthday() {
         return birthday;
