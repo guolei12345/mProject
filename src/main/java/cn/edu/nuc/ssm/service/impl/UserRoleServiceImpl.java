@@ -12,10 +12,7 @@ import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.logger.BaseLog;
 import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
-import cn.edu.nuc.ssm.util.MailUtil;
-import cn.edu.nuc.ssm.util.PhoneUtil;
-import cn.edu.nuc.ssm.util.RedisUtil;
-import cn.edu.nuc.ssm.util.StringUtil;
+import cn.edu.nuc.ssm.util.*;
 import cn.edu.nuc.ssm.webService.util.ValidateEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,10 +67,8 @@ public class UserRoleServiceImpl extends BaseLog implements UserRoleService {
         int rtn = 0;
         UserRole userRole = userRoleMapper.selectByUserId(user.getUserid());
         if(userRole == null ||"".equals(userRole.getId())){
-            userRole = new UserRole();
-            userRole.setId(StringUtil.getUUId());
-            userRole.setUserid(user.getUserid());
-            userRole.setRoleid(user.getRoleid());
+            //调用封装数据的工具
+            userRole = UserRoleUtil.getUserRole(user);
             rtn = userRoleMapper.insertSelective(userRole);
         }else{
             userRole.setRoleid(user.getRoleid());

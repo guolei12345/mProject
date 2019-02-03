@@ -309,10 +309,10 @@
 							</a>
 							<ul class="submenu">
 								<li>
-									<a href="#" onclick="load('/user/select')">
-										<i class="icon-double-angle-right"></i>
-										表单组件
-									</a>
+									<a href="#" onclick="load('/user/search')">查看用户信息</a>
+								</li>
+								<li>
+									<a href="#" onclick="load('/user/add')">增加用户</a>
 								</li>
 							</ul>
 						</li>
@@ -380,17 +380,7 @@
 							<li class="active">控制台</li>
 						</ul><!-- .breadcrumb -->
 
-						<div class="nav-search" id="nav-search">
-							<form class="form-search">
-								<span class="input-icon">
-									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
-									<i class="icon-search nav-search-icon"></i>
-								</span>
-							</form>
-							<div>
-								${msg}
-							</div>
-						</div><!-- #nav-search -->
+
 					</div>
 
 					<div class="page-content">

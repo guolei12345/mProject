@@ -1,5 +1,6 @@
 package cn.edu.nuc.ssm.controller;
 
+import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.Role;
 import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.entity.UserRole;
@@ -12,11 +13,13 @@ import cn.edu.nuc.ssm.service.interfaces.UserService;
 import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -198,13 +201,21 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/select",method = RequestMethod.GET)
-    public String getSelect(Model model){
+    public String getSelect(String key, Model model){
         logger.info("to get select");
         List<User> userList = userService.selectAllUser();
         model.addAttribute("userList",userList);
         return "/user/select";
     }
-
+    @RequestMapping(value="search",method=RequestMethod.GET)
+    public String list(@RequestParam(name="current",defaultValue="1") int current,
+                       @RequestParam(name="key",defaultValue="")String key,
+                       @RequestParam(name="offset",defaultValue="5")int offset,
+                       Model model){
+        PageInfo pageInfo = userService.selectAllUserByKey(key,current,offset);
+        model.addAttribute("pageInfo",pageInfo);
+        return "/user/select";
+    }
     /**
      * 完善用户信息
      * @param user
@@ -264,6 +275,35 @@ public class UserController extends BaseController {
         String msg = "";
         if(rtn == 1){
             msg = "删除用户成功！";
+        }
+        List<User> userList = userService.selectAllUser();
+        model.addAttribute("userList",userList);
+        return "/user/select";
+    }
+
+    /**
+     * 请求查询用户
+     * @return
+     */
+    @RequestMapping(value = "/add",method = RequestMethod.GET)
+    public String getAdd(Model model){
+        logger.info("to get add");
+        List<Role> roleList = roleService.selectAllRole();
+        model.addAttribute("roleList",roleList);
+        return "/user/add";
+    }
+
+    /**
+     * 请求查询用户
+     * @return
+     */
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
+    public String postAdd(User user,Model model){
+        logger.info("to post add");
+        String msg = "";
+        int rtn = userService.saveUser(user);
+        if(rtn>0){
+            msg = "增加用户信息成功！";
         }
         return "/index";
     }

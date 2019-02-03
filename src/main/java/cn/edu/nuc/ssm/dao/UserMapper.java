@@ -1,6 +1,7 @@
 package cn.edu.nuc.ssm.dao;
 
 import cn.edu.nuc.ssm.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,8 @@ public interface UserMapper {
     User selectByEmail(String email);
 
     List<User> selectAllUser();
+
+    int selectUserCount();
+
+    List<User> selectUserByKey(@Param(value = "key")String key, @Param(value = "start")int start, @Param(value = "offset")int offset);
 }

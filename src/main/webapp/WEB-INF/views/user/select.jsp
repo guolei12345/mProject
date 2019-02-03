@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm-6"><div id="sample-table-2_length" class="dataTables_length">
                     <label>Display
-                        <select size="1" name="sample-table-2_length" aria-controls="sample-table-2">
+                        <select size="1" id="offset" name="sample-table-2_length" aria-controls="sample-table-2">
                         <option value="10" selected="selected">10</option>
                             <option value="5">5</option>
                             <option value="10">10</option>
@@ -31,8 +31,13 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="dataTables_filter" id="sample-table-2_filter">
-                        <label>Search: <input type="text" aria-controls="sample-table-2"></label>
+                    <div class="dataTables_filter">
+                        <label>关键字: <input type="text" id="userKey" aria-controls="sample-table-2">
+                            <button class="btn btn-info" onclick="searchByKey('/user/search','userKey',1)">
+                                <i class="icon-ok bigger-110"></i>
+                                查询
+                            </button>
+                        </label>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -57,7 +62,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${userList}" var="user">
+                        <c:forEach items="${pageInfo.list}" var="user">
                         <tr>
                             <td class="center">
                                 <label>
@@ -148,6 +153,12 @@
 
     function option(url,userid){
         var urls = url+"?userid="+userid;
+        $("#load").load(urls)
+    }
+    function searchByKey(url,key,current) {
+        var keys = $("#"+key).val();
+        var offset = $("#offset").val();
+        var urls = url+"?key="+keys+"&current="+current+"&offset="+offset;
         $("#load").load(urls)
     }
 </script>

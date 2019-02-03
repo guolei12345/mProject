@@ -25,6 +25,19 @@
     userId, userName, loginName, password, tell, email, creatTime, loginTime, lastLoginTime, 
     count, isCheck, status, type, colum1, colum2, colum3, colum4, colum5
     </sql>
+    <select id="selectUserByKey" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from user
+        where userName like #{key}
+        or loginName like #{key}
+        or tell like #{key}
+        or email like #{key}
+        limit #{start},#{offset}
+    </select>
+    <select id="selectUserCount" resultType="java.lang.Integer">
+        select count(userid)
+        from user
+    </select>
     <select id="selectAllUser" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

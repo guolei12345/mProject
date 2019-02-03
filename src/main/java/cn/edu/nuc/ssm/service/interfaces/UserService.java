@@ -1,5 +1,6 @@
 package cn.edu.nuc.ssm.service.interfaces;
 
+import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.User;
 
 import javax.servlet.http.HttpSession;
@@ -31,4 +32,8 @@ public interface UserService {
     void resetUser(HttpSession session,String tell);
 
     int deleteUser(String userid);
+
+    int saveUser(User user);
+
+    PageInfo<User> selectAllUserByKey(String key,int current,int offset);
 }

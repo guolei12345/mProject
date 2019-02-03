@@ -3,17 +3,16 @@ package cn.edu.nuc.ssm.service.impl;
 import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.dao.UserMapper;
 import cn.edu.nuc.ssm.dao.UserRoleMapper;
+import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.entity.UserRole;
 import cn.edu.nuc.ssm.enums.*;
 import cn.edu.nuc.ssm.logger.BaseLog;
 import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
-import cn.edu.nuc.ssm.util.MailUtil;
-import cn.edu.nuc.ssm.util.PhoneUtil;
-import cn.edu.nuc.ssm.util.RedisUtil;
-import cn.edu.nuc.ssm.util.StringUtil;
+import cn.edu.nuc.ssm.util.*;
 import cn.edu.nuc.ssm.webService.util.ValidateEmailService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +64,33 @@ public class UserServiceImpl extends BaseLog implements UserService {
             userRoleMapper.deleteByPrimaryKey(userRole.getId());
         }
         return userMapper.deleteByPrimaryKey(userid);
+    }
+
+    @Override
+    public int saveUser(User user) {
+        if(!StringUtil.isNotEmpty(user.getUserid())){
+            user.setUserid(StringUtil.getUUId());
+        }
+        int rtn = userMapper.insertSelective(user);
+        if(rtn>0){
+            //调用封装数据的工具
+            UserRole userRole = UserRoleUtil.getUserRole(user);
+            rtn += userRoleMapper.insertSelective(userRole);
+        }
+        return rtn;
+    }
+
+    @Override
+    public PageInfo<User> selectAllUserByKey(String key,int current,int offset) {
+        PageInfo pageInfo = new PageInfo(current);
+        pageInfo.setOffset(offset);
+        int count = userMapper.selectUserCount();
+        pageInfo.setCount(count);
+        String keyMsg = "%"+key+"%";
+
+        List<User> list = userMapper.selectUserByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());
+        pageInfo.setList(list);
+        return  pageInfo;
     }
 
     @Override
