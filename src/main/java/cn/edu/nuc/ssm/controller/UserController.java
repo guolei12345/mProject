@@ -272,13 +272,10 @@ public class UserController extends BaseController {
     public String getDelete(String userid, Model model){
         logger.info("to get delete");
         int rtn = userService.deleteUser(userid);
-        String msg = "";
         if(rtn == 1){
-            msg = "删除用户成功！";
+            return list(1,"",10,model);
         }
-        List<User> userList = userService.selectAllUser();
-        model.addAttribute("userList",userList);
-        return "/user/select";
+        return "/index";
     }
 
     /**
