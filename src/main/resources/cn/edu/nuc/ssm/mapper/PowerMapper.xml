@@ -20,6 +20,25 @@
     powerID, praPoerID, powerName, url, isCheck, description, status, type, colum1, colum2, 
     colum3, colum4, colum5
   </sql>
+  <select id="selectPowerByKey" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from power
+    where powerName like #{key}
+    or url like #{key}
+    or description like #{key}
+    limit #{start},#{offset}
+  </select>
+  <select id="selectPowerCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select count(powerID)
+    from power
+    where status = #{status,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAllParPower" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from power
+    where status = #{status,jdbcType=VARCHAR} and type = #{type,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

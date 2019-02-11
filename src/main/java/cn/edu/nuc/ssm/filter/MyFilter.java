@@ -40,7 +40,7 @@ public class MyFilter extends BaseLog implements Filter{
         String requestURI = req.getRequestURI();
         String url = ((HttpServletRequest) request).getContextPath();
         //如果第一次请求不为登录页面,则进行检查用session内容,如果为登录页面就不去检查.
-        if(!"/user/login".equals(requestURI) && !"/".equals(requestURI)&&!requestURI.contains(".")&&!"/user/getVerify".equals(requestURI))
+        if(!"/user/updatePass".equals(requestURI) &&!"/user/regist".equals(requestURI) &&!"/user/login".equals(requestURI) && !"/".equals(requestURI)&&!requestURI.contains(".")&&!"/user/getVerify".equals(requestURI))
         {
             //取得session. 如果没有session则自动会创建一个, 我们用false表示没有取得到session则设置为session为空.
             HttpSession session = req.getSession(false);

@@ -24,7 +24,7 @@ public interface UserMapper {
 
     List<User> selectAllUser();
 
-    int selectUserCount();
+    int selectUserCount(@Param(value = "status")String status);
 
     List<User> selectUserByKey(@Param(value = "key")String key, @Param(value = "start")int start, @Param(value = "offset")int offset);
 }

@@ -84,10 +84,9 @@ public class UserServiceImpl extends BaseLog implements UserService {
     public PageInfo<User> selectAllUserByKey(String key,int current,int offset) {
         PageInfo pageInfo = new PageInfo(current);
         pageInfo.setOffset(offset);
-        int count = userMapper.selectUserCount();
+        int count = userMapper.selectUserCount("1");
         pageInfo.setCount(count);
         String keyMsg = "%"+key+"%";
-
         List<User> list = userMapper.selectUserByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());
         pageInfo.setList(list);
         return  pageInfo;
@@ -338,8 +337,8 @@ public class UserServiceImpl extends BaseLog implements UserService {
         else if(!CheckUtil.isMobilephone(user.getTell())){
             rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.手机号格式不正确.toString());
         }
-        //是否是正确的邮箱
-        else if(!CheckUtil.isEmail(user.getEmail())){
+        //是否是正确的邮箱 邮箱可以为空
+        else if(StringUtil.isNotEmpty(user.getEmail()) && !CheckUtil.isEmail(user.getEmail())){
             rtn = RegistCodeEnum.getRegistCode(RegistCodeEnum.不是正确的邮箱地址.toString());
         }
         //两次密码不一致

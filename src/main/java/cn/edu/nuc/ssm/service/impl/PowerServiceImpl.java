@@ -1,10 +1,16 @@
 package cn.edu.nuc.ssm.service.impl;
 
 import cn.edu.nuc.ssm.dao.PowerMapper;
+import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.Power;
+import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.service.interfaces.PowerService;
+import cn.edu.nuc.ssm.util.StringUtil;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * 权限表操作的实现类
@@ -25,6 +31,14 @@ public class PowerServiceImpl implements PowerService {
 
     @Override
     public int insertSelective(Power record) {
+        String parId = record.getPrapoerid();
+        record.setPowerid(StringUtil.getUUId());
+        //没有父级目录
+        if(StringUtil.isNotEmpty(parId) && parId.equals("0")){
+            record.setType("1");
+        }else{
+            record.setType("2");
+        }
         return powerMapper.insertSelective(record);
     }
 
@@ -41,5 +55,22 @@ public class PowerServiceImpl implements PowerService {
     @Override
     public int updateByPrimaryKey(Power record) {
         return powerMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Power> selectAllParPower(String s,String type) {
+        return powerMapper.selectAllParPower(s,type);
+    }
+
+    @Override
+    public PageInfo<Power> selectPowerByKey(int current, String key, int offset) {
+        PageInfo pageInfo = new PageInfo(current);
+        pageInfo.setOffset(offset);
+        int count = powerMapper.selectPowerCount("1");
+        pageInfo.setCount(count);
+        String keyMsg = "%"+key+"%";
+        List<Power> list = powerMapper.selectPowerByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());
+        pageInfo.setList(list);
+        return  pageInfo;
     }
 }
