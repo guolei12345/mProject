@@ -316,47 +316,23 @@
 								</li>
 							</ul>
 						</li>
-						
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text"> 表单 </span>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-dashboard"></i>
+                                <span class="menu-text"> 功能管理 </span>
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+                            <ul class="submenu">
+                                <li>
+                                    <a href="#" onclick="load('/power/search')">功能查询</a>
+                                </li>
+                                <li>
+                                    <a href="#" onclick="load('/power/add')">添加功能</a>
+                                </li>
+                            </ul>
+                        </li>
 
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										表单组件
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										向导提示 &amp; 验证
-									</a>
-								</li>
-
-								<li>
-									<a href="wysiwyg.html">
-										<i class="icon-double-angle-right"></i>
-										编辑器
-									</a>
-								</li>
-
-								<li>
-									<a href="dropzone.html">
-										<i class="icon-double-angle-right"></i>
-										文件上传
-									</a>
-								</li>
-							</ul>
-						</li>
-
-					<div class="sidebar-collapse" id="sidebar-collapse">
+                        <div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 					</div>
 
@@ -377,22 +353,10 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">控制台</li>
 						</ul><!-- .breadcrumb -->
-
-
 					</div>
 
 					<div class="page-content">
-						<div class="page-header">
-							<h1>
-								控制台
-								<small>
-									<i class="icon-double-angle-right"></i>
-									 查看
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
 						<div class="row" id="load">
 							<!--   要加载的界面内容 -->
 						</div><!-- /.row -->
@@ -433,7 +397,7 @@
 		<%--自己的方法--%>
 		<script type="text/javascript">
 			function load(url){
-				$("#load").load(url)
+				$("#load").load(url);
 			}
 		</script>
 	</body>

@@ -72,7 +72,7 @@
                                              onclick="this.src='/user/getVerify?'+Math.random();"/>
                                     </span>
                                 </label>
-                                <input type="submit" class="form-control" value="登录" />
+                                <input type="submit" class="form-control" value="注册" />
                             </fieldset>
                         </form>
                     </div><!-- /widget-main -->

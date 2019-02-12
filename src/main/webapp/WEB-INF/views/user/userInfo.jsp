@@ -78,13 +78,19 @@
 
 								<div class="col-sm-9">
 									<label class="inline">
-										<input name="sex" type="radio" class="ace" value="1" />
+										<input name="sex" type="radio"
+											<c:if test="${user.sex=='1'}">
+												checked="checked"
+											</c:if> class="ace" value="1" />
 										<span class="lbl"> 男生</span>
 									</label>
 
 									&nbsp; &nbsp; &nbsp;
 									<label class="inline">
-										<input name="sex" type="radio" class="ace" value="0"/>
+										<input name="sex" type="radio"
+											<c:if test="${user.sex=='0'}">
+												checked="checked"
+											</c:if> class="ace" value="0"/>
 										<span class="lbl"> 女生</span>
 									</label>
 								</div>
@@ -148,6 +154,12 @@
 			</form>
 		</div><!-- /span -->
 	</div><!-- /user-profile -->
+	<script type="text/javascript">
+		jQuery(function($) {
+			$('#user-profile-3').end().find('.date-picker').datepicker().next().on(ace.click_event, function(){
+				$(this).prev().focus();
+			});
+		});
+	</script>
 	</body>
 </html>
-
