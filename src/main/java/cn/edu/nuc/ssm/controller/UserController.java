@@ -3,7 +3,6 @@ package cn.edu.nuc.ssm.controller;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.Role;
 import cn.edu.nuc.ssm.entity.User;
-import cn.edu.nuc.ssm.entity.UserRole;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
@@ -17,6 +16,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +36,15 @@ public class UserController extends BaseController {
     private RoleService roleService;
     @Autowired
     private UserRoleService userRoleService;
+    /**
+     * 请求登陆页面
+     * @return
+     */
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String getIndex(){
+        logger.info("to get index");
+        return "/index";
+    }
     /**
      * 请求登陆页面
      * @return
@@ -60,18 +69,30 @@ public class UserController extends BaseController {
         String code = RedisUtil.getJedis().get("code").toUpperCase();
         //没有输入信息返回
         if(user == null) return "/user/login";
-        rtn = userService.login(user,code,session);
+        rtn = userService.login(user,code);
         msg = LoginCodeEnum.getLoginValue(rtn);
         logger.info("Controller 调用登陆 Service end info：{}",msg);
         model.addAttribute("msg",msg);
         logger.info(msg);
         if(rtn == LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString())){
-            userService.resetUser(session,user.getNum());
+            resetUser(user,session);
             return "/index";
         }else{
             return "/user/login";
         }
     }
+
+    /**
+     * 重置 user信息
+     * @param userInfo
+     * @param session
+     */
+    private void resetUser(User userInfo, HttpSession session) {
+        User user = userService.selectByUser(userInfo);
+        session.removeAttribute("user");
+        session.setAttribute("user",user);
+    }
+
     /**
      * 请求注册页面
      * @return
@@ -227,8 +248,7 @@ public class UserController extends BaseController {
         String msg = "";
         int rtn = userService.updateByPrimaryKeySelective(user);
         if(rtn == 1){
-            //重置session中user
-            userService.resetUser(session,user.getTell());
+            resetUser(user,session);
             msg = "完善信息成功";
         }else {
             msg = "完善信息失败";
@@ -254,15 +274,17 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public String postEdit(User user, Model model){
+    public String postEdit(@RequestBody User user, Model model){
         logger.info("to post edit,userInfo :");
         String msg = "";
         int rtn = userRoleService.saveOrUpdateUserRole(user);
         if(rtn == 1){
             msg = "修改用户权限成功！";
+        }else{
+            msg = "修改用户权限失败！";
         }
         model.addAttribute("msg",msg);
-        return "/index";
+        return list(1,"",5,model);
     }
     /**
      * 请求查询用户
@@ -273,9 +295,11 @@ public class UserController extends BaseController {
         logger.info("to get delete");
         int rtn = userService.deleteUser(userid);
         if(rtn == 1){
-            return list(1,"",10,model);
+            model.addAttribute("msg","删除成功");
+        }else{
+            model.addAttribute("msg","删除失败");
         }
-        return "/index";
+        return list(1,"",5,model);
     }
 
     /**

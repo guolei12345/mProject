@@ -75,16 +75,23 @@
                             <td class="hidden-320">${user.tell}</td>
                             <td class="hidden-320">${user.email}</td>
                             <td class="hidden-320">${user.birthday}</td>
-                            <td class="hidden-320">${user.sex}</td>
+                            <td class="hidden-320">
+                                <c:if test="${user.sex == '1'}">
+                                    男
+                                </c:if>
+                                <c:if test="${user.sex == '0'}">
+                                    女
+                                </c:if>
+                            </td>
                             <td class="hidden-320">${user.sign}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/user/edit',${user.userid})">
+                                    <a class="green" href="#" onclick="option('/user/edit','userid',${user.userid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="option('/user/delete',${user.userid})">
+                                    <a class="red" href="#" onclick="option('/user/delete','userid',${user.userid})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
                                 </div>
@@ -99,17 +106,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByUserKey('/user/search','userKey',1)">
+                <li class="prev" onclick="searchByKey('/user/search','userKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach begin="1" end="${pageInfo.total}" var="page">
-                <li class="prev" onclick="searchByUserKey('/user/search','userKey',${page})">
+                <li class="prev" onclick="searchByKey('/user/search','userKey',${page})">
                     <a href="#">${page}</a>
                 </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByUserKey('/user/search','userKey',${pageInfo.total})">
+                <li class="prev" onclick="searchByKey('/user/search','userKey',${pageInfo.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>
@@ -140,16 +147,6 @@
 
 <script type="text/javascript">
 
-    function option(url,userid){
-        var urls = url+"?userid="+userid;
-        $("#load").load(urls)
-    }
-    function searchByUserKey(url,key,current) {
-        var keys = $("#"+key).val();
-        var offset = $("#offset").val();
-        var urls = url+"?key="+keys+"&current="+current+"&offset="+offset;
-        $("#load").load(urls)
-    }
 </script>
 </body>
 </html>

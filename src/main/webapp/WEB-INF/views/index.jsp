@@ -351,7 +351,10 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/user/index">首页</a>
+							</li>
+							<li>
+								${msg}
 							</li>
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -398,6 +401,16 @@
 		<script type="text/javascript">
 			function load(url){
 				$("#load").load(url);
+			}
+			function option(url,name,value){
+				var urls = url+"?"+name+"="+value;
+				$("#load").load(urls)
+			}
+			function searchByKey(url,key,current) {
+				var keys = $("#"+key).val();
+				var offset = $("#offset").val();
+				var urls = url+"?key="+keys+"&current="+current+"&offset="+offset;
+				$("#load").load(urls)
 			}
 		</script>
 	</body>

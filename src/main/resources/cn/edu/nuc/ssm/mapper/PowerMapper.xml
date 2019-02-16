@@ -28,6 +28,10 @@
     or description like #{key}
     limit #{start},#{offset}
   </select>
+  <select id="selectPowerCountAll" resultType="java.lang.Integer">
+    select count(powerID)
+    from power
+  </select>
   <select id="selectPowerCount" parameterType="java.lang.String" resultType="java.lang.Integer">
     select count(powerID)
     from power

@@ -32,7 +32,7 @@
                 <div class="col-sm-6">
                     <div class="dataTables_filter">
                         <label>关键字: <input type="text" id="powerKey" aria-controls="sample-table-2">
-                            <button class="btn btn-info" onclick="searchByPowerKey('/power/search','powerKey',1)">
+                            <button class="btn btn-info" onclick="searchByKey('/power/search','powerKey',1)">
                                 <i class="icon-ok bigger-110"></i>
                                 查询
                             </button>
@@ -91,11 +91,11 @@
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="powerOption('/power/edit',${power.powerid})">
+                                    <a class="green" href="#" onclick="option('/power/edit','powerid',${power.powerid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="powerOption('/power/delete',${power.powerid})">
+                                    <a class="red" href="#" onclick="option('/power/delete','powerid',${power.powerid})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
                                 </div>
@@ -110,17 +110,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByPowerKey('/power/search','powerKey',1)">
+                <li class="prev" onclick="searchByKey('/power/search','powerKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach begin="1" end="${powerPage.total}" var="page">
-                    <li class="prev" onclick="searchByPowerKey('/power/search','powerKey',${page})">
+                    <li class="prev" onclick="searchByKey('/power/search','powerKey',${page})">
                         <a href="#">${page}</a>
                     </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByPowerKey('/power/search','powerKey',${powerPage.total})">
+                <li class="prev" onclick="searchByKey('/power/search','powerKey',${powerPage.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>
@@ -151,16 +151,6 @@
 
 <script type="text/javascript">
 
-    function powerOption(url,userid){
-        var urls = url+"?userid="+userid;
-        $("#load").load(urls)
-    }
-    function searchByPowerKey(url,key,current) {
-        var keys = $("#"+key).val();
-        var offset = $("#offset").val();
-        var urls = url+"?key="+keys+"&current="+current+"&offset="+offset;
-        $("#load").load(urls)
-    }
 </script>
 </body>
 </html>

@@ -66,7 +66,7 @@ public class PowerServiceImpl implements PowerService {
     public PageInfo<Power> selectPowerByKey(int current, String key, int offset) {
         PageInfo pageInfo = new PageInfo(current);
         pageInfo.setOffset(offset);
-        int count = powerMapper.selectPowerCount("1");
+        int count = powerMapper.selectPowerCountAll();
         pageInfo.setCount(count);
         String keyMsg = "%"+key+"%";
         List<Power> list = powerMapper.selectPowerByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());

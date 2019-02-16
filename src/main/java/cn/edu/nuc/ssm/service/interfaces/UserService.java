@@ -15,11 +15,13 @@ public interface UserService {
 
     User selectByPrimaryKey(String userid);
 
+    User selectByUser(User user);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
 
-    int login(User user, String code, HttpSession session);
+    int login(User user, String code);
 
     int regist(User user,String code);
 
@@ -28,8 +30,6 @@ public interface UserService {
     int updatePassWord(User user, boolean hasOld);
 
     List<User> selectAllUser();
-
-    void resetUser(HttpSession session,String tell);
 
     int deleteUser(String userid);
 

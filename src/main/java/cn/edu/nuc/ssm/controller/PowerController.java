@@ -8,6 +8,7 @@ import cn.edu.nuc.ssm.service.interfaces.PowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,5 +58,51 @@ public class PowerController extends BaseController {
         PageInfo<Power> powerPageInfo = powerService.selectPowerByKey(current,key,offset);
         model.addAttribute("powerPage", powerPageInfo);
         return "/power/select";
+    }
+
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    public String getEdit(String powerid, Model model){
+        logger.info("to get edit");
+        Power power = powerService.selectByPrimaryKey(powerid);
+        model.addAttribute("powerEdit",power);
+        return "/power/edit";
+    }
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public String postEdit(@RequestBody Power power, Model model){
+        logger.info("to post edit,userInfo :");
+        String msg = "";
+        int rtn = powerService.updateByPrimaryKeySelective(power);
+        if(rtn == 1){
+            msg = "修改功能信息成功！";
+        }else{
+            msg = "修改功能信息失败！";
+        }
+        model.addAttribute("msg",msg);
+        return list(1,"",5,model);
+    }
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public String getDelete(String powerid, Model model){
+        logger.info("to get delete");
+        String msg = "";
+        int rtn = powerService.deleteByPrimaryKey(powerid);
+        if(rtn > 0){
+            msg = "删除成功！";
+        }else{
+            msg = "删除失败！";
+        }
+        model.addAttribute("msg",msg);
+        return list(1,"",5,model);
     }
 }

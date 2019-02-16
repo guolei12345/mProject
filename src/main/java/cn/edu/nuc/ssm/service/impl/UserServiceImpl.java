@@ -51,13 +51,6 @@ public class UserServiceImpl extends BaseLog implements UserService {
     }
 
     @Override
-    public void resetUser(HttpSession session,String tell) {
-        User user = userMapper.selectByTell(tell);
-        session.removeAttribute("user");
-        session.setAttribute("user",user);
-    }
-
-    @Override
     public int deleteUser(String userid) {
         UserRole userRole = userRoleMapper.selectByUserId(userid);
         if(userRole != null && !"".equals(userRole.getId())){
@@ -97,6 +90,31 @@ public class UserServiceImpl extends BaseLog implements UserService {
         return userMapper.selectByPrimaryKey(userid);
     }
 
+    /**
+     * 根据用户信息，查询全部信息
+     * @param user
+     * @return
+     */
+    @Override
+    public User selectByUser(User user) {
+        User userInfo;
+        if(StringUtil.isNotEmpty(user.getUserid())){
+            userInfo = userMapper.selectByPrimaryKey(user.getUserid());
+        }else if(StringUtil.isNotEmpty(user.getNum()) && getNumType(user.getNum())==NumTypeEnum.手机号){
+            userInfo = userMapper.selectByTell(user.getNum());
+        }else if(StringUtil.isNotEmpty(user.getNum()) && getNumType(user.getNum())==NumTypeEnum.邮箱){
+            userInfo = userMapper.selectByEmail(user.getNum());
+        }else if(StringUtil.isNotEmpty(user.getTell())){
+            userInfo = userMapper.selectByTell(user.getNum());
+        }
+        else if(StringUtil.isNotEmpty(user.getEmail())){
+            userInfo = userMapper.selectByEmail(user.getNum());
+        }else{
+            userInfo = null;
+        }
+        return userInfo;
+    }
+
     @Override
     public int updateByPrimaryKeySelective(User record) {
         return userMapper.updateByPrimaryKeySelective(record);
@@ -113,7 +131,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
      * @return
      */
     @Override
-    public int login(User user, String code, HttpSession session) {
+    public int login(User user, String code) {
         //登陆结果code
         int rtn = loginCheck(user,code);
         //校验通过

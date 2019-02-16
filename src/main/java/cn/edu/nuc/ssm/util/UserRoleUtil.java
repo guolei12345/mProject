@@ -16,7 +16,7 @@ public class UserRoleUtil {
      */
     public static UserRole getUserRole(User user){
         UserRole userRole;
-        if(user != null &&!StringUtil.isNotEmpty(user.getUserid())&&!StringUtil.isNotEmpty(user.getRoleid())){
+        if(user != null &&StringUtil.isNotEmpty(user.getUserid())&&StringUtil.isNotEmpty(user.getRoleid())){
             userRole = new UserRole();
             userRole.setId(StringUtil.getUUId());
             userRole.setUserid(user.getUserid());
