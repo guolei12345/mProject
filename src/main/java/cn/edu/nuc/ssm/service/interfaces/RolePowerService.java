@@ -1,11 +1,8 @@
-package cn.edu.nuc.ssm.dao;
+package cn.edu.nuc.ssm.service.interfaces;
 
 import cn.edu.nuc.ssm.entity.RolePower;
-import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-public interface RolePowerMapper {
+public interface RolePowerService {
     int deleteByPrimaryKey(String id);
 
     int insert(RolePower record);
@@ -18,7 +15,5 @@ public interface RolePowerMapper {
 
     int updateByPrimaryKey(RolePower record);
 
-    List<RolePower> selectByRoleId(@Param(value = "roleid") String roleid);
-
-    void deleteByRoleId(@Param(value = "roleid")String roleid);
+    int saveOrUpdateRolePower(String roleid, String powerList);
 }

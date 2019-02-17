@@ -1,5 +1,7 @@
 package cn.edu.nuc.ssm.entity;
 
+import java.util.Objects;
+
 public class Power {
     private String powerid;
 
@@ -69,6 +71,14 @@ public class Power {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Power power = (Power) o;
+        return powerid.equals(power.powerid);
     }
 
     public void setDescription(String description) {

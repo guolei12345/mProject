@@ -331,7 +331,21 @@
                                 </li>
                             </ul>
                         </li>
-
+						<li>
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-dashboard"></i>
+								<span class="menu-text"> 角色管理 </span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
+								<li>
+									<a href="#" onclick="load('/role/search')">角色查询</a>
+								</li>
+								<li>
+									<a href="#" onclick="load('/role/add')">添加角色</a>
+								</li>
+							</ul>
+						</li>
                         <div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 					</div>

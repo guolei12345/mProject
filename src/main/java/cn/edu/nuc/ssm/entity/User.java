@@ -51,6 +51,28 @@ public class User {
     private String code;
 
     private String checkCode;
+    //用户角色对应表
+    private UserRole userRole;
+    //角色信息
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+        this.roleid = role.getRoleid();
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+        this.roleid = userRole.getRoleid();
+    }
 
     public String getRoleid() {
         return roleid;

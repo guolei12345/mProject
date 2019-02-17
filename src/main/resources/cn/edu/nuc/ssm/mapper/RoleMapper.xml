@@ -14,21 +14,42 @@
     <result column="colum3" jdbcType="VARCHAR" property="colum3" />
     <result column="colum4" jdbcType="VARCHAR" property="colum4" />
     <result column="colum5" jdbcType="VARCHAR" property="colum5" />
+    <association property="powerList" javaType="cn.edu.nuc.ssm.entity.Power">
+      <id column="powerid" jdbcType="VARCHAR" property="powerid" />
+      <result column="powername" jdbcType="VARCHAR" property="powername" />
+      <result column="url" jdbcType="VARCHAR" property="url" />
+      <result column="descrip" jdbcType="VARCHAR" property="description" />
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     roleID, roleName, createTime, description, isCheck, status, type, colum1, colum2, 
     colum3, colum4, colum5
   </sql>
+  <select id="selectRoleCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(roleid)
+    from role
+    where roleName like #{key}
+    or description like #{key}
+  </select>
+  <select id="selectRoleByKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from role
+    where roleName like #{key}
+    or description like #{key}
+    limit #{start},#{offset}
+  </select>
   <select id="selectAllRole" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from role
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from role
-    where roleID = #{roleid,jdbcType=VARCHAR}
+    select
+    r.*,p.powerid,p.powername,p.url,p.description as descrip
+    from role r left join rolePower rp on r.roleid = rp.roleid left join power p on rp.powerid = p. powerid
+    where  r.roleID = #{roleid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from role

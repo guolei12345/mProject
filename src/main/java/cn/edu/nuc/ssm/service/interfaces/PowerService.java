@@ -24,4 +24,6 @@ public interface PowerService {
     List<Power> selectAllParPower(String s,String type);
 
     PageInfo<Power> selectPowerByKey(int current, String key, int offset);
+
+    List<Power> selectAllPower();
 }

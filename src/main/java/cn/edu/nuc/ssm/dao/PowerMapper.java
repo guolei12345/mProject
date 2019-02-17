@@ -26,4 +26,6 @@ public interface PowerMapper {
     List<Power> selectPowerByKey(@Param(value = "key")String key, @Param(value = "start")int start, @Param(value = "offset")int offset);
 
     int selectPowerCountAll();
+
+    List<Power> selectAllPower(@Param(value = "status")String status);
 }

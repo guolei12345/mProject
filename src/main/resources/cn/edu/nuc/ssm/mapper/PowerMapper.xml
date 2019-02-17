@@ -20,6 +20,11 @@
     powerID, praPoerID, powerName, url, isCheck, description, status, type, colum1, colum2, 
     colum3, colum4, colum5
   </sql>
+  <select id="selectAllPower" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from power
+    where status = #{status,jdbcType=VARCHAR}
+  </select>
   <select id="selectPowerByKey" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from power

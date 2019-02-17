@@ -20,14 +20,24 @@
         <result column="colum3" jdbcType="VARCHAR" property="colum3"/>
         <result column="colum4" jdbcType="VARCHAR" property="colum4"/>
         <result column="colum5" jdbcType="VARCHAR" property="colum5"/>
+        <association property="userRole" javaType="cn.edu.nuc.ssm.entity.UserRole">
+            <id column="id" jdbcType="VARCHAR" property="id" />
+            <result column="userid" jdbcType="VARCHAR" property="userid" />
+            <result column="roleid" jdbcType="VARCHAR" property="roleid" />
+        </association>
+        <association property="role" javaType="cn.edu.nuc.ssm.entity.Role">
+            <id column="roleid" jdbcType="VARCHAR" property="roleid" />
+            <result column="rolename" jdbcType="VARCHAR" property="rolename" />
+        </association>
+        <!--<association property="userRole" column="userid" select="cn.edu.nuc.ssm.dao.UserRoleMapper.selectByUserId" />-->
     </resultMap>
     <sql id="Base_Column_List">
     userId, userName, loginName, password, tell, email, creatTime, loginTime, lastLoginTime, 
     count, isCheck, status, type, colum1, colum2, colum3, colum4, colum5
     </sql>
     <select id="selectUserByKey" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/>
-        from user
+        select u.*,ur.id,ur.userid,ur.roleid,r.roleid,rolename
+        from user u left join userRole ur on u.userid = ur.userid left join role r on r.roleid = ur.roleid
         where userName like #{key}
         or loginName like #{key}
         or tell like #{key}
@@ -39,27 +49,23 @@
         from user
     </select>
     <select id="selectAllUser" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
+        select u.*,ur.id,ur.userid,ur.roleid,r.roleid,rolename
+        from user u left join userRole ur on u.userid = ur.userid left join role r on r.roleid = ur.roleid
     </select>
     <select id="selectByEmail" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where email = #{email,jdbcType=VARCHAR}
+        select u.*,ur.id,ur.userid,ur.roleid,r.roleid,rolename
+        from user u left join userRole ur on u.userid = ur.userid left join role r on r.roleid = ur.roleid
+        where u.email = #{email,jdbcType=VARCHAR}
     </select>
     <select id="selectByTell" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where tell = #{tell,jdbcType=VARCHAR}
+        select u.*,ur.id,ur.userid,ur.roleid,r.roleid,rolename
+        from user u left join userRole ur on u.userid = ur.userid left join role r on r.roleid = ur.roleid
+        where u.tell = #{tell,jdbcType=VARCHAR}
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where userId = #{userid,jdbcType=VARCHAR}
+        select u.*,ur.id,ur.userid,ur.roleid,r.roleid,rolename
+        from user u left join userRole ur on u.userid = ur.userid left join role r on r.roleid = ur.roleid
+        where u.userId = #{userid,jdbcType=VARCHAR}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from user

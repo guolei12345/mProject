@@ -9,12 +9,22 @@
   <sql id="Base_Column_List">
     id, roleid, powerid
   </sql>
+  <select id="selectByRoleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rolepower
+    where roleid = #{roleid,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from rolepower
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <delete id="deleteByRoleId">
+    delete from rolepower
+    where roleid = #{roleid,jdbcType=VARCHAR}
+  </delete>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from rolepower
     where id = #{id,jdbcType=VARCHAR}

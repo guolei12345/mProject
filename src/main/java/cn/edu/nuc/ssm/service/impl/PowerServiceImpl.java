@@ -73,4 +73,10 @@ public class PowerServiceImpl implements PowerService {
         pageInfo.setList(list);
         return  pageInfo;
     }
+
+    @Override
+    public List<Power> selectAllPower() {
+        List<Power> powerList = powerMapper.selectAllPower("1");
+        return powerList;
+    }
 }

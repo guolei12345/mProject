@@ -1,5 +1,8 @@
 package cn.edu.nuc.ssm.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Role {
     private String roleid;
 
@@ -24,6 +27,17 @@ public class Role {
     private String colum4;
 
     private String colum5;
+
+    //该角色对应的权限
+    List<Power> powerList = new ArrayList<Power>();
+
+    public List<Power> getPowerList() {
+        return powerList;
+    }
+
+    public void setPowerList(List<Power> powerList) {
+        this.powerList = powerList;
+    }
 
     public String getRoleid() {
         return roleid;

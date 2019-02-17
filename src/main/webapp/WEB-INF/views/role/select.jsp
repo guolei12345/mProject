@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>用户查询</title>
+    <title>角色查询</title>
 </head>
 
 <body>
@@ -16,23 +16,23 @@
     <div class="navbar-container" id="navbar-container">
         <div class="row">
             <div class="col-xs-12">
-                <h3 class="header smaller lighter blue">用户信息表</h3>
+                <h3 class="header smaller lighter blue">角色信息表</h3>
                 <div class="table-header">
-                    用户信息
+                    角色信息
                 </div>
                 <div class="col-sm-6"><div id="sample-table-2_length" class="dataTables_length">
-                    <label>Display
+                    <label>显示
                         <select size="1" id="offset" name="sample-table-2_length" aria-controls="sample-table-2">
-                            <option value="5" <c:if test="${pageInfo.offset==5}">selected="selected"</c:if>>5</option>
-                            <option value="10" <c:if test="${pageInfo.offset==10}">selected="selected"</c:if>>10</option>
-                            <option value="20" <c:if test="${pageInfo.offset==20}">selected="selected"</c:if>>20</option>
-                        </select> records</label>
+                            <option value="5" <c:if test="${rolePage.offset==5}">selected="selected"</c:if>>5</option>
+                            <option value="10" <c:if test="${rolePage.offset==10}">selected="selected"</c:if>>10</option>
+                            <option value="20" <c:if test="${rolePage.offset==20}">selected="selected"</c:if>>20</option>
+                        </select> 条记录</label>
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="dataTables_filter">
-                        <label>关键字: <input type="text" id="userKey" aria-controls="sample-table-2">
-                            <button class="btn btn-info" onclick="searchByKey('/user/search','userKey',1)">
+                        <label>关键字: <input type="text" id="roleKey" aria-controls="sample-table-2">
+                            <button class="btn btn-info" onclick="searchByKey('/role/search','roleKey',1)">
                                 <i class="icon-ok bigger-110"></i>
                                 查询
                             </button>
@@ -49,20 +49,16 @@
                                     <span class="lbl"></span>
                                 </label>
                             </th>
-                            <th class="hidden">用户id</th>
-                            <th class="hidden-320">用户名</th>
-                            <th class="hidden-320">姓名</th>
-                            <th class="hidden-320">电话号</th>
-                            <th class="hidden-320">邮箱</th>
-                            <th class="hidden-320">生日</th>
-                            <th class="hidden-320">性别</th>
-                            <th class="hidden-320">个性签名</th>
-                            <th class="hidden-320">角色</th>
+                            <th class="hidden">角色id</th>
+                            <th class="hidden-320">角色名</th>
+                            <th class="hidden-320">类型</th>
+                            <th class="hidden-320">角色描述</th>
+                            <th class="hidden-320">状态</th>
                             <th class="hidden-320">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${pageInfo.list}" var="user">
+                        <c:forEach items="${rolePage.list}" var="role">
                         <tr>
                             <td class="center">
                                 <label>
@@ -70,31 +66,32 @@
                                     <span class="lbl"></span>
                                 </label>
                             </td>
-                            <th class="hidden">${user.userid}</th>
-                            <td class="hidden-320">${user.loginname}</td>
-                            <td class="hidden-320">${user.username}</td>
-                            <td class="hidden-320">${user.tell}</td>
-                            <td class="hidden-320">${user.email}</td>
-                            <td class="hidden-320">${user.birthday}</td>
+                            <th class="hidden">${role.roleid}</th>
+                            <td class="hidden-320">${role.rolename}</td>
+
+                            <td class="hidden-320">${role.type}</td>
+                            <td class="hidden-320">${role.description}</td>
                             <td class="hidden-320">
-                                <c:if test="${user.sex == '1'}">
-                                    男
+                                <c:if test="${role.status=='1'}">
+                                    可用
                                 </c:if>
-                                <c:if test="${user.sex == '0'}">
-                                    女
+                                <c:if test="${role.status=='0'}">
+                                    不可用
                                 </c:if>
                             </td>
-                            <td class="hidden-320">${user.sign}</td>
-                            <td class="hidden-320">${user.role.rolename}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/user/edit','userid',${user.userid})">
+                                    <a class="green" href="#" onclick="option('/role/edit','roleid',${role.roleid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="option('/user/delete','userid',${user.userid})">
+                                    <a class="red" href="#" onclick="option('/role/delete','roleid',${role.roleid})">
                                         <i class="icon-trash bigger-130"></i>
+                                    </a>
+
+                                    <a class="blue" href="#" onclick="option('/role/option','roleid',${role.roleid})">
+                                        <i class="icon-edit bigger-130"></i>
                                     </a>
                                 </div>
                             </td>
@@ -108,17 +105,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByKey('/user/search','userKey',1)">
+                <li class="prev" onclick="searchByKey('/role/search','roleKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
-                <c:forEach begin="1" end="${pageInfo.total}" var="page">
-                <li class="prev" onclick="searchByKey('/user/search','userKey',${page})">
-                    <a href="#">${page}</a>
-                </li>
+                <c:forEach begin="1" end="${rolePage.total}" var="page">
+                    <li class="prev" onclick="searchByKey('/role/search','roleKey',${page})">
+                        <a href="#">${page}</a>
+                    </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByKey('/user/search','userKey',${pageInfo.total})">
+                <li class="prev" onclick="searchByKey('/role/search','roleKey',${rolePage.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>
