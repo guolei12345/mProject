@@ -23,12 +23,13 @@
                         </div>
                     </div>
                     <div class="form-group center col-sm-12">
-                        <label class="col-sm-3 control-label"> 类型 </label>
-
+                    <label class="col-sm-3 control-label no-padding-right" for="prapoerid"> 父级功能 </label>
                         <div class="col-sm-9">
-                            <select class="col-xs-10 col-sm-5" name="type">
-                                <option value="1" <c:if test="${powerEdit.type=='1'}">selected="selected"</c:if>>父目录</option>
-                                <option value="0" <c:if test="${powerEdit.type=='0'}">selected="selected"</c:if>>子目录</option>
+                            <select class="col-xs-10 col-sm-5" name="prapoerid" id="prapoerid">
+                                <option value="0">无</option>
+                                <c:forEach items="${powerList}" var="power">
+                                    <option value="${power.powerid}" <c:if test="${power.powerid eq powerEdit.prapoerid}">selected="selected"</c:if>>${power.powername}</option>
+                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -75,13 +76,20 @@
     function editPower(urls){
         var powerid = $("#powerid").val();
         var powername = $("#powername").val();
-        var type = $("#type").val();
+        var prapoerid = $("#prapoerid").val();
+        var type;
+        if(prapoerid == '0'){
+            type = "1";
+        }else{
+            type = "0";
+        }
         var url = $("#url").val();
         var description = $("#description").val();
         var status = $("#status").val();
         var data = {
             powerid:powerid,
             powername:powername,
+            prapoerid:prapoerid,
             type:type,
             url:url,
             description:description,

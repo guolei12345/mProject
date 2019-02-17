@@ -52,6 +52,7 @@
                             <th class="hidden">功能id</th>
                             <th class="hidden-320">功能名</th>
                             <th class="hidden-320">类型</th>
+                            <th class="hidden-320">父目录</th>
                             <th class="hidden-320">地址</th>
                             <th class="hidden-320">功能描述</th>
                             <th class="hidden-320">状态</th>
@@ -78,6 +79,7 @@
                                     子目录
                                 </c:if>
                             </td>
+                            <td class="hidden-320">${power.parPower.powername}</td>
                             <td class="hidden-320">${power.url}</td>
                             <td class="hidden-320">${power.description}</td>
                             <td class="hidden-320">

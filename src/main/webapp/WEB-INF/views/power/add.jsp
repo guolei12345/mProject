@@ -15,9 +15,9 @@
                 <form action="/power/add" method="post">
 
                     <div class="form-group center col-sm-12">
-                        <label class="col-sm-3 control-label no-padding-right" for="roleid"> 父级功能 </label>
+                        <label class="col-sm-3 control-label no-padding-right" for="prapoerid"> 父级功能 </label>
                         <div class="col-sm-9">
-                            <select class="col-xs-10 col-sm-5" name="prapoerid" id="roleid">
+                            <select class="col-xs-10 col-sm-5" name="prapoerid" id="prapoerid">
                                 <option value="0">无</option>
                                 <c:forEach items="${powerList}" var="power">
                                     <option value="${power.powerid}">${power.powername}</option>

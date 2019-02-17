@@ -67,6 +67,8 @@ public class PowerController extends BaseController {
     @RequestMapping(value = "/edit",method = RequestMethod.GET)
     public String getEdit(String powerid, Model model){
         logger.info("to get edit");
+        List<Power> powerList = powerService.selectAllParPower("1","1");
+        model.addAttribute("powerList",powerList);
         Power power = powerService.selectByPrimaryKey(powerid);
         model.addAttribute("powerEdit",power);
         return "/power/edit";

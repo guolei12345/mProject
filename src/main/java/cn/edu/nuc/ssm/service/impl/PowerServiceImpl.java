@@ -37,7 +37,7 @@ public class PowerServiceImpl implements PowerService {
         if(StringUtil.isNotEmpty(parId) && parId.equals("0")){
             record.setType("1");
         }else{
-            record.setType("2");
+            record.setType("0");
         }
         return powerMapper.insertSelective(record);
     }
@@ -70,13 +70,33 @@ public class PowerServiceImpl implements PowerService {
         pageInfo.setCount(count);
         String keyMsg = "%"+key+"%";
         List<Power> list = powerMapper.selectPowerByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());
-        pageInfo.setList(list);
+        List<Power> powerList = setParPower(list,powerMapper);
+        pageInfo.setList(powerList);
         return  pageInfo;
+    }
+
+    /**
+     * 设置父目录
+     * @param list
+     * @param powerMapper
+     * @return
+     */
+    private List<Power> setParPower(List<Power> list, PowerMapper powerMapper) {
+        for(Power power : list){
+            if("0".equals(power.getType())&&StringUtil.isNotEmpty(power.getPrapoerid())){
+                Power parPower =  powerMapper.selectByPrimaryKey(power.getPrapoerid());
+                power.setParPower(parPower);
+            }
+        }
+        return list;
     }
 
     @Override
     public List<Power> selectAllPower() {
         List<Power> powerList = powerMapper.selectAllPower("1");
-        return powerList;
+        List<Power> list = setParPower(powerList,powerMapper);
+        return list;
     }
+
+
 }

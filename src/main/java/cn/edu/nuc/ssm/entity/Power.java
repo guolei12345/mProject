@@ -28,6 +28,15 @@ public class Power {
     private String colum4;
 
     private String colum5;
+    private Power parPower;
+
+    public Power getParPower() {
+        return parPower;
+    }
+
+    public void setParPower(Power parPower) {
+        this.parPower = parPower;
+    }
 
     public String getPowerid() {
         return powerid;

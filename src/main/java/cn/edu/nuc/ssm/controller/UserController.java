@@ -6,10 +6,12 @@ import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
+import cn.edu.nuc.ssm.service.interfaces.PowerService;
 import cn.edu.nuc.ssm.service.interfaces.RoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
 import cn.edu.nuc.ssm.util.RedisUtil;
+import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.apache.ibatis.annotations.Param;
@@ -36,6 +38,8 @@ public class UserController extends BaseController {
     private RoleService roleService;
     @Autowired
     private UserRoleService userRoleService;
+    @Autowired
+    private PowerService powerService;
     /**
      * 请求登陆页面
      * @return
@@ -89,6 +93,11 @@ public class UserController extends BaseController {
      */
     private void resetUser(User userInfo, HttpSession session) {
         User user = userService.selectByUser(userInfo);
+        if(StringUtil.isNotEmpty(user.getRoleid())){
+            Role role = roleService.selectByPrimaryKey(user.getRoleid());
+            if(role != null)
+            user.setRole(role);
+        }
         session.removeAttribute("user");
         session.setAttribute("user",user);
     }
