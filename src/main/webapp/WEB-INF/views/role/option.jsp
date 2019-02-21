@@ -50,24 +50,24 @@
                                 </td>
                                 <th class="hidden">${power.powerid}</th>
                                 <td class="hidden-320">${role.rolename}</td>
-                                <td class="hidden-320">${power.powername}</td>
+                                <td class="hidden-320">${power.powername} ${power.type} ${power.type=='0'}</td>
 
                                 <td class="hidden-320">
                                     <c:if test="${power.type=='1'}">
-                                        父目录
+                                        <span style="color:brown">父目录</span>
                                     </c:if>
                                     <c:if test="${power.type=='0'}">
-                                        子目录
+                                        <span style="color:blueviolet">子目录</span>
                                     </c:if>
                                 </td>
                                 <td class="hidden-320">${power.url}</td>
-                                <td class="hidden-320">${power.description}</td>
+                                <td class="hidden-320">${power.description} ${power.status} ${power.status=='0'}</td>
                                 <td class="hidden-320">
                                     <c:if test="${power.status=='1'}">
-                                        可用
+                                        <span style="color:green">可用</span>
                                     </c:if>
                                     <c:if test="${power.status=='0'}">
-                                        不可用
+                                        <span style="color:red">不可用</span>
                                     </c:if>
                                 </td>
                             </tr>
@@ -86,20 +86,20 @@
 
                                 <td class="hidden-320">
                                     <c:if test="${power.type=='1'}">
-                                        父目录
+                                        <span style="color:brown">父目录</span>
                                     </c:if>
                                     <c:if test="${power.type=='0'}">
-                                        子目录
+                                        <span style="color:blueviolet">子目录</span>
                                     </c:if>
                                 </td>
                                 <td class="hidden-320">${power.url}</td>
                                 <td class="hidden-320">${power.description}</td>
                                 <td class="hidden-320">
                                     <c:if test="${power.status=='1'}">
-                                        可用
+                                        <span style="color:green">可用</span>
                                     </c:if>
                                     <c:if test="${power.status=='0'}">
-                                        不可用
+                                        <span style="color:red">不可用</span>
                                     </c:if>
                                 </td>
                             </tr>
@@ -150,7 +150,6 @@
         var selectList = jQuery(".table tbody input[type=checkbox]:checked").map(function () {
             return jQuery(this).val();
         }).get().join(',');
-        alert(selectList.toString());
         var urls = url+"?powerList="+selectList+"&roleid="+roleid;
         $("#load").load(urls);
     }

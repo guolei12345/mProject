@@ -300,52 +300,26 @@
 					</script>
 
 					<ul class="nav nav-list">
-
-						<li>
+						<c:forEach items="${user.role.powerList}" var="power">
+							<c:if test="${power.prapoerid == '0'}">
+							<li>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 用户管理 </span>
+								<span class="menu-text"> ${power.powername} </span>
 								<b class="arrow icon-angle-down"></b>
 							</a>
-							<ul class="submenu">
-								<li>
-									<a href="#" onclick="load('/user/search')">查看用户信息</a>
-								</li>
-								<li>
-									<a href="#" onclick="load('/user/add')">增加用户</a>
-								</li>
-							</ul>
-						</li>
-                        <li>
-                            <a href="#" class="dropdown-toggle">
-                                <i class="icon-dashboard"></i>
-                                <span class="menu-text"> 功能管理 </span>
-                                <b class="arrow icon-angle-down"></b>
-                            </a>
-                            <ul class="submenu">
-                                <li>
-                                    <a href="#" onclick="load('/power/search')">功能查询</a>
-                                </li>
-                                <li>
-                                    <a href="#" onclick="load('/power/add')">添加功能</a>
-                                </li>
-                            </ul>
-                        </li>
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 角色管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li>
-									<a href="#" onclick="load('/role/search')">角色查询</a>
-								</li>
-								<li>
-									<a href="#" onclick="load('/role/add')">添加角色</a>
-								</li>
-							</ul>
-						</li>
+								<ul class="submenu">
+								<c:forEach items="${user.role.powerList}" var="sonPower">
+									<c:if test="${sonPower.prapoerid == power.powerid}">
+										<li>
+											<a href="#" onclick="load('${sonPower.url}')">${sonPower.powername}</a>
+										</li>
+									</c:if>
+								</c:forEach>
+								</ul>
+							</li>
+							</c:if>
+						</c:forEach>
                         <div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
 					</div>

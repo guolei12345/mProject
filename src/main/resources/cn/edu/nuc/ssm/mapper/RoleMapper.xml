@@ -16,9 +16,12 @@
     <result column="colum5" jdbcType="VARCHAR" property="colum5" />
     <association property="powerList" javaType="cn.edu.nuc.ssm.entity.Power">
       <id column="powerid" jdbcType="VARCHAR" property="powerid" />
+      <result column="prapoerid" jdbcType="VARCHAR" property="prapoerid" />
       <result column="powername" jdbcType="VARCHAR" property="powername" />
       <result column="url" jdbcType="VARCHAR" property="url" />
       <result column="descrip" jdbcType="VARCHAR" property="description" />
+        <result column="statu" jdbcType="VARCHAR" property="status" />
+        <result column="types" jdbcType="VARCHAR" property="type" />
     </association>
   </resultMap>
   <sql id="Base_Column_List">
@@ -47,7 +50,7 @@
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
-    r.*,p.powerid,p.powername,p.url,p.description as descrip
+    r.*,p.powerid,p.prapoerid,p.powername,p.url,p.description as descrip,p.type as types,p.status as statu
     from role r left join rolePower rp on r.roleid = rp.roleid left join power p on rp.powerid = p. powerid
     where  r.roleID = #{roleid,jdbcType=VARCHAR}
   </select>

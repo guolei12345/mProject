@@ -79,7 +79,7 @@ public class UserController extends BaseController {
         model.addAttribute("msg",msg);
         logger.info(msg);
         if(rtn == LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString())){
-            resetUser(user,session);
+            resetUser(user,session,model);
             return "/index";
         }else{
             return "/user/login";
@@ -91,7 +91,7 @@ public class UserController extends BaseController {
      * @param userInfo
      * @param session
      */
-    private void resetUser(User userInfo, HttpSession session) {
+    private void resetUser(User userInfo, HttpSession session, Model model) {
         User user = userService.selectByUser(userInfo);
         if(StringUtil.isNotEmpty(user.getRoleid())){
             Role role = roleService.selectByPrimaryKey(user.getRoleid());
@@ -100,6 +100,7 @@ public class UserController extends BaseController {
         }
         session.removeAttribute("user");
         session.setAttribute("user",user);
+        model.addAttribute("user",user);
     }
 
     /**
@@ -257,7 +258,7 @@ public class UserController extends BaseController {
         String msg = "";
         int rtn = userService.updateByPrimaryKeySelective(user);
         if(rtn == 1){
-            resetUser(user,session);
+            resetUser(user,session,model);
             msg = "完善信息成功";
         }else {
             msg = "完善信息失败";
