@@ -1,5 +1,6 @@
 package cn.edu.nuc.ssm.controller;
 
+import cn.edu.nuc.ssm.CheckUtil;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.Role;
 import cn.edu.nuc.ssm.entity.User;
@@ -10,11 +11,11 @@ import cn.edu.nuc.ssm.service.interfaces.PowerService;
 import cn.edu.nuc.ssm.service.interfaces.RoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.UserService;
+import cn.edu.nuc.ssm.util.PropertyUtil;
 import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +71,13 @@ public class UserController extends BaseController {
         logger.info("Controller 开始调用登陆 Service start info{}",user.toString());
         String msg = "";
         int rtn = 0;
-        String code = RedisUtil.getJedis().get("code").toUpperCase();
+        String code = "";
+        boolean useRedis = PropertyUtil.getPropertyBool("useRedis");
+        if(useRedis){
+            code = RedisUtil.getJedis().get("code").toUpperCase();
+        }else{
+            code = session.getAttribute("code").toString().toUpperCase();
+        }
         //没有输入信息返回
         if(user == null) return "/user/login";
         rtn = userService.login(user,code);
@@ -124,7 +131,13 @@ public class UserController extends BaseController {
         logger.info("Controller 开始调用注册 Service start info{}",user.toString());
         String msg = "";
         int rtn = 0;
-        String code = RedisUtil.getJedis().get("code").toUpperCase();
+        String code = "";
+        boolean useRedis = PropertyUtil.getPropertyBool("useRedis");
+        if(useRedis){
+            code = RedisUtil.getJedis().get("code").toUpperCase();
+        }else{
+            code = session.getAttribute("code").toString().toUpperCase();
+        }
         //没有输入信息返回
         if(user == null) return "/user/regist";
         rtn = userService.regist(user,code);
@@ -197,8 +210,14 @@ public class UserController extends BaseController {
         logger.info("to getVerify");
         //登陆页面验证码缓存到session
         String code = VerifyUtil.getVerifyCode1();
-        //设置缓存
-        RedisUtil.getJedis().set("code", code);
+        boolean useRedis = PropertyUtil.getPropertyBool("useRedis");
+        if(useRedis){
+            //设置缓存
+            RedisUtil.getJedis().set("code", code);
+        }else {
+            //存到session中
+            session.setAttribute("code",code);
+        }
         logger.info("code:{}",code);
         //获取验证码接口
         byte[] bytes = validateCodeService.enGetVerify(code);
