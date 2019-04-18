@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.nuc.ssm.dao.PowerMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.Power">
+<mapper namespace="cn.edu.nuc.ssm.dao.power.PowerMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.power.Power">
     <id column="powerID" jdbcType="VARCHAR" property="powerid" />
     <result column="praPoerID" jdbcType="VARCHAR" property="prapoerid" />
     <result column="powerName" jdbcType="VARCHAR" property="powername" />
@@ -58,7 +58,7 @@
     delete from power
     where powerID = #{powerid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.Power">
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.power.Power">
     insert into power (powerID, praPoerID, powerName, 
       url, isCheck, description, 
       status, type, colum1, 
@@ -70,7 +70,7 @@
       #{colum2,jdbcType=VARCHAR}, #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, 
       #{colum5,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.Power">
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.power.Power">
     insert into power
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="powerid != null">
@@ -155,7 +155,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.Power">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.power.Power">
     update power
     <set>
       <if test="prapoerid != null">
@@ -197,7 +197,7 @@
     </set>
     where powerID = #{powerid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.Power">
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.power.Power">
     update power
     set praPoerID = #{prapoerid,jdbcType=VARCHAR},
       powerName = #{powername,jdbcType=VARCHAR},

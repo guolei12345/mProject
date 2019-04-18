@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.nuc.ssm.dao.RoleMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.Role">
+<mapper namespace="cn.edu.nuc.ssm.dao.power.RoleMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.power.Role">
     <id column="roleID" jdbcType="VARCHAR" property="roleid" />
     <result column="roleName" jdbcType="VARCHAR" property="rolename" />
     <result column="createTime" jdbcType="VARCHAR" property="createtime" />
@@ -14,7 +14,7 @@
     <result column="colum3" jdbcType="VARCHAR" property="colum3" />
     <result column="colum4" jdbcType="VARCHAR" property="colum4" />
     <result column="colum5" jdbcType="VARCHAR" property="colum5" />
-    <association property="powerList" javaType="cn.edu.nuc.ssm.entity.Power">
+    <association property="powerList" javaType="cn.edu.nuc.ssm.entity.power.Power">
       <id column="powerid" jdbcType="VARCHAR" property="powerid" />
       <result column="prapoerid" jdbcType="VARCHAR" property="prapoerid" />
       <result column="powername" jdbcType="VARCHAR" property="powername" />
@@ -58,7 +58,7 @@
     delete from role
     where roleID = #{roleid,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.Role">
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.power.Role">
     insert into role (roleID, roleName, createTime, 
       description, isCheck, status, 
       type, colum1, colum2, 
@@ -70,7 +70,7 @@
       #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, #{colum5,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.Role">
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.power.Role">
     insert into role
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="roleid != null">
@@ -149,7 +149,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.Role">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.power.Role">
     update role
     <set>
       <if test="rolename != null">
@@ -188,7 +188,7 @@
     </set>
     where roleID = #{roleid,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.Role">
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.power.Role">
     update role
     set roleName = #{rolename,jdbcType=VARCHAR},
       createTime = #{createtime,jdbcType=VARCHAR},

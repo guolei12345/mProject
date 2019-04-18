@@ -1,7 +1,5 @@
 package cn.edu.nuc.ssm.enums;
 
-import cn.edu.nuc.ssm.entity.Power;
-
 public enum UpdatePassCodeEnum {
     修改密码成功(1,"修改密码成功"),
     修改密码失败(0,"修改密码失败，原因未知"),

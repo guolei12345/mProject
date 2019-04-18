@@ -1,6 +1,5 @@
 package cn.edu.nuc.ssm.filter;
 
-import cn.edu.nuc.ssm.entity.User;
 import cn.edu.nuc.ssm.logger.BaseLog;
 
 import javax.servlet.*;

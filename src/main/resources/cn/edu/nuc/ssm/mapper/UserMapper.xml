@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.nuc.ssm.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.User">
+<mapper namespace="cn.edu.nuc.ssm.dao.power.UserMapper">
+    <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.power.User">
         <id column="userId" jdbcType="VARCHAR" property="userid"/>
         <result column="userName" jdbcType="VARCHAR" property="username"/>
         <result column="loginName" jdbcType="VARCHAR" property="loginname"/>
@@ -20,16 +20,16 @@
         <result column="colum3" jdbcType="VARCHAR" property="colum3"/>
         <result column="colum4" jdbcType="VARCHAR" property="colum4"/>
         <result column="colum5" jdbcType="VARCHAR" property="colum5"/>
-        <association property="userRole" javaType="cn.edu.nuc.ssm.entity.UserRole">
+        <association property="userRole" javaType="cn.edu.nuc.ssm.entity.power.UserRole">
             <id column="id" jdbcType="VARCHAR" property="id" />
             <result column="userid" jdbcType="VARCHAR" property="userid" />
             <result column="roleid" jdbcType="VARCHAR" property="roleid" />
         </association>
-        <association property="role" javaType="cn.edu.nuc.ssm.entity.Role">
+        <association property="role" javaType="cn.edu.nuc.ssm.entity.power.Role">
             <id column="roleid" jdbcType="VARCHAR" property="roleid" />
             <result column="rolename" jdbcType="VARCHAR" property="rolename" />
         </association>
-        <!--<association property="userRole" column="userid" select="cn.edu.nuc.ssm.dao.UserRoleMapper.selectByUserId" />-->
+        <!--<association property="userRole" column="userid" select="cn.edu.nuc.ssm.dao.power.UserRoleMapper.selectByUserId" />-->
     </resultMap>
     <sql id="Base_Column_List">
     userId, userName, loginName, password, tell, email, creatTime, loginTime, lastLoginTime, 
@@ -71,7 +71,7 @@
     delete from user
     where userId = #{userid,jdbcType=VARCHAR}
   </delete>
-    <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.User">
+    <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.power.User">
     insert into user (userId, userName, loginName, 
       password, tell, email, 
       creatTime, loginTime, lastLoginTime, 
@@ -87,7 +87,7 @@
       #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, #{colum5,jdbcType=VARCHAR}
       )
   </insert>
-    <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.User">
+    <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.power.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userid != null">
@@ -202,7 +202,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.User">
+    <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.power.User">
         update user
         <set>
             <if test="username != null">
@@ -259,7 +259,7 @@
         </set>
         where userId = #{userid,jdbcType=VARCHAR}
     </update>
-    <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.User">
+    <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.power.User">
     update user
     set userName = #{username,jdbcType=VARCHAR},
       loginName = #{loginname,jdbcType=VARCHAR},

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.nuc.ssm.dao.movie.SeatMapper" >
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.movie.Seat" >
+    <id column="seatId" property="seatid" jdbcType="VARCHAR" />
+    <result column="hallId" property="hallid" jdbcType="VARCHAR" />
+    <result column="scheduleId" property="scheduleid" jdbcType="VARCHAR" />
+    <result column="seatNum" property="seatnum" jdbcType="VARCHAR" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="colum1" property="colum1" jdbcType="VARCHAR" />
+    <result column="colum2" property="colum2" jdbcType="VARCHAR" />
+    <result column="colum3" property="colum3" jdbcType="VARCHAR" />
+    <result column="colum4" property="colum4" jdbcType="VARCHAR" />
+    <result column="colum5" property="colum5" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    seatId, hallId, scheduleId, seatNum, time, colum1, colum2, colum3, colum4, colum5
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from seat
+    where seatId = #{seatid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from seat
+    where seatId = #{seatid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.movie.Seat" >
+    insert into seat (seatId, hallId, scheduleId, 
+      seatNum, time, colum1, 
+      colum2, colum3, colum4, 
+      colum5)
+    values (#{seatid,jdbcType=VARCHAR}, #{hallid,jdbcType=VARCHAR}, #{scheduleid,jdbcType=VARCHAR}, 
+      #{seatnum,jdbcType=VARCHAR}, #{time,jdbcType=VARCHAR}, #{colum1,jdbcType=VARCHAR}, 
+      #{colum2,jdbcType=VARCHAR}, #{colum3,jdbcType=VARCHAR}, #{colum4,jdbcType=VARCHAR}, 
+      #{colum5,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.movie.Seat" >
+    insert into seat
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="seatid != null" >
+        seatId,
+      </if>
+      <if test="hallid != null" >
+        hallId,
+      </if>
+      <if test="scheduleid != null" >
+        scheduleId,
+      </if>
+      <if test="seatnum != null" >
+        seatNum,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="colum1 != null" >
+        colum1,
+      </if>
+      <if test="colum2 != null" >
+        colum2,
+      </if>
+      <if test="colum3 != null" >
+        colum3,
+      </if>
+      <if test="colum4 != null" >
+        colum4,
+      </if>
+      <if test="colum5 != null" >
+        colum5,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="seatid != null" >
+        #{seatid,jdbcType=VARCHAR},
+      </if>
+      <if test="hallid != null" >
+        #{hallid,jdbcType=VARCHAR},
+      </if>
+      <if test="scheduleid != null" >
+        #{scheduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="seatnum != null" >
+        #{seatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null" >
+        #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null" >
+        #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null" >
+        #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null" >
+        #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null" >
+        #{colum5,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.movie.Seat" >
+    update seat
+    <set >
+      <if test="hallid != null" >
+        hallId = #{hallid,jdbcType=VARCHAR},
+      </if>
+      <if test="scheduleid != null" >
+        scheduleId = #{scheduleid,jdbcType=VARCHAR},
+      </if>
+      <if test="seatnum != null" >
+        seatNum = #{seatnum,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="colum1 != null" >
+        colum1 = #{colum1,jdbcType=VARCHAR},
+      </if>
+      <if test="colum2 != null" >
+        colum2 = #{colum2,jdbcType=VARCHAR},
+      </if>
+      <if test="colum3 != null" >
+        colum3 = #{colum3,jdbcType=VARCHAR},
+      </if>
+      <if test="colum4 != null" >
+        colum4 = #{colum4,jdbcType=VARCHAR},
+      </if>
+      <if test="colum5 != null" >
+        colum5 = #{colum5,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where seatId = #{seatid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.movie.Seat" >
+    update seat
+    set hallId = #{hallid,jdbcType=VARCHAR},
+      scheduleId = #{scheduleid,jdbcType=VARCHAR},
+      seatNum = #{seatnum,jdbcType=VARCHAR},
+      time = #{time,jdbcType=VARCHAR},
+      colum1 = #{colum1,jdbcType=VARCHAR},
+      colum2 = #{colum2,jdbcType=VARCHAR},
+      colum3 = #{colum3,jdbcType=VARCHAR},
+      colum4 = #{colum4,jdbcType=VARCHAR},
+      colum5 = #{colum5,jdbcType=VARCHAR}
+    where seatId = #{seatid,jdbcType=VARCHAR}
+  </update>
+</mapper>

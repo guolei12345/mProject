@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.edu.nuc.ssm.dao.UserRoleMapper">
-  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.UserRole">
+<mapper namespace="cn.edu.nuc.ssm.dao.power.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.nuc.ssm.entity.power.UserRole">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="userid" jdbcType="VARCHAR" property="userid" />
     <result column="roleid" jdbcType="VARCHAR" property="roleid" />
@@ -25,13 +25,13 @@
     delete from userrole
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.UserRole">
+  <insert id="insert" parameterType="cn.edu.nuc.ssm.entity.power.UserRole">
     insert into userrole (id, userid, roleid
       )
     values (#{id,jdbcType=VARCHAR}, #{userid,jdbcType=VARCHAR}, #{roleid,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.UserRole">
+  <insert id="insertSelective" parameterType="cn.edu.nuc.ssm.entity.power.UserRole">
     insert into userrole
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -56,7 +56,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.UserRole">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.edu.nuc.ssm.entity.power.UserRole">
     update userrole
     <set>
       <if test="userid != null">
@@ -68,7 +68,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.UserRole">
+  <update id="updateByPrimaryKey" parameterType="cn.edu.nuc.ssm.entity.power.UserRole">
     update userrole
     set userid = #{userid,jdbcType=VARCHAR},
       roleid = #{roleid,jdbcType=VARCHAR}

@@ -1,7 +1,7 @@
 package cn.edu.nuc.ssm.util;
 
-import cn.edu.nuc.ssm.entity.User;
-import cn.edu.nuc.ssm.entity.UserRole;
+import cn.edu.nuc.ssm.entity.power.User;
+import cn.edu.nuc.ssm.entity.power.UserRole;
 
 public class UserRoleUtil {
     /**
