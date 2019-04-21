@@ -1,6 +1,8 @@
 package cn.edu.nuc.ssm.controller.movie;
 
 import cn.edu.nuc.ssm.controller.BaseController;
+import cn.edu.nuc.ssm.entity.PageInfo;
+import cn.edu.nuc.ssm.entity.movie.Hall;
 import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -44,10 +47,13 @@ public class TypeController extends BaseController {
         return "/index";
     }
 
-    @RequestMapping(value="/searchAllType",method=RequestMethod.GET)
-    public String list(Model model){
-        List<Type> typeList = typeService.selectAllType();
-        model.addAttribute("typeList", typeList);
+    @RequestMapping(value="/search",method=RequestMethod.GET)
+    public String list(@RequestParam(name="current",defaultValue="1") int current,
+                       @RequestParam(name="key",defaultValue="")String key,
+                       @RequestParam(name="offset",defaultValue="5")int offset,
+                       Model model){
+        PageInfo<Type> typePageInfo = typeService.selectTypeByKey(current,key,offset);
+        model.addAttribute("typePage", typePageInfo);
         return "/type/select";
     }
     /**

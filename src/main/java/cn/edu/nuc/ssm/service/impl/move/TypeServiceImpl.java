@@ -1,6 +1,8 @@
 package cn.edu.nuc.ssm.service.impl.move;
 
 import cn.edu.nuc.ssm.dao.movie.TypeMapper;
+import cn.edu.nuc.ssm.entity.PageInfo;
+import cn.edu.nuc.ssm.entity.movie.Hall;
 import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import cn.edu.nuc.ssm.util.StringUtil;
@@ -52,5 +54,17 @@ public class TypeServiceImpl implements TypeService {
     @Override
     public List<Type> selectAllType() {
         return typeMapper.selectAllType();
+    }
+
+    @Override
+    public PageInfo<Type> selectTypeByKey(int current, String key, int offset) {
+        PageInfo pageInfo = new PageInfo(current);
+        pageInfo.setOffset(offset);
+        String keyMsg = "%"+key+"%";
+        int count = typeMapper.selectTypeCount(keyMsg);
+        pageInfo.setCount(count);
+        List<Type> list = typeMapper.selectTypeByKey(keyMsg,pageInfo.getStart(),pageInfo.getOffset());
+        pageInfo.setList(list);
+        return  pageInfo;
     }
 }
