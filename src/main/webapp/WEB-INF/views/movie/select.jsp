@@ -79,7 +79,7 @@
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/movie/edit','moveid',${movie.moveid})">
+                                    <a class="green" href="#" onclick="option('/movie/edit','movieid',${movie.moveid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 

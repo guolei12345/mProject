@@ -5,6 +5,7 @@ import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
 import cn.edu.nuc.ssm.entity.movie.Pic;
 import cn.edu.nuc.ssm.entity.movie.Type;
+import cn.edu.nuc.ssm.entity.power.User;
 import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
 import cn.edu.nuc.ssm.service.interfaces.movie.PicService;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
@@ -17,6 +18,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -112,6 +114,37 @@ public class MovieController extends BaseController {
         }else{
             model.addAttribute("msg","删除失败");
         }
+        return list(1,"",5,model);
+    }
+
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.GET)
+    public String getEdit(String movieid, Model model){
+        logger.info("to get edit");
+        Movie movie = movieService.selectByPrimaryKey(movieid);
+        List<Type> typeList = typeService.selectAllType();
+        model.addAttribute("typeList",typeList);
+        model.addAttribute("movieEdit",movie);
+        return "/movie/edit";
+    }
+    /**
+     * 修改信息页面
+     * @return
+     */
+    @RequestMapping(value = "/edit",method = RequestMethod.POST)
+    public String postEdit(@RequestBody Movie movie, Model model){
+        logger.info("to post edit,Movie :");
+        String msg = "";
+        int rtn = movieService.updateByPrimaryKeySelective(movie);
+        if(rtn == 1){
+            msg = "修改成功！";
+        }else{
+            msg = "修改失败！";
+        }
+        model.addAttribute("msg",msg);
         return list(1,"",5,model);
     }
 }

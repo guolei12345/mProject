@@ -51,9 +51,8 @@
     limit #{start},#{offset}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from movie
+    select m.*,p.picId,picurl,t.typeid,t.typename
+    from movie m left join pic p on m.picId = p.picId left join type t on m.typeid = t.typeid
     where moveId = #{moveid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
