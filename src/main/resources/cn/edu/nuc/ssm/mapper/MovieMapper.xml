@@ -19,7 +19,17 @@
     <result column="colum3" property="colum3" jdbcType="VARCHAR" />
     <result column="colum4" property="colum4" jdbcType="VARCHAR" />
     <result column="colum5" property="colum5" jdbcType="VARCHAR" />
-  </resultMap>
+    <association property="pic" javaType="cn.edu.nuc.ssm.entity.movie.Pic">
+      <id column="id" jdbcType="VARCHAR" property="id" />
+      <result column="picid" jdbcType="VARCHAR" property="picid" />
+      <result column="picurl" jdbcType="VARCHAR" property="picurl" />
+    </association>
+    <association property="type" javaType="cn.edu.nuc.ssm.entity.movie.Type">
+      <id column="id" jdbcType="VARCHAR" property="id" />
+      <result column="typeid" jdbcType="VARCHAR" property="typeid" />
+      <result column="typename" jdbcType="VARCHAR" property="typename" />
+    </association>
+</resultMap>
   <sql id="Base_Column_List" >
     moveId, moveName, director, actor, language, typeId, distrit, date, keyWord, picId, 
     keyChinese, routeId, colum1, colum2, colum3, colum4, colum5
@@ -34,9 +44,8 @@
   </select>
   <!--模糊查询分页显示-->
   <select id="selectMovieByKey" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from movie
+    select m.*,p.picId,picurl,t.typeid,t.typename
+    from movie m left join pic p on m.picId = p.picId left join type t on m.typeid = t.typeid
     where moveName like #{key}
     or director like #{key}
     limit #{start},#{offset}

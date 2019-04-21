@@ -35,6 +35,26 @@ public class Movie {
 
     private String colum5;
 
+    private Pic pic;
+
+    private Type type;
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Pic getPic() {
+        return pic;
+    }
+
+    public void setPic(Pic pic) {
+        this.pic = pic;
+    }
+
     public String getMoveid() {
         return moveid;
     }

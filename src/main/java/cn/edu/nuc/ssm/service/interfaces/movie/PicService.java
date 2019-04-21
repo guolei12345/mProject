@@ -7,7 +7,7 @@ public interface PicService {
 
     int insert(Pic record);
 
-    int insertSelective(Pic record);
+    Pic insertSelective(Pic record);
 
     Pic selectByPrimaryKey(String picid);
 

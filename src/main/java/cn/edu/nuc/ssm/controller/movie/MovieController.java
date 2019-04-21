@@ -6,7 +6,13 @@ import cn.edu.nuc.ssm.entity.movie.Movie;
 import cn.edu.nuc.ssm.entity.movie.Pic;
 import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
+import cn.edu.nuc.ssm.service.interfaces.movie.PicService;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
+import cn.edu.nuc.ssm.service.interfaces.util.FileService;
+import cn.edu.nuc.ssm.util.PropertyUtil;
+import cn.edu.nuc.ssm.util.RedisUtil;
+import cn.edu.nuc.ssm.util.VerifyUtil;
+import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +22,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletRequest;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/movie")
@@ -31,6 +34,12 @@ public class MovieController extends BaseController {
     private MovieService movieService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private FileService fileService;
+    @Autowired
+    private PicService picService;
+    @Autowired
+    private ValidateCodeService validateCodeService;
     /**
      * 请求查询角色
      * @return
@@ -50,26 +59,14 @@ public class MovieController extends BaseController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public String postAdd(Movie movie, MultipartFile file, Model model, HttpSession session) throws IOException {
         logger.info("to get add");
-        //使用UUID给图片重命名，并去掉四个“-”
-        String name = UUID.randomUUID().toString().replaceAll("-", "");
-        //获取文件的扩展名
-        String ext = FilenameUtils.getExtension(file.getOriginalFilename());
-        //设置图片上传路径
-        String url = this.getClass().getClassLoader().getResource("/").getPath();
-        String path = url+"upload";
-        File dir = new File(path);
-        if(!dir.exists()){
-            dir.mkdirs();
-        }
-        String upPath = path+"/"+name + "." + ext;
-        //以绝对路径保存重名命后的图片
-        file.transferTo(new File(upPath));
-        //把图片存储路径保存到数据库
         String msg = "";
-        Pic pic = new Pic();
-        pic.setPicid(name);
-        pic.setPicurl(upPath);
+        //文件上传
+        Pic pic = fileService.fileUpload(file);
+        //保存文件到数据库
+        pic = picService.insertSelective(pic);
+        //电影图片信息设置
         movie.setPicid(pic.getPicid());
+        //电影信息存到数据库
         int rtn = movieService.insertSelective(movie);
         if(rtn>0){
             msg = "添加功能成功！";
@@ -88,5 +85,33 @@ public class MovieController extends BaseController {
         PageInfo<Movie> moviePageInfo = movieService.selectMovieByKey(current,key,offset);
         model.addAttribute("moviePage", moviePageInfo);
         return "/movie/select";
+    }
+    /**
+     * 获取图片并输出到界面
+     * @param session
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getPic",method = RequestMethod.GET)
+    public void getVerify(String path,HttpSession session, HttpServletResponse response) throws Exception {
+        logger.info("to getPic");
+        //获取验证码接口
+        validateCodeService.outPutToClient(path,response);
+    }
+
+    /**
+     * 请求查询用户
+     * @return
+     */
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    public String getDelete(String moveid, Model model){
+        logger.info("to get delete");
+        int rtn = movieService.deleteByPrimaryKey(moveid);
+        if(rtn == 1){
+            model.addAttribute("msg","删除成功");
+        }else{
+            model.addAttribute("msg","删除失败");
+        }
+        return list(1,"",5,model);
     }
 }

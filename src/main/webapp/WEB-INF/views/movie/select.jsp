@@ -74,9 +74,8 @@
                             <td class="hidden-320">${movie.director}</td>
                             <td class="hidden-320">${movie.actor}</td>
                             <td class="hidden-320">${movie.language}</td>
-                            <td class="hidden-320">${movie.typeid}</td>
-                            <td class="hidden-320"><img  src="http://localhost:8080/${userList.imageURL}"
-                                                         width="500" height="500"><br><br><br><br></td>
+                            <td class="hidden-320">${movie.type.typename}</td>
+                            <td class="hidden-320"><img src="/movie/getPic?path=${movie.pic.picurl}" width="100" height="120" class="input-icon input-icon-right" width="145" height="33" id="identity"/></td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 

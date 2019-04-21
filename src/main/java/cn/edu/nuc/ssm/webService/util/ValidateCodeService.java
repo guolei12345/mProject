@@ -97,4 +97,26 @@ public abstract class ValidateCodeService {
             ex.printStackTrace();
         }
     }
+    /**
+     * 图片到客户端
+     * @param path
+     * @param response
+     */
+    public void outPutToClient(String path, HttpServletResponse response) throws Exception{
+        try {
+            response.setContentType("image/png");
+            OutputStream outputStream = response.getOutputStream();
+            InputStream inputStream = new FileInputStream(path);
+            int len;
+            byte[] buf = new byte[1024];
+            while ((len = inputStream.read(buf)) != -1) {
+                outputStream.write(buf, 0, len);
+            }
+            outputStream.flush();
+            System.out.println("Make Picture success,Please find image in " + response);
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+            ex.printStackTrace();
+        }
+    }
 }
