@@ -15,6 +15,23 @@
   <sql id="Base_Column_List" >
     hallId, hallHeats, hallDescription, hallsetNum, colum1, colum2, colum3, colum4, colum5
   </sql>
+  <!--模糊查询数量-->
+  <select id="selectHallCount" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select
+    count(hallId)
+    from hall
+    where hallHeats like #{key}
+    or hallDescription like #{key}
+  </select>
+  <!--模糊查询分页显示-->
+  <select id="selectHallByKey" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hall
+    where hallHeats like #{key}
+    or hallDescription like #{key}
+    limit #{start},#{offset}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
