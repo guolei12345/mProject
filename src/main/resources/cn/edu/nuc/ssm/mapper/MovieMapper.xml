@@ -34,6 +34,11 @@
     moveId, moveName, director, actor, language, typeId, distrit, date, keyWord, picId, 
     keyChinese, routeId, colum1, colum2, colum3, colum4, colum5
   </sql>
+  <!--查出所有电影-->
+  <select id="selectAllMovie" resultMap="BaseResultMap">
+    select m.*,p.picId,picurl,t.typeid,t.typename
+    from movie m left join pic p on m.picId = p.picId left join type t on m.typeid = t.typeid
+  </select>
   <!--模糊查询数量-->
   <select id="selectMovieCount" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select

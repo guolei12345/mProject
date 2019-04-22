@@ -3,6 +3,8 @@ package cn.edu.nuc.ssm.service.interfaces.movie;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
 
+import java.util.List;
+
 public interface MovieService {
     int deleteByPrimaryKey(String moveid);
 
@@ -17,4 +19,6 @@ public interface MovieService {
     int updateByPrimaryKey(Movie record);
 
     PageInfo<Movie> selectMovieByKey(int current, String key, int offset);
+
+    List<Movie> selectAllMovie();
 }

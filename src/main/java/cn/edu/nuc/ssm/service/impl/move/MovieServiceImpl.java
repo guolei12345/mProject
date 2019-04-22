@@ -58,4 +58,10 @@ public class MovieServiceImpl implements MovieService {
         pageInfo.setList(list);
         return  pageInfo;
     }
+
+    @Override
+    public List<Movie> selectAllMovie() {
+        return movieMapper.selectAllMovie();
+    }
+
 }

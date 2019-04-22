@@ -15,6 +15,12 @@
   <sql id="Base_Column_List" >
     hallId, hallHeats, hallDescription, hallsetNum, colum1, colum2, colum3, colum4, colum5
   </sql>
+  <!--查询所有影厅信息-->
+  <select id="selectAllHall" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from hall
+  </select>
   <!--模糊查询数量-->
   <select id="selectHallCount" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select

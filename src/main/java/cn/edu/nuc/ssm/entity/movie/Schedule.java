@@ -21,6 +21,26 @@ public class Schedule {
 
     private String colum5;
 
+    private Movie movie;
+
+    private Hall hall;
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Hall getHall() {
+        return hall;
+    }
+
+    public void setHall(Hall hall) {
+        this.hall = hall;
+    }
+
     public String getScheduleid() {
         return scheduleid;
     }

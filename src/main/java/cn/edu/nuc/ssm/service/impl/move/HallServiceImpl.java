@@ -61,4 +61,9 @@ public class HallServiceImpl implements HallService {
         pageInfo.setList(list);
         return  pageInfo;
     }
+
+    @Override
+    public List<Hall> selectAllHall() {
+        return hallMapper.selectAllHall();
+    }
 }

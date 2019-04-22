@@ -22,4 +22,5 @@ public interface HallMapper {
 
     List<Hall> selectHallByKey(@Param(value = "key")String key, @Param(value = "start")int start, @Param(value = "offset")int offset);
 
+    List<Hall> selectAllHall();
 }
