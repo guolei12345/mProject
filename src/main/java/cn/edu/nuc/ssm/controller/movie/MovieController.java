@@ -4,10 +4,12 @@ import cn.edu.nuc.ssm.controller.BaseController;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
 import cn.edu.nuc.ssm.entity.movie.Pic;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.entity.power.User;
 import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
 import cn.edu.nuc.ssm.service.interfaces.movie.PicService;
+import cn.edu.nuc.ssm.service.interfaces.movie.ScheduleService;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import cn.edu.nuc.ssm.service.interfaces.util.FileService;
 import cn.edu.nuc.ssm.util.PropertyUtil;
@@ -42,6 +44,30 @@ public class MovieController extends BaseController {
     private PicService picService;
     @Autowired
     private ValidateCodeService validateCodeService;
+    @Autowired
+    private ScheduleService scheduleService;
+    /**
+     * 电影票选择
+     * @return
+     */
+    @RequestMapping(value = "/buy",method = RequestMethod.GET)
+    public String getBuyMovieInfo(String movieid,Model model){
+        logger.info("to get BuyMovieInfo");
+        List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
+        model.addAttribute("scheduleList",scheduleList);
+        return "/movie/buy";
+    }
+    /**
+     * 请求查询电影信息
+     * @return
+     */
+    @RequestMapping(value = "/movieInfo",method = RequestMethod.GET)
+    public String getMovieInfo(Model model){
+        logger.info("to get movieInfo");
+        List<Movie> movieList = movieService.selectAllMovie();
+        model.addAttribute("movieList",movieList);
+        return "/movie/movieInfo";
+    }
     /**
      * 请求查询角色
      * @return

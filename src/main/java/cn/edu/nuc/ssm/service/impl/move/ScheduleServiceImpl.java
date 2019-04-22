@@ -61,4 +61,10 @@ public class ScheduleServiceImpl implements ScheduleService {
         pageInfo.setList(list);
         return  pageInfo;
     }
+
+    @Override
+    public List<Schedule> selectScheduleByMovieId(String movieid) {
+        List<Schedule> list = scheduleMapper.selectScheduleByMovieId(movieid);
+        return list;
+    }
 }

@@ -4,6 +4,8 @@ import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.entity.movie.Type;
 
+import java.util.List;
+
 public interface ScheduleService {
     int deleteByPrimaryKey(String scheduleid);
 
@@ -18,4 +20,6 @@ public interface ScheduleService {
     int updateByPrimaryKey(Schedule record);
 
     PageInfo<Schedule> selectScheduleByKey(int current, String key, int offset);
+
+    List<Schedule> selectScheduleByMovieId(String movieid);
 }

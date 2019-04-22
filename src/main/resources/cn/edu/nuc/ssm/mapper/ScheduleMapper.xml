@@ -53,6 +53,12 @@
     count(scheduleId)
     from schedule
   </select>
+  <!--查询电影的排片信息-->
+  <select id="selectScheduleByMovieId" resultMap="BaseResultMap">
+    select s.*,m.*,h.*
+    from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
+    where s.moveId = #{movieid}
+  </select>
   <!--模糊查询分页显示-->
   <select id="selectScheduleByKey" resultMap="BaseResultMap">
     select s.*,m.*,h.*
