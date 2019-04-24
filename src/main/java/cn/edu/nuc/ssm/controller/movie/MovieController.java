@@ -54,7 +54,9 @@ public class MovieController extends BaseController {
     public String getBuyMovieInfo(String movieid,Model model){
         logger.info("to get BuyMovieInfo");
         List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
+        Movie movie = movieService.selectByPrimaryKey(movieid);
         model.addAttribute("scheduleList",scheduleList);
+        model.addAttribute("movie",movie);
         return "/movie/buy";
     }
     /**
