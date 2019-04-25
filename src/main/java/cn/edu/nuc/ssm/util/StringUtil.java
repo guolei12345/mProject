@@ -1,5 +1,7 @@
 package cn.edu.nuc.ssm.util;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
 
@@ -43,5 +45,20 @@ public class StringUtil {
      */
     public static String getCheckNum6(){
         return String.valueOf((new Random().nextInt(899999) + 100000));
+    }
+
+    public static Date StringToDate(String time) {
+        //注意：SimpleDateFormat构造函数的样式与time的样式必须相符
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sDateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); //加上时间
+        Date date=null;
+        //必须捕获异常
+        try {
+            date=simpleDateFormat.parse(time);
+            System.out.println(date);
+        } catch(Exception px) {
+            px.printStackTrace();
+        }
+        return date;
     }
 }

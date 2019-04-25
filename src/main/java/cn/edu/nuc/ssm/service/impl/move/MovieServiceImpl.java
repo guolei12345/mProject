@@ -3,12 +3,13 @@ package cn.edu.nuc.ssm.service.impl.move;
 import cn.edu.nuc.ssm.dao.movie.MovieMapper;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
 import cn.edu.nuc.ssm.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -64,4 +65,24 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.selectAllMovie();
     }
 
+    @Override
+    public Map<String,List<Schedule>> groupByDate(List<Schedule> scheduleList) {
+        Map<String,List<Schedule>> map = new HashMap<>();
+        for(Schedule schedule:scheduleList){
+            String date = schedule.getTime();
+            boolean flag = map.containsKey(date);
+            List<Schedule> schedules = new ArrayList<Schedule>();
+            if(flag){
+                schedules = map.get(date);
+                schedules.add(schedule);
+                map.remove(date);
+
+            }else{
+                schedules.add(schedule);
+                map.put(date,schedules);
+            }
+            map.put(date,schedules);
+        }
+        return map;
+    }
 }

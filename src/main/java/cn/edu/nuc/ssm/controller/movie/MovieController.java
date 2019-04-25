@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/movie")
@@ -55,7 +56,8 @@ public class MovieController extends BaseController {
         logger.info("to get BuyMovieInfo");
         List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
         Movie movie = movieService.selectByPrimaryKey(movieid);
-        model.addAttribute("scheduleList",scheduleList);
+        Map<String,List<Schedule>> scheduleMap = movieService.groupByDate(scheduleList);
+        model.addAttribute("scheduleMap",scheduleMap);
         model.addAttribute("movie",movie);
         return "/movie/buy";
     }

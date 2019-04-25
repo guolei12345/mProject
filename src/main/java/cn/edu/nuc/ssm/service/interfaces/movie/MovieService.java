@@ -2,8 +2,10 @@ package cn.edu.nuc.ssm.service.interfaces.movie;
 
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MovieService {
     int deleteByPrimaryKey(String moveid);
@@ -21,4 +23,6 @@ public interface MovieService {
     PageInfo<Movie> selectMovieByKey(int current, String key, int offset);
 
     List<Movie> selectAllMovie();
+
+    Map<String,List<Schedule>> groupByDate(List<Schedule> scheduleList);
 }

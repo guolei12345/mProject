@@ -43,15 +43,21 @@
                         </div>
                     </div>
                     <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right"> 日期 </label>
+                        <div class="col-sm-9">
+                            <input type="date" id="time" name="time" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
+                    <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label no-padding-right"> 开始时间 </label>
                         <div class="col-sm-9">
-                            <input type="datetime-local" id="time" name="time" class="col-xs-10 col-sm-5" />
+                            <input type="time" id="colum1" name="colum1" class="col-xs-10 col-sm-5" />
                         </div>
                     </div>
                     <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label no-padding-right"> 截止时间 </label>
                         <div class="col-sm-9">
-                            <input type="datetime-local" id="colum1" name="colum1" class="col-xs-10 col-sm-5" />
+                            <input type="time" id="colum2" name="colum2" class="col-xs-10 col-sm-5" />
                         </div>
                     </div>
                     <div class="form-group center">

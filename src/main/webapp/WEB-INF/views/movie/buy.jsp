@@ -6,39 +6,32 @@
 		<meta charset="utf-8" />
 		<title>电影排片信息</title>
 	</head>
-
 	<body>
 	<div id="user-profile-3" class="user-profile row">
 		<div class="col-sm-offset-1 col-sm-10">
 			<div class="space"></div>
-            <img src="/movie/getPic?path=${movie.pic.picurl}" width="200" height="300" class="input-icon input-icon-right" width="145" height="33" id="identity"/>
             <form class="form-horizontal" action="/movie/order" method="post" >
-                <div class="col-sm-6">
-                    <div class="tabbable tabs-left">
+                <div class="col-sm-12">
+                    <img src="/movie/getPic?path=${movie.pic.picurl}" width="200" height="300" class="col-sm-4" width="145" height="33" id="identity"/>
+                    <div class="tabbable tabs-top col-sm-8">
                         <ul class="nav nav-tabs" id="myTab3">
+                            <c:forEach items="${scheduleMap}" var="map">
                             <li class="">
-                                <a data-toggle="tab" href="#Move">
+                                <a data-toggle="tab" href="#${map.key}">
                                     <i class="pink icon-dashboard bigger-110"></i>
-                                    movie
-                                </a>
-                            </li>
-                            <c:forEach items="${scheduleList}" var="schedule">
-                            <li class="">
-                                <a data-toggle="tab" href="#${schedule.scheduleid}">
-                                    <i class="pink icon-dashboard bigger-110"></i>
-                                    ${schedule.hall.hallheats}
+                                    ${map.key}
                                 </a>
                             </li>
                             </c:forEach>
                         </ul>
 
                         <div class="tab-content">
-                            <div id="Move" class="tab-pane active">
-                                Move
-                            </div>
-                            <c:forEach items="${scheduleList}" var="schedule">
-                            <div id="${schedule.scheduleid}" class="tab-pane">
-                                ${schedule.hall.halldescription}
+                            <c:forEach items="${scheduleMap}" var="map">
+                            <div id="${map.key}" class="tab-pane">
+                                <c:forEach items="${map.value}" var="schedule">
+                                    <p>时间：${schedule.colum1} --- ${schedule.colum2}</p>
+                                    <p> 演播厅：${schedule.hall.hallheats}</p>
+                                </c:forEach>
                             </div>
                             </c:forEach>
                         </div>
