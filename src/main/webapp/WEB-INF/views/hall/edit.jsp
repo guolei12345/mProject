@@ -26,6 +26,12 @@
                             <input type="text" id="halldescription" name="halldescription" value="${hallEdit.halldescription}" class="col-xs-10 col-sm-5" />
                         </div>
                     </div>
+                    <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label"> 座位数 </label>
+                        <div class="col-sm-9">
+                            <input type="number" id="hallsetnum" name="hallsetnum" value="${hallEdit.hallsetnum}" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
                     <div class="form-group center col-sm-7">
                             <button class="btn btn-info" type="button" onclick="editRole('/hall/edit')">
                                 <i class="icon-ok bigger-110"></i>
@@ -48,10 +54,12 @@
         var hallheats = $("#hallheats").val();
         var hallid = $("#hallid").val();
         var halldescription = $("#halldescription").val();
+        var hallsetnum = $("#hallsetnum").val();
         var data = {
             hallid:hallid,
             hallheats:hallheats,
-            halldescription:halldescription
+            halldescription:halldescription,
+            hallsetnum:hallsetnum
         };
         $.ajax({
             type:"post",

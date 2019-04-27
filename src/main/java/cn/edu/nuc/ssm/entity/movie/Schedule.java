@@ -1,5 +1,8 @@
 package cn.edu.nuc.ssm.entity.movie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Schedule {
     private String scheduleid;
 
@@ -25,6 +28,16 @@ public class Schedule {
 
     private Hall hall;
 
+    private List<HallSet> hallSetList;
+
+    public List<HallSet> getHallSetList() {
+        return hallSetList;
+    }
+
+    public void setHallSetList(List<HallSet> hallSetList) {
+        this.hallSetList = hallSetList;
+    }
+
     public Movie getMovie() {
         return movie;
     }
@@ -39,6 +52,26 @@ public class Schedule {
 
     public void setHall(Hall hall) {
         this.hall = hall;
+        List<HallSet> hallSetList = new ArrayList<>();
+        try{
+            String[] hasSelect = colum3.split("-");
+            Integer num = Integer.parseInt(hall.getHallsetnum());
+            for(int i = 1;i<num+1;i++){
+                HallSet hallSet = new HallSet();
+                hallSet.setNum(String.valueOf(i));
+                boolean isSelect = false;
+                for (String select : hasSelect){
+                    if(select.equals(hallSet.getNum())){
+                        isSelect = true;break;
+                    }
+                }
+                hallSet.setIsSelect(isSelect);
+                hallSetList.add(hallSet);
+            }
+        }catch (Exception e){
+            //e.
+        }
+        this.hallSetList = hallSetList;
     }
 
     public String getScheduleid() {

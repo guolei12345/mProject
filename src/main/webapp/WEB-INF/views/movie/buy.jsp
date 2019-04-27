@@ -15,8 +15,13 @@
                     <img src="/movie/getPic?path=${movie.pic.picurl}" width="200" height="300" class="col-sm-4" width="145" height="33" id="identity"/>
                     <div class="tabbable tabs-top col-sm-8">
                         <ul class="nav nav-tabs" id="myTab3">
-                            <c:forEach items="${scheduleMap}" var="map">
-                            <li class="">
+                            <c:forEach items="${scheduleMap}" var="map" varStatus="idx">
+                                <c:if test="${idx.index=='0'}">
+                                <li class="active">
+                                </c:if>
+                                <c:if test="${idx.index!='0'}">
+                                    <li class="">
+                                </c:if>
                                 <a data-toggle="tab" href="#${map.key}">
                                     <i class="pink icon-dashboard bigger-110"></i>
                                     ${map.key}
@@ -25,13 +30,48 @@
                             </c:forEach>
                         </ul>
 
-                        <div class="tab-content">
+                        <div class="tab-content tabs-right col-sm-8">
                             <c:forEach items="${scheduleMap}" var="map">
                             <div id="${map.key}" class="tab-pane">
-                                <c:forEach items="${map.value}" var="schedule">
-                                    <p>时间：${schedule.colum1} --- ${schedule.colum2}</p>
-                                    <p> 演播厅：${schedule.hall.hallheats}</p>
-                                </c:forEach>
+                                <%--内层--%>
+                                <ul class="nav tabs-left nav-tabs" id="myTab2">
+                                    <c:forEach items="${map.value}" var="schedule" varStatus="idx">
+                                        <%--<c:if test="${idx.index=='0'}">--%>
+                                            <%--<li class="active">--%>
+                                        <%--</c:if>--%>
+                                        <%--<c:if test="${idx.index!='0'}">--%>
+                                            <%--<li class="">--%>
+                                        <%--</c:if>--%>
+                                        <li class="">
+                                        <a data-toggle="tab" href="#${schedule.scheduleid}">
+                                            <i class="pink icon-dashboard bigger-110"></i>
+                                                ${schedule.colum1}--${schedule.colum2}
+                                        </a>
+                                    </li>
+                                    </c:forEach>
+                                </ul>
+
+                                <div class="tab-content">
+                                    <c:forEach items="${map.value}" var="schedule">
+                                    <div id="${schedule.scheduleid}" class="tab-pane">
+                                        <p> 演播厅：${schedule.hall.hallheats}</p>
+                                        <p>时间：${schedule.colum1} --- ${schedule.colum2}</p>
+                                        <%--座位--%>
+                                        <c:forEach items="${schedule.hallSetList}" var="setNum">
+                                            <c:if test="${!setNum.isSelect}">
+                                                <a>${setNum.num}</a>
+                                            </c:if>
+                                            <c:if test="${setNum.isSelect}">
+                                                ${setNum.num}
+                                            </c:if>
+                                        </c:forEach>
+                                    </div>
+                                    </c:forEach>
+                                </div>
+                                <%--<c:forEach items="${map.value}" var="schedule">--%>
+                                    <%--<p>时间：${schedule.colum1} --- ${schedule.colum2}</p>--%>
+                                    <%--<p> 演播厅：${schedule.hall.hallheats}</p>--%>
+                                <%--</c:forEach>--%>
                             </div>
                             </c:forEach>
                         </div>

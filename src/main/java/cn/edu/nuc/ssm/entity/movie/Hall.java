@@ -1,5 +1,8 @@
 package cn.edu.nuc.ssm.entity.movie;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hall {
     private String hallid;
 

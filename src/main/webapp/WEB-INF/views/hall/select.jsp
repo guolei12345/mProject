@@ -52,6 +52,7 @@
                             <th class="hidden">影厅id</th>
                             <th class="hidden-320">影厅名</th>
                             <th class="hidden-320">影厅描述</th>
+                            <th class="hidden-320">座位</th>
                             <th class="hidden-320">操作</th>
                         </tr>
                         </thead>
@@ -67,6 +68,7 @@
                             <th class="hidden">${hall.hallid}</th>
                             <td class="hidden-320">${hall.hallheats}</td>
                             <td class="hidden-320">${hall.halldescription}</td>
+                            <td class="hidden-320">${hall.hallsetnum}</td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 

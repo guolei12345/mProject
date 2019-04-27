@@ -25,7 +25,12 @@
                             <input type="text" id="halldescription" name="halldescription" class="col-xs-10 col-sm-5" />
                         </div>
                     </div>
-
+                    <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right"> 座位数 </label>
+                        <div class="col-sm-9">
+                            <input type="number" id="hallsetnum" name="hallsetnum" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
                     <div class="form-group center">
                         <button class="btn btn-info" type="submit">
                             <i class="icon-ok bigger-110"></i>
