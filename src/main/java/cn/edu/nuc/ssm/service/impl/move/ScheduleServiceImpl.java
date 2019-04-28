@@ -67,4 +67,15 @@ public class ScheduleServiceImpl implements ScheduleService {
         List<Schedule> list = scheduleMapper.selectScheduleByMovieId(movieid);
         return list;
     }
+
+    @Override
+    public Schedule SubOrder(String scheduleid, String setNum) {
+        Schedule schedule = scheduleMapper.selectByPrimaryKey(scheduleid);
+        String hasSelect = schedule.getColum3();
+        StringBuffer stringBuffer = new StringBuffer(hasSelect);
+        stringBuffer.append("-"+setNum);
+        schedule.setColum3(stringBuffer.toString());
+        scheduleMapper.updateByPrimaryKeySelective(schedule);
+        return schedule;
+    }
 }

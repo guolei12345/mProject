@@ -394,6 +394,10 @@
 				var urls = url+"?"+name+"="+value;
 				$("#load").load(urls)
 			}
+			function optionMovie(url,name,value){
+				var urls = url+"&"+name+"="+value;
+				$("#load").load(urls)
+			}
 			function searchByKey(url,key,current) {
 				var keys = $("#"+key).val();
 				var offset = $("#offset").val();

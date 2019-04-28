@@ -68,6 +68,14 @@ public class Schedule {
                 hallSet.setIsSelect(isSelect);
                 hallSetList.add(hallSet);
             }
+            int sumNum = 1;
+            for(int i=1;i<=num;i++){
+                if(i*i>=num){
+                    num = i;
+                    break;
+                }
+                this.colum4 = String.valueOf(sumNum);
+            }
         }catch (Exception e){
             //e.
         }

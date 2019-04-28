@@ -51,6 +51,17 @@ public class MovieController extends BaseController {
      * 电影票选择
      * @return
      */
+    @RequestMapping(value = "/subOrder",method = RequestMethod.GET)
+    public String getSubOrder(String setNum,String scheduleid,Model model){
+        logger.info("to get subOrder");
+        Schedule schedule = scheduleService.SubOrder(scheduleid,setNum);
+        return getBuyMovieInfo(schedule.getMoveid(),model);
+    }
+
+    /**
+     * 电影票选择
+     * @return
+     */
     @RequestMapping(value = "/buy",method = RequestMethod.GET)
     public String getBuyMovieInfo(String movieid,Model model){
         logger.info("to get BuyMovieInfo");

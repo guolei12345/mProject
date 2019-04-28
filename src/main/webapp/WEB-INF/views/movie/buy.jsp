@@ -57,21 +57,28 @@
                                         <p> 演播厅：${schedule.hall.hallheats}</p>
                                         <p>时间：${schedule.colum1} --- ${schedule.colum2}</p>
                                         <%--座位--%>
+                                        <table>
+                                            <tr>
                                         <c:forEach items="${schedule.hallSetList}" var="setNum">
-                                            <c:if test="${!setNum.isSelect}">
-                                                <a>${setNum.num}</a>
-                                            </c:if>
-                                            <c:if test="${setNum.isSelect}">
-                                                ${setNum.num}
+                                            <%--<c:if test="${setNum.num%8==0}">--%>
+                                                <%--<tr>--%>
+                                            <%--</c:if>--%>
+                                            <td>
+                                                <c:if test="${!setNum.isSelect}">
+                                                    <a href="#"class="btn btn-xs btn-success" onclick="optionMovie('/movie/subOrder?setNum=${setNum.num}','scheduleid','${schedule.scheduleid}')">${setNum.num}</a>
+                                                </c:if>
+                                                <c:if test="${setNum.isSelect}">
+                                                    <a class="btn btn-xs btn-info" href="#">${setNum.num}</a>
+                                                </c:if>
+                                            </td>
+                                            <c:if test="${setNum.num%8==0}">
+                                                </tr><tr>
                                             </c:if>
                                         </c:forEach>
+                                        </table>
                                     </div>
                                     </c:forEach>
                                 </div>
-                                <%--<c:forEach items="${map.value}" var="schedule">--%>
-                                    <%--<p>时间：${schedule.colum1} --- ${schedule.colum2}</p>--%>
-                                    <%--<p> 演播厅：${schedule.hall.hallheats}</p>--%>
-                                <%--</c:forEach>--%>
                             </div>
                             </c:forEach>
                         </div>

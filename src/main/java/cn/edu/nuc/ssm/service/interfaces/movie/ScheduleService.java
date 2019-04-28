@@ -22,4 +22,6 @@ public interface ScheduleService {
     PageInfo<Schedule> selectScheduleByKey(int current, String key, int offset);
 
     List<Schedule> selectScheduleByMovieId(String movieid);
+
+    Schedule SubOrder(String scheduleid, String setNum);
 }
