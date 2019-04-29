@@ -3,6 +3,8 @@ package cn.edu.nuc.ssm.service.interfaces.movie;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.entity.movie.Type;
+import cn.edu.nuc.ssm.entity.movie.UserSchedule;
+import cn.edu.nuc.ssm.entity.power.User;
 
 import java.util.List;
 
