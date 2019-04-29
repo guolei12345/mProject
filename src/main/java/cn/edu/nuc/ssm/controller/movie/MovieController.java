@@ -2,9 +2,15 @@ package cn.edu.nuc.ssm.controller.movie;
 
 import cn.edu.nuc.ssm.controller.BaseController;
 import cn.edu.nuc.ssm.entity.PageInfo;
-import cn.edu.nuc.ssm.entity.movie.*;
+import cn.edu.nuc.ssm.entity.movie.Movie;
+import cn.edu.nuc.ssm.entity.movie.Pic;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
+import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.entity.power.User;
-import cn.edu.nuc.ssm.service.interfaces.movie.*;
+import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
+import cn.edu.nuc.ssm.service.interfaces.movie.PicService;
+import cn.edu.nuc.ssm.service.interfaces.movie.ScheduleService;
+import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import cn.edu.nuc.ssm.service.interfaces.util.FileService;
 import cn.edu.nuc.ssm.util.PropertyUtil;
 import cn.edu.nuc.ssm.util.RedisUtil;
@@ -41,30 +47,14 @@ public class MovieController extends BaseController {
     private ValidateCodeService validateCodeService;
     @Autowired
     private ScheduleService scheduleService;
-    @Autowired
-    private UserScheduleService userScheduleService;
-    /**
-     * 电影票信息查询
-     * @return
-     */
-    @RequestMapping(value = "/orderInfo",method = RequestMethod.GET)
-    public String getSubOrder(HttpSession session,Model model){
-        logger.info("to get orderInfo");
-        User user = (User)session.getAttribute("user");
-        List<UserSchedule> userScheduleList = userScheduleService.selectMovieOrderByUser(user);
-        model.addAttribute("userScheduleList",userScheduleList);
-        return "/movie/orderInfo";
-    }
     /**
      * 电影票选择
      * @return
      */
     @RequestMapping(value = "/subOrder",method = RequestMethod.GET)
-    public String getSubOrder(String setNum,String scheduleid,Model model,HttpSession session){
+    public String getSubOrder(String setNum,String scheduleid,Model model){
         logger.info("to get subOrder");
         Schedule schedule = scheduleService.SubOrder(scheduleid,setNum);
-        User user = (User)session.getAttribute("user");
-        boolean flag = userScheduleService.saveUserOrder(scheduleid,setNum,user);
         return getBuyMovieInfo(schedule.getMoveid(),model);
     }
 
