@@ -13,12 +13,12 @@
         <div class="widget-body">
             <div class="widget-main">
                 <div>
-                    <table class="table table-striped table-bordered">
+                    <table class="table table-striped table-bordered" id="orderTab">
                         <thead>
                         <tr>
                             <td class="center">
                                 <label>
-                                    <input type="checkbox" checked="checked" class="ace" />
+                                    <input type="checkbox" id="checkAll" checked="checked" onclick="orderCheck(this)" class="ace" />
                                     <span class="lbl"></span>
                                 </label>
                             </td>
@@ -36,7 +36,7 @@
                         <tr>
                             <td class="center">
                                 <label>
-                                    <input type="checkbox" checked="checked" class="ace" />
+                                    <input type="checkbox" name="onlyOne" id="${userSchedule.id}" checked="checked" onclick="orderCheck(this)" class="ace onlyOne" />
                                     <span class="lbl"></span>
                                 </label>
                             </td>
@@ -45,7 +45,7 @@
                             <th>${userSchedule.hall.hallheats}</th>
                             <th class="hidden-xs">${userSchedule.schedule.time}</th>
                             <th>${userSchedule.setnum}</th>
-                            <th>${userSchedule.schedule.price}</th>
+                            <th class="price">${userSchedule.schedule.price}</th>
                             <th><a class="red" href="#" onclick="option('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
                                 <i class="icon-trash bigger-130"></i>
                             </a></th>
@@ -73,6 +73,29 @@
         </div><!-- /widget-body -->
     </div><!-- /login-box -->
 </div><!-- /position-relative -->
+<script type="text/javascript">
+    function orderCheck(date) {
+        debugger;
+        //选中所有
+        if(date.id=='checkAll'){
+            var checkedList = $(".onlyOne");
+            for (i=0;i<checkedList.length;i++){
+                checkedList[i].checked=date.checked;
+            }
+            showAllPrice();
+        }
+    }
+    function showAllPrice() {
+        var orderTab = $("#orderTab");
+        //在table中找input下类型为checkbox属性为选中状态的数据
+        var checked = $("table input[type=checkbox]:checked");
+        var total = 0;
+        checked.each(function () {//遍历
+            var row = $(this).parent("td").parent("tr");//获取选中行
+            alert(row);
+        })
+    }
+</script>
 </body>
 </html>
 
