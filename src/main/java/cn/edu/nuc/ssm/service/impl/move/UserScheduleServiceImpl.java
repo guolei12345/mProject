@@ -1,8 +1,11 @@
 package cn.edu.nuc.ssm.service.impl.move;
 
+import cn.edu.nuc.ssm.dao.movie.ScheduleMapper;
 import cn.edu.nuc.ssm.dao.movie.UserScheduleMapper;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.entity.movie.UserSchedule;
 import cn.edu.nuc.ssm.entity.power.User;
+import cn.edu.nuc.ssm.service.interfaces.movie.ScheduleService;
 import cn.edu.nuc.ssm.service.interfaces.movie.UserScheduleService;
 import cn.edu.nuc.ssm.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import java.util.List;
 public class UserScheduleServiceImpl implements UserScheduleService {
     @Autowired
     private UserScheduleMapper userScheduleMapper;
+    @Autowired
+    private ScheduleMapper scheduleMapper;
     @Override
     public int deleteByPrimaryKey(String id) {
         return userScheduleMapper.deleteByPrimaryKey(id);
@@ -68,5 +73,10 @@ public class UserScheduleServiceImpl implements UserScheduleService {
             userScheduleList = userScheduleMapper.selectMovieOrderByUser(user.getUserid());
         }
         return userScheduleList;
+    }
+
+    @Override
+    public int delectOrder(String userScheduleId) {
+        return 0;
     }
 }

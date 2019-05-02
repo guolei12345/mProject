@@ -21,4 +21,6 @@ public interface UserScheduleService {
     boolean saveUserOrder(String scheduleid, String setNum, User user);
 
     List<UserSchedule> selectMovieOrderByUser(User user);
+
+    int delectOrder(String userScheduleId);
 }

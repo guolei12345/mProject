@@ -61,4 +61,9 @@ public class StringUtil {
         }
         return date;
     }
+
+    public static String removeStr(String col, String setnum) {
+        String colum = col.replaceFirst("-"+setnum,"");
+        return colum;
+    }
 }

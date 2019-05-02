@@ -8,6 +8,7 @@ import cn.edu.nuc.ssm.service.interfaces.movie.*;
 import cn.edu.nuc.ssm.service.interfaces.util.FileService;
 import cn.edu.nuc.ssm.util.PropertyUtil;
 import cn.edu.nuc.ssm.util.RedisUtil;
+import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.apache.commons.io.FilenameUtils;
@@ -47,6 +48,28 @@ public class MovieController extends BaseController {
      * 电影票信息查询
      * @return
      */
+    @RequestMapping(value = "/deleteOrder",method = RequestMethod.GET)
+    public String deleteOrder(String userScheduleId,HttpSession session,Model model){
+        logger.info("to get deleteOrder");
+        String msg = "";
+        UserSchedule userSchedule = userScheduleService.selectByPrimaryKey(userScheduleId);
+        int rtn = userScheduleService.deleteByPrimaryKey(userScheduleId);
+        if(rtn>0){
+            Schedule schedule = scheduleService.selectByPrimaryKey(userSchedule.getScheduleid());
+            //取到已经选的座
+            String clo = schedule.getColum3();
+            //移除删除的订单，让别人可选
+            String colum3 = StringUtil.removeStr(clo,userSchedule.getSetnum());
+            schedule.setColum3(colum3);
+            int r = scheduleService.updateByPrimaryKeySelective(schedule);
+            if (r>0)
+            msg = "删除订单成功";
+        }else {
+            msg = "删除订单失败";
+        }
+        model.addAttribute("msg",msg);
+        return getSubOrder(session,model);
+    }
     @RequestMapping(value = "/orderInfo",method = RequestMethod.GET)
     public String getSubOrder(HttpSession session,Model model){
         logger.info("to get orderInfo");
