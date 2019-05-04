@@ -404,6 +404,12 @@
 				var urls = url+"?key="+keys+"&current="+current+"&offset="+offset;
 				$("#load").load(urls)
 			}
+			function searchMovie(url,key,type) {
+				var keys = $("#"+key).val();
+				var types = $("#"+type).val();
+				var urls = url+"?"+key+"="+keys+"&"+type+"="+types;
+				$("#load").load(urls)
+			}
 		</script>
 	</body>
 </html>

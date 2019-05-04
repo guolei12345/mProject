@@ -20,6 +20,24 @@
 					</small>
 				</h1>
 			</div><!-- /.page-header -->
+			<div class="dataTables_filter">
+				<label>
+					<a href="#" onclick="load('/movie/movieTuijian')" aria-controls="sample-table-2">热门推荐</a>
+					电影类型:
+					<select name="movieType" id="movieType" aria-controls="sample-table-2">
+						<option value=""></option>
+						<c:forEach items="${typeList}" var="type">
+							<option value="${type.typeid}">${type.typename}</option>
+						</c:forEach>
+					</select>
+
+					关键字: <input type="text" id="movieInfoKey" aria-controls="sample-table-2">
+					<button class="btn btn-info" onclick="searchMovie('/movie/movieInfo','movieInfoKey','movieType')">
+						<i class="icon-ok bigger-110"></i>
+						查询
+					</button>
+				</label>
+			</div>
 			<div class="row">
 				<c:forEach items="${movieList}" var="movie">
 				<div class="col-xs-6 col-sm-3 pricing-box">

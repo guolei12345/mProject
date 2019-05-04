@@ -23,4 +23,8 @@ public interface MovieMapper {
     List<Movie> selectMovieByKey(@Param(value = "key")String key, @Param(value = "start")int start, @Param(value = "offset")int offset);
 
     List<Movie> selectAllMovie();
+
+    List<Movie> selectMovieByMovieKey(@Param(value = "movieInfoKey")String movieInfoKey);
+
+    List<Movie> selectMovieByType(@Param(value = "movieType")String movieType);
 }

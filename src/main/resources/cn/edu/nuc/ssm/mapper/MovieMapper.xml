@@ -34,6 +34,16 @@
     moveId, moveName, director, actor, language, typeId, distrit, date, keyWord, picId, 
     keyChinese, routeId, colum1, colum2, colum3, colum4, colum5
   </sql>
+  <select id="selectMovieByType" resultMap="BaseResultMap">
+    select m.*,p.picId,picurl,t.typeid,t.typename
+    from movie m left join pic p on m.picId = p.picId left join type t on m.typeid = t.typeid
+    where m.typeid = #{movieType}
+  </select>
+  <select id="selectMovieByMovieKey" resultMap="BaseResultMap">
+    select m.*,p.picId,picurl,t.typeid,t.typename
+    from movie m left join pic p on m.picId = p.picId left join type t on m.typeid = t.typeid
+    where m.moveName like #{movieInfoKey}
+  </select>
   <!--查出所有电影-->
   <select id="selectAllMovie" resultMap="BaseResultMap">
     select m.*,p.picId,picurl,t.typeid,t.typename

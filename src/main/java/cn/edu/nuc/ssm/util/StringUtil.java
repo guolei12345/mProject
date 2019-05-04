@@ -2,6 +2,7 @@ package cn.edu.nuc.ssm.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -65,5 +66,25 @@ public class StringUtil {
     public static String removeStr(String col, String setnum) {
         String colum = col.replaceFirst("-"+setnum,"");
         return colum;
+    }
+
+    /**
+     * 找到数量最大的key
+     * @param typeNum
+     * @return
+     */
+    public static String findMaxType(Map<String, Integer> typeNum) {
+        String maxType = "";
+        int num = 0;
+        if(typeNum!=null){
+            for(String key:typeNum.keySet()){
+                int tem = typeNum.get(key);
+                if(tem>num){
+                    num = tem;
+                    maxType = key;
+                }
+            }
+        }
+        return maxType;
     }
 }

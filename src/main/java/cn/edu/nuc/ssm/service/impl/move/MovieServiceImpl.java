@@ -9,6 +9,7 @@ import cn.edu.nuc.ssm.util.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Service
@@ -84,5 +85,33 @@ public class MovieServiceImpl implements MovieService {
             map.put(date,schedules);
         }
         return map;
+    }
+
+    @Override
+    public List<Movie> selectMovieByKey(String movieInfoKey) {
+        String movieInfo = "%"+movieInfoKey+"%";
+        return movieMapper.selectMovieByMovieKey(movieInfo);
+    }
+
+    @Override
+    public List<Movie> selectMovieByType(String movieType) {
+        return movieMapper.selectMovieByType(movieType);
+    }
+
+    @Override
+    public Map<String, Integer> totalSearchMovieType(HttpSession session, String typeid) {
+        Map<String,Integer> typeNum = (Map<String,Integer>)session.getAttribute("typeNum");
+        if(typeNum == null){
+            typeNum = new HashMap<>();
+            typeNum.put(typeid,Integer.valueOf(1));
+        }else{
+            int num = 0;
+            if(null != typeNum.get(typeid)){
+                num = typeNum.get(typeid);
+            }
+            num = num+1;
+            typeNum.put(typeid,Integer.valueOf(num));
+        }
+        return typeNum;
     }
 }

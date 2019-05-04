@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -88,7 +90,7 @@ public class MovieController extends BaseController {
         Schedule schedule = scheduleService.SubOrder(scheduleid,setNum);
         User user = (User)session.getAttribute("user");
         boolean flag = userScheduleService.saveUserOrder(scheduleid,setNum,user);
-        return getBuyMovieInfo(schedule.getMoveid(),model);
+        return getBuyMovieInfo(schedule.getMoveid(),model,session);
     }
 
     /**
@@ -96,23 +98,54 @@ public class MovieController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/buy",method = RequestMethod.GET)
-    public String getBuyMovieInfo(String movieid,Model model){
+    public String getBuyMovieInfo(String movieid,Model model,HttpSession session){
         logger.info("to get BuyMovieInfo");
         List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
         Movie movie = movieService.selectByPrimaryKey(movieid);
         Map<String,List<Schedule>> scheduleMap = movieService.groupByDate(scheduleList);
+        Map<String,Integer> typeNum = movieService.totalSearchMovieType(session,movie.getTypeid());
         model.addAttribute("scheduleMap",scheduleMap);
         model.addAttribute("movie",movie);
+        session.setAttribute("typeNum",typeNum);
         return "/movie/buy";
+    }
+    /**
+     * 电影推荐
+     * @return
+     */
+    @RequestMapping(value = "/movieTuijian",method = RequestMethod.GET)
+    public String movieTuijian(Model model, HttpSession session){
+        logger.info("to get movieTuijian");
+        List<Type> typeList = typeService.selectAllType();
+        List<Movie> movieList = new ArrayList<Movie>();
+        Map<String,Integer> typeNum = (Map<String,Integer>)session.getAttribute("typeNum");
+        String maxNumType = StringUtil.findMaxType(typeNum);
+        if(!StringUtil.isNotEmpty(maxNumType)){
+            maxNumType = typeList.get(0).getTypeid();
+        }
+        movieList = movieService.selectMovieByType(maxNumType);
+        model.addAttribute("typeList",typeList);
+        model.addAttribute("movieList",movieList);
+        return "/movie/movieInfo";
     }
     /**
      * 请求查询电影信息
      * @return
      */
     @RequestMapping(value = "/movieInfo",method = RequestMethod.GET)
-    public String getMovieInfo(Model model){
+    public String getMovieInfo(String movieInfoKey,String movieType,Model model){
         logger.info("to get movieInfo");
-        List<Movie> movieList = movieService.selectAllMovie();
+        List<Type> typeList = typeService.selectAllType();
+        List<Movie> movieList = new ArrayList<Movie>();
+        if(StringUtil.isNotEmpty(movieInfoKey)){
+            movieList = movieService.selectMovieByKey(movieInfoKey);
+        }else if(StringUtil.isNotEmpty(movieType)){
+            movieList = movieService.selectMovieByType(movieType);
+        }
+        else {
+            movieList = movieService.selectAllMovie();
+        }
+        model.addAttribute("typeList",typeList);
         model.addAttribute("movieList",movieList);
         return "/movie/movieInfo";
     }
