@@ -23,4 +23,6 @@ public interface UserScheduleService {
     List<UserSchedule> selectMovieOrderByUser(User user);
 
     int delectOrder(String userScheduleId);
+
+    boolean changeOrderState(List<String> list);
 }

@@ -11,7 +11,11 @@ import cn.edu.nuc.ssm.util.RedisUtil;
 import cn.edu.nuc.ssm.util.StringUtil;
 import cn.edu.nuc.ssm.util.VerifyUtil;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.logging.log4j.core.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -124,6 +128,28 @@ public class MovieController extends BaseController {
         model.addAttribute("typeList",typeList);
         model.addAttribute("movieList",movieList);
         return "/movie/movieInfo";
+    }
+    /**
+     * 支付
+     * @return
+     */
+    @RequestMapping(value = "/pay",method = RequestMethod.POST)
+    public String pay(@RequestBody String ids,Model model, HttpSession session){
+        //TODO 具体支付 暂时不实现
+        logger.info("to get pay");
+        JSONObject object = JSON.parseObject(ids);
+        String json = object.getString("ids");
+        JSONArray createArray=JSONArray.parseArray(json);
+        List<String> list = createArray.toJavaList(String.class);
+        boolean flag = userScheduleService.changeOrderState(list);
+        String msg = "";
+        if(flag){
+            msg = "订单支付成功";
+        }else {
+            msg = "订单支付失败";
+        }
+        model.addAttribute("msg",msg);
+        return getSubOrder(session,model);
     }
     /**
      * 请求查询电影信息

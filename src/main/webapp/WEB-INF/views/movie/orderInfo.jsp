@@ -28,6 +28,7 @@
                             <th class="hidden-xs">开始时间</th>
                             <th>座位号</th>
                             <th>价格</th>
+                            <th>支付状态</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -46,9 +47,21 @@
                             <th class="hidden-xs">${userSchedule.schedule.time}</th>
                             <th>${userSchedule.setnum}</th>
                             <th id="${idx.index}" class="price" name="price">${userSchedule.schedule.price}</th>
-                            <th><a class="red" href="#" onclick="option('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
-                                <i class="icon-trash bigger-130"></i>
-                            </a></th>
+                            <th>
+                                <c:if test="${userSchedule.colum1=='1'}">
+                                    <span style="color:green">已支付</span>
+                                </c:if>
+                                <c:if test="${userSchedule.colum1!='1'}">
+                                    <span style="color:red">未支付</span>
+                                </c:if>
+                            </th>
+                            <th>
+                                <c:if test="${userSchedule.colum1!='1'}">
+                                    <a class="red" href="#" onclick="option('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
+                                        <i class="icon-trash bigger-130"></i>
+                                    </a>
+                                </c:if>
+                            </th>
                         </tr>
                         </c:forEach>
                         </tbody>
@@ -61,8 +74,9 @@
                     <div class="col-sm-5 pull-right">
                         <h4 class="pull-right">
                             总价 :
-                            <span class="red" id="total">元</span>
-                            <span class="red"><button class="btn btn-success">
+                            <span class="red" id="total"></span>
+                            <span class="red">元</span>
+                            <span class="red"><button class="btn btn-success" onclick="pay()">
                                 支付
                             </button></span>
                         </h4>
@@ -123,6 +137,31 @@
             total = total+price;
         };
         $("#total").html(total);
+    }
+    //支付
+    function  pay() {
+        var checked = $("table input[type=checkbox]:checked");
+        var array=new Array();
+        for(i=0;i<checked.length;i++){
+            var id = checked[i].id;
+            if(id == "checkAll"){
+                continue;
+            }
+            array.push(id);
+        }
+        var data = {
+            ids:array
+        }
+        var urls = "/movie/pay";
+        $.ajax({
+            type:"post",
+            url:urls,
+            data:JSON.stringify(data),
+            contentType:"application/json;charset=utf-8",
+            success:function(dt){
+                $("#load").html(dt);
+            }
+        });
     }
 </script>
 </body>

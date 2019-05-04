@@ -79,4 +79,19 @@ public class UserScheduleServiceImpl implements UserScheduleService {
     public int delectOrder(String userScheduleId) {
         return 0;
     }
+
+    @Override
+    public boolean changeOrderState(List<String> list) {
+        boolean flag = true;
+        if(list != null){
+            for (String id:list){
+                UserSchedule userSchedule = userScheduleMapper.selectByPrimaryKey(id);
+                userSchedule.setColum1("1");
+                userScheduleMapper.updateByPrimaryKey(userSchedule);
+            }
+        }else{
+            flag = false;
+        }
+        return flag;
+    }
 }

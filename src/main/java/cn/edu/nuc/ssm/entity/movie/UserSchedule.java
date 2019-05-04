@@ -10,8 +10,8 @@ public class UserSchedule {
     private String scheduleid;
 
     private String setnum;
-
-    private String colum1;
+//    支付状态
+    private String colum1 = "0";
 
     private String colum2;
 
