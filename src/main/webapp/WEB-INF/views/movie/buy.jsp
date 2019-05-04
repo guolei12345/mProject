@@ -17,7 +17,7 @@
                         <ul class="nav nav-tabs" id="myTab3">
                             <c:forEach items="${scheduleMap}" var="map" varStatus="idx">
                                 <c:if test="${idx.index=='0'}">
-                                <li class="active">
+                                    <li class="active">
                                 </c:if>
                                 <c:if test="${idx.index!='0'}">
                                     <li class="">

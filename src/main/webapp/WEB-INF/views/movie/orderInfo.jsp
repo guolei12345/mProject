@@ -18,7 +18,7 @@
                         <tr>
                             <td class="center">
                                 <label>
-                                    <input type="checkbox" id="checkAll" checked="checked" onclick="orderCheck(this)" class="ace" />
+                                    <input type="checkbox" id="checkAll" onclick="orderCheck(this)" class="ace" />
                                     <span class="lbl"></span>
                                 </label>
                             </td>
@@ -36,7 +36,7 @@
                         <tr>
                             <th class="center">
                                 <label>
-                                    <input type="checkbox" name="onlyOne" id="${userSchedule.id}" checked="checked" onclick="orderCheck(this)" class="ace onlyOne" />
+                                    <input type="checkbox" name="onlyOne" id="${userSchedule.id}" onclick="orderCheck(this)" class="ace onlyOne" />
                                     <span class="lbl"></span>
                                 </label>
                             </th>
@@ -75,7 +75,6 @@
 </div><!-- /position-relative -->
 <script type="text/javascript">
     function orderCheck(date) {
-        debugger;
         //选中所有
         if(date.id=='checkAll'){
             var checkedList = $(".onlyOne");
@@ -84,12 +83,14 @@
             }
         }else{
             var checkedList = $(".onlyOne");
+            var isChecked = true;
             for (i=0;i<checkedList.length;i++){
-                if(checkedList[i].checked!=date.checked){
-                    var checkAllState = $("#checkAll").checked;
-                    break;
+                if(!checkedList[i].checked){
+                    isChecked = false;break;
                 }
             }
+            var check = $("#checkAll");
+            check[0].checked = isChecked;
         }
         showAllPrice();
     }
@@ -99,11 +100,26 @@
         //在table中找input下类型为checkbox属性为选中状态的数据
         var checked = $("table input[type=checkbox]:checked");
         var total = 0;
-        for (i=0;i<checked.length-1;i++){
-
-            $("#"+checked.id)
-            var priceOne = $("#"+i);
-            var price = parseInt(priceOne[0].innerHTML);
+        for (i=0;i<checked.length;i++){
+            var id = checked[i].id;
+            if(id == "checkAll"){
+                continue;
+            }
+            var url = "/movie/moviePrice";
+            var price = 0;
+            var data = {
+                id:id
+            };
+            $.ajax({
+                type:"post",
+                url:url,
+                async:false,
+                data:JSON.stringify(data),
+                contentType:"application/json;charset=utf-8",
+                success:function(dt){
+                    price = parseInt(dt.toString());
+                }
+            })
             total = total+price;
         };
         $("#total").html(total);

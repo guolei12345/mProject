@@ -15,10 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -127,6 +124,18 @@ public class MovieController extends BaseController {
         model.addAttribute("typeList",typeList);
         model.addAttribute("movieList",movieList);
         return "/movie/movieInfo";
+    }
+    /**
+     * 请求查询电影信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/moviePrice",method = RequestMethod.POST)
+    public String moviePrice(@RequestBody UserSchedule userSchedul,Model model){
+        logger.info("to get moviePrice");
+        UserSchedule userSchedule = userScheduleService.selectByPrimaryKey(userSchedul.getId());
+        String price = userSchedule.getSchedule().getPrice();
+        return price;
     }
     /**
      * 请求查询电影信息

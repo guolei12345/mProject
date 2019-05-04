@@ -64,9 +64,9 @@
     where userid = #{userid,jdbcType=VARCHAR}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from userschedule
+    select u.*,s.*,m.*,h.*
+    from userschedule as u left join schedule as s on u.scheduleId = s.scheduleId
+    left join movie m on s.moveId = m.moveId left join hall h on s.hallId = h.hallId
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
