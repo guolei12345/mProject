@@ -71,6 +71,6 @@ public class TypeController extends BaseController {
             msg = "删除失败！";
         }
         model.addAttribute("msg",msg);
-        return "";
+        return list(1,"",5,model);
     }
 }

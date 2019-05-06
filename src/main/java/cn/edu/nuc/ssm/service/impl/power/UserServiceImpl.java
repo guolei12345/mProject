@@ -314,6 +314,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
     private int updateCheck(User user,boolean hasOld) {
         logger.info("注册校验 start");
         int rtn = 0;
+        boolean useRedis = PropertyUtil.getPropertyBool("useRedis");
         String code = RedisUtil.getJedis().get(user.getNum());
         //验证码
         if(!hasOld&&!code.equals(user.getCode())){
