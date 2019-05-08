@@ -47,6 +47,14 @@ public class MovieController extends BaseController {
     private ScheduleService scheduleService;
     @Autowired
     private UserScheduleService userScheduleService;
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String getindex(HttpSession session,Model model){
+        logger.info("to get index");
+//        User user = (User)session.getAttribute("user");
+//        List<UserSchedule> userScheduleList = userScheduleService.selectMovieOrderByUser(user);
+//        model.addAttribute("userScheduleList",userScheduleList);
+        return "/movie/index";
+    }
     /**
      * 电影票信息查询
      * @return
