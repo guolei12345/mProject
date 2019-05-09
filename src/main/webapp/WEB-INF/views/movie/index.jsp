@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <link href="/assets/ace//assets/movie/css/bootstrap.min.css" rel="stylesheet" />
@@ -54,7 +55,7 @@ window.onload = function(){
 <div class="header">
   <div class="top_img">
     <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
-    <div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>
+    <%--<div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>--%>
     <div class="top_nav">
       <p><a href="#"> 快速订票系统入口</a> </p>
       <p><a href="#"> 最新优惠活动中心</a></p>
@@ -80,7 +81,11 @@ window.onload = function(){
     <div id="YImage">
       <p id="YPhotos"> <a href="#" title="11"><img src="/assets/movie/images/b5.jpg" alt="11" /></a> <a href="#" title="11"><img src="/assets/movie/images/b1.jpg" alt="111" /></a> <a href="#" title="11"><img src="/assets/movie/images/b3.jpg" alt="22" /></a> <a href="#" title="1"><img src="/assets/movie/images/b4.jpg" alt="22" /></a> </p>
     </div>
-    <p id="YSamples"> <a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>
+    <p id="YSamples">
+        <c:forEach items="${movieListLB}" var="movie">
+            <a href="#1" class="current" title="2"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
+        </c:forEach>
+        <%--<a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
   </div>
   <script language="javascript" type="text/javascript">
 <!--
@@ -388,7 +393,7 @@ window.onload = function(){
           </dd>
           <div class="clear"></div>
         </dl>
-        <div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
+        <%--<div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>--%>
       </div>
     </div>
 

@@ -50,9 +50,11 @@ public class MovieController extends BaseController {
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getindex(HttpSession session,Model model){
         logger.info("to get index");
+        //首页轮播图
+        List<Movie> movieListLB = movieService.selectMovieByType("1000002075930476");
 //        User user = (User)session.getAttribute("user");
 //        List<UserSchedule> userScheduleList = userScheduleService.selectMovieOrderByUser(user);
-//        model.addAttribute("userScheduleList",userScheduleList);
+        model.addAttribute("movieListLB",movieListLB);
         return "/movie/index";
     }
     /**
