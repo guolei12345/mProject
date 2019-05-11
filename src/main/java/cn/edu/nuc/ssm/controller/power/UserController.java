@@ -145,6 +145,9 @@ public class UserController extends BaseController {
         logger.info("Controller 调用注册 Service end info：{}",msg);
         model.addAttribute("msg",msg);
         if(rtn==RegistCodeEnum.getRegistCode(RegistCodeEnum.注册成功.toString())){
+            User userReg = userService.selectByUser(user);
+            userReg.setRoleid("333");
+            int r = userRoleService.saveOrUpdateUserRole(userReg);
             return "/user/login";
         }else{
             return "/user/regist";

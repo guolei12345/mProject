@@ -22,7 +22,7 @@ public interface ScheduleService {
     int updateByPrimaryKey(Schedule record);
 
     PageInfo<Schedule> selectScheduleByKey(int current, String key, int offset);
-
+    //电影排片信息查询
     List<Schedule> selectScheduleByMovieId(String movieid);
 
     Schedule SubOrder(String scheduleid, String setNum);

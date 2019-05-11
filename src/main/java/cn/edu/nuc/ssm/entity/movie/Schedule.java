@@ -1,5 +1,7 @@
 package cn.edu.nuc.ssm.entity.movie;
 
+import cn.edu.nuc.ssm.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,15 +56,22 @@ public class Schedule {
         this.hall = hall;
         List<HallSet> hallSetList = new ArrayList<>();
         try{
-            String[] hasSelect = colum3.split("-");
+            String[] hasSelect;
+            if(StringUtil.isNotEmpty(colum3)){
+                hasSelect = colum3.split("-");
+            }else {
+                hasSelect = new String[1];
+            }
             Integer num = Integer.parseInt(hall.getHallsetnum());
             for(int i = 1;i<num+1;i++){
                 HallSet hallSet = new HallSet();
                 hallSet.setNum(String.valueOf(i));
                 boolean isSelect = false;
-                for (String select : hasSelect){
-                    if(select.equals(hallSet.getNum())){
-                        isSelect = true;break;
+                if(StringUtil.isNotEmpty(colum3)){
+                    for (String select : hasSelect){
+                        if(select.equals(hallSet.getNum())){
+                            isSelect = true;break;
+                        }
                     }
                 }
                 hallSet.setIsSelect(isSelect);
@@ -139,11 +148,11 @@ public class Schedule {
     }
 
     public String getColum3() {
-        return colum3;
+        return colum3 == null ? "" : colum3.trim();
     }
 
     public void setColum3(String colum3) {
-        this.colum3 = colum3 == null ? null : colum3.trim();
+        this.colum3 = colum3 == null ? "" : colum3.trim();
     }
 
     public String getColum4() {

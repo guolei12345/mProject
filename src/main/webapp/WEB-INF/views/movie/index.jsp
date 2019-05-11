@@ -82,7 +82,7 @@ window.onload = function(){
       <p id="YPhotos"> <a href="#" title="11"><img src="/assets/movie/images/b5.jpg" alt="11" /></a> <a href="#" title="11"><img src="/assets/movie/images/b1.jpg" alt="111" /></a> <a href="#" title="11"><img src="/assets/movie/images/b3.jpg" alt="22" /></a> <a href="#" title="1"><img src="/assets/movie/images/b4.jpg" alt="22" /></a> </p>
     </div>
     <p id="YSamples">
-        <c:forEach items="${movieListLB}" var="movie">
+        <c:forEach items="${sydklbt}" var="movie">
             <a href="#1" class="current" title="2"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
         </c:forEach>
         <%--<a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
@@ -107,40 +107,21 @@ window.onload = function(){
         <div class="left_1_l">
           <div class="scrolldoorFrame">
             <ul class="scrollUl">
-              <li class="sd01" id="m01"><a href="#">
+              <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
+              <li class="sd0${idx.index+1}" id="m0${idx.index+1}"><a href="#">
                 <dl class="hd_list">
-                  <dt><img src="/assets/movie/images/hd01.jpg" width="81" height="35" /></dt>
-                  <dd>【青春期3】</dd>
-                  <dd>7月13日上映>></dd>
+                  <dt><img src="/movie/getPic?path=${movie.pic.picurl}" width="81" height="35" /></dt>
+                  <dd>${movie.movename}</dd>
+                  <dd>${movie.language}</dd>
                 </dl>
-                </a></li>
-              <li class="sd02" id="m02"><a href="#">
-                <dl class="hd_list">
-                  <dt><img src="/assets/movie/images/hd03.jpg" width="81" height="35" /></dt>
-                  <dd>【重来电影】</dd>
-                  <dd>剧情 爱情>></dd>
-                </dl>
-                </a></li>
-              <li class="sd02" id="m03"><a href="#">
-                <dl class="hd_list">
-                  <dt><img src="/assets/movie/images/hd02.jpg" width="81" height="35" /></dt>
-                  <dd>【青春期3】</dd>
-                  <dd>7月6日首播>></dd>
-                </dl>
-                </a></li>
-              <li class="sd02" id="m04"><a href="#">
-                <dl class="hd_list">
-                  <dt><img src="/assets/movie/images/hd04.jpg" width="81" height="35" /></dt>
-                  <dd>【浮出水面】</dd>
-                  <dd>7月12日播>></dd>
-                </dl>
-                </a></li>
+                </a>
+              </li>
+              </c:forEach>
             </ul>
             <div class="cont">
-              <div id="c01"><img src="/assets/movie/images/hd1.jpg" width="449" height="193" /></div>
-              <div id="c02" class="hidden"><img src="/assets/movie/images/hd3.jpg" width="449" height="193" /></div>
-              <div id="c03" class="hidden"><img src="/assets/movie/images/hd2.jpg" width="449" height="193" /></div>
-              <div id="c04" class="hidden"><img src="/assets/movie/images/hd4.jpg" width="449" height="193" /></div>
+              <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
+                <div id="c0${idx.index+1}"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="449" height="193" /></a></div>
+                </c:forEach>
             </div>
           </div>
         </div>
@@ -175,7 +156,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -186,7 +167,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -197,7 +178,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -208,7 +189,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：成龙 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -219,7 +200,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -230,7 +211,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -241,7 +222,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -252,7 +233,7 @@ window.onload = function(){
             <p>杨幂赵文卓展夺宝情缘</p>
             <p>主演：杨幂 赵文卓 樊 ...</p>
             <p>
-              <input name="" type="button" class="dgbg02" value="马上购票" />
+              <input name="" type="button" class="dgbg02" value="特惠购票" />
             </p>
           </dd>
         </dl>
@@ -322,27 +303,6 @@ window.onload = function(){
           
          
         -->
-        <div class="clear"></div>
-      </div>
-    </div>
-    <div class="left_6 top10px">
-      <h2><span><a href="#">>>查看更多</a></span>热门活动优惠专区 </h2>
-      <div class="left_6_con">
-        <dl class="fx_list">
-          <dt><img src="/assets/movie/images/fx1.jpg" width="65" height="65" /></dt>
-          <dd><strong>霸气抢票第e波 </strong><br />
-            -<a href="#">--《四大名捕》火热抢票送不停 抢票时间：7月16日-7月22日 </a></dd>
-        </dl>
-        <dl class="fx_list">
-          <dt><img src="/assets/movie/images/fx12.jpg" width="65" height="65" /></dt>
-          <dd><strong>给力活动第一期 </strong><br />
-            <a href="#">---《给力火车》给力送票送不停 活动时间：7月19日-7月28日 </a></dd>
-        </dl>
-        <dl class="fx_list">
-          <dt><img src="/assets/movie/images/fx13.jpg" width="65" height="65" /></dt>
-          <dd><strong>购票有礼大派送 </strong><br />
-            <a href="#">---《购票有礼》优惠大派送送不停 送票时间：7月20日-7月29日</a></dd>
-        </dl>
         <div class="clear"></div>
       </div>
     </div>
@@ -438,49 +398,7 @@ window.onload = function(){
     </div>
   </div>
   <div class="clear"></div>
-
-  <div class="bottom top10px">
-    <h2>订票帮助中心 >></h2>
-    <div class="bottom_con">
-      <table width="100%" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <th scope="col"><a href="#"><img src="/assets/movie/images/20091130101638768.jpg" width="128" height="35" /></a></th>
-          <th scope="col"><a href="#"><img src="/assets/movie/images/20091130101739119.jpg" width="128" height="35" /></a></th>
-          <th scope="col"><a href="#"><img src="/assets/movie/images/20091130101911881.jpg" width="128" height="35" /></a></th>
-          <th scope="col"><a href="#"><img src="/assets/movie/images/20091130102100902.jpg" width="128" height="35" /></a></th>
-          <th scope="col"><a href="#"><img src="/assets/movie/images/20091130102356804.jpg" width="128" height="35" /></a></th>
-        </tr>
-        <tr>
-          <td><a href="#">如何快速购票</a></td>
-          <td><a href="#">购票说明介绍</a></td>
-          <td><a href="#">影片信息查询</a></td>
-          <td><a href="#">领悟科技公司</a></td>
-          <td><a href="#">公司新闻资讯</a></td>
-        </tr>
-        <tr>
-          <td><a href="#">找到欣赏影片</a></td>
-          <td><a href="#">支付相关说明</a></td>
-          <td><a href="#">联系我们</a></td>
-          <td><a href="#">电影订票系统</a></td>
-          <td><a href="#">河南影片营销策划</a></td>
-        </tr>
-        <tr>
-          <td><a href="#">今日快速订票说明</a></td>
-          <td><a href="#">优惠活动最新折扣</a></td>
-          <td><a href="#">电影购票系统说明</a></td>
-          <td><a href="#">领悟科技公司介绍</a></td>
-          <td><a href="#">领悟精致生活俱乐部</a></td>
-        </tr>
-      </table>
-    </div>
-  </div>
   <div class="clear"></div>
-</div>
-<div class="footer">
-  <div class="footer_nav">领悟科技旗下：电影售票系统&nbsp;&nbsp;&nbsp;&nbsp; <a href="#">热门影片</a> | <a href="#">正在热映</a> | <a href="#">即将上映</a> | <a href="#">经典回味</a> | <a href="#">全球首映</a> | <a href="#">热门活动</a> | <a href="#">优惠专区</a> | <a href="#">放映时刻表</a> | <a href="#">公司新闻</a> | <a href="#">领悟科技</a> </div>
-  <p>您是305818 位访客  欢迎您的光临！<br />
-    海南领悟科技 版权所有 豫ICP备01025000148号 <br />
-    广告部：0371-6699999 / 668888 业务部：0371-6677777 / 66555577 / 66665555 / 155998899  </p>
 </div>
 </body>
 </html>

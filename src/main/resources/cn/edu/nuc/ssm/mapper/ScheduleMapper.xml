@@ -66,9 +66,8 @@
     limit #{start},#{offset}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from schedule
+    select s.*,m.*,h.*
+    from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
     where scheduleId = #{scheduleid,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >

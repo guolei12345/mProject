@@ -1,5 +1,8 @@
 package cn.edu.nuc.ssm.entity.movie;
 
+import cn.edu.nuc.ssm.enums.MovieShowPath;
+import cn.edu.nuc.ssm.util.StringUtil;
+
 public class Type {
     private String typeid;
 
@@ -36,7 +39,11 @@ public class Type {
     }
 
     public void setColum1(String colum1) {
-        this.colum1 = colum1 == null ? null : colum1.trim();
+        if(StringUtil.isNotEmpty(colum1)&&!StringUtil.isNum(colum1)){
+            this.colum1 = String.valueOf(MovieShowPath.getMovieShowPathCode(colum1));
+        }else {
+            this.colum1 = colum1 == null ? null : colum1.trim();
+        }
     }
 
     public String getColum2() {

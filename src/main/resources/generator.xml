@@ -4,9 +4,9 @@
     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
 	<!--
-	
+
 		java -jar mybatis-generator-core-1.3.2.jar -configfile generator.xml -overwrite
-	
+
 	-->
 
     <!-- 数据库驱动包位置 E:/Study/Maven/repository/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar-->
@@ -24,7 +24,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
         <!-- 生成实体类的包名和位置，这里配置将生成的实体类放在me.gacl.domain这个包下 springmvc_spring_mybatis-->
-        <javaModelGenerator targetPackage="cn.edu.nuc.ssm.entity" targetProject="E:\gitProject\mProject\src\main\java">
+        <javaModelGenerator targetPackage="cn.edu.nuc.ssm.entity.movie" targetProject="E:\gitProject\mProject\src\main\java">
             <property name="enableSubPackages" value="true" />
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
@@ -33,7 +33,7 @@
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置，这里配置将生成的dao类放在me.gacl.dao这个包下 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.nuc.ssm.dao" targetProject="E:\gitProject\mProject\src\main\resources">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.edu.nuc.ssm.mapper" targetProject="E:\gitProject\mProject\src\main\resources">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
         <!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
@@ -51,6 +51,7 @@
         <!--<table tableName="schedule" domainObjectName="Schedule" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
         <!--<table tableName="seat" domainObjectName="Seat" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
         <!--<table tableName="type" domainObjectName="Type" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
-        <table tableName="userSchedule" domainObjectName="UserSchedule" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+        <!--<table tableName="advise" domainObjectName="Advise" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />-->
+        <!--<table tableName="advise"/>-->
     </context>
 </generatorConfiguration>

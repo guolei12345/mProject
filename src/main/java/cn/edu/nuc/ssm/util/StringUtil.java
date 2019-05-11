@@ -87,4 +87,20 @@ public class StringUtil {
         }
         return maxType;
     }
+
+    /**
+     * 判断字符串是否是数字
+     * @param str
+     * @return
+     */
+    public static boolean isNum(String str) {
+        try{
+            Integer.parseInt(str);
+            return true;
+        }catch(NumberFormatException e)
+        {
+             System.out.println("异常：\"" + str + "\"不是数字/整数...");
+             return false;
+        }
+    }
 }

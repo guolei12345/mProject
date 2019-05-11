@@ -4,6 +4,7 @@ import cn.edu.nuc.ssm.controller.BaseController;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Hall;
 import cn.edu.nuc.ssm.entity.movie.Type;
+import cn.edu.nuc.ssm.enums.MovieShowPath;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,7 @@ public class TypeController extends BaseController {
     @RequestMapping(value = "/add",method = RequestMethod.GET)
     public String getAdd(Model model){
         logger.info("to get add");
+        model.addAttribute("movieShowPath", MovieShowPath.values());
         return "/type/add";
     }
 

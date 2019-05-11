@@ -50,12 +50,29 @@ public class MovieController extends BaseController {
     @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String getindex(HttpSession session,Model model){
         logger.info("to get index");
-        //首页轮播图
-        List<Movie> movieListLB = movieService.selectMovieByType("1000002075930476");
-//        User user = (User)session.getAttribute("user");
-//        List<UserSchedule> userScheduleList = userScheduleService.selectMovieOrderByUser(user);
-        model.addAttribute("movieListLB",movieListLB);
+        List<Type> typeList = typeService.selectAllType();
+        List<Movie> movieList = new ArrayList<>();
+        for(Type type : typeList){
+            movieList = movieService.selectMovieByType(type.getTypeid());
+            model.addAttribute(type.getColum2(),movieList);
+        }
         return "/movie/index";
+    }
+    @RequestMapping(value = "/selectSet",method = RequestMethod.GET)
+    public String selectSet(String scheduleid,HttpSession session,Model model){
+        logger.info("to get selectSet");
+        Schedule schedule = scheduleService.selectByPrimaryKey(scheduleid);
+        model.addAttribute("schedule",schedule);
+        return "/movie/selectSet";
+    }
+    @RequestMapping(value = "/videoInfo",method = RequestMethod.GET)
+    public String videoInfo(String movieid,HttpSession session,Model model){
+        logger.info("to get videoInfo");
+        Movie movie = movieService.selectByPrimaryKey(movieid);
+        List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
+        model.addAttribute("scheduleList",scheduleList);
+        model.addAttribute("movie",movie);
+        return "/movie/videoInfo";
     }
     /**
      * 电影票信息查询

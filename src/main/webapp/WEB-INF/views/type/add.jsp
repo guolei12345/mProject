@@ -19,6 +19,16 @@
                             <input type="text" id="typename" name="typename"  class="col-xs-10 col-sm-5" />
                         </div>
                     </div>
+                    <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right" for="colum1">展示地址</label>
+                        <div class="col-sm-9">
+                            <select class="col-xs-10 col-sm-5" name="colum1" id="colum1">
+                                <c:forEach items="${movieShowPath}" var="type">
+                                    <option value="${type.name()}">${type.name()}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group center">
                         <button class="btn btn-info" type="submit">
                             <i class="icon-ok bigger-110"></i>
