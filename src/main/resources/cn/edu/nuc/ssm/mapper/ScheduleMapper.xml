@@ -7,8 +7,8 @@
     <result column="hallId" property="hallid" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="VARCHAR" />
     <result column="time" property="time" jdbcType="VARCHAR" />
-    <result column="colum1" property="colum1" jdbcType="VARCHAR" />
-    <result column="colum2" property="colum2" jdbcType="VARCHAR" />
+    <result column="scolum1" property="colum1" jdbcType="VARCHAR" />
+    <result column="scolum2" property="colum2" jdbcType="VARCHAR" />
     <result column="colum3" property="colum3" jdbcType="VARCHAR" />
     <result column="colum4" property="colum4" jdbcType="VARCHAR" />
     <result column="colum5" property="colum5" jdbcType="VARCHAR" />
@@ -52,6 +52,11 @@
     select
     count(scheduleId)
     from schedule
+  </select>
+  <select id="selectScheduleByDate" resultMap="BaseResultMap">
+    select s.*,m.*,h.*
+    from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
+    where s.time = #{date}
   </select>
   <!--查询电影的排片信息-->
   <select id="selectScheduleByMovieId" resultMap="BaseResultMap">

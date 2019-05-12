@@ -6,10 +6,7 @@ import cn.edu.nuc.ssm.entity.movie.*;
 import cn.edu.nuc.ssm.entity.power.User;
 import cn.edu.nuc.ssm.service.interfaces.movie.*;
 import cn.edu.nuc.ssm.service.interfaces.util.FileService;
-import cn.edu.nuc.ssm.util.PropertyUtil;
-import cn.edu.nuc.ssm.util.RedisUtil;
-import cn.edu.nuc.ssm.util.StringUtil;
-import cn.edu.nuc.ssm.util.VerifyUtil;
+import cn.edu.nuc.ssm.util.*;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -27,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -56,12 +54,23 @@ public class MovieController extends BaseController {
             movieList = movieService.selectMovieByType(type.getTypeid());
             model.addAttribute(type.getColum2(),movieList);
         }
+        //今日热播
+        String date = StringUtil.getTodayDate();
+        List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
+        List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
+        model.addAttribute("movieList",movieLists);
+        model.addAttribute("scheduleListJR",scheduleListJR);
         return "/movie/index";
     }
     @RequestMapping(value = "/selectSet",method = RequestMethod.GET)
     public String selectSet(String scheduleid,HttpSession session,Model model){
         logger.info("to get selectSet");
         Schedule schedule = scheduleService.selectByPrimaryKey(scheduleid);
+        //今日热播
+        String date = StringUtil.getTodayDate();
+        List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
+        List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
+        model.addAttribute("movieList",movieLists);
         model.addAttribute("schedule",schedule);
         return "/movie/selectSet";
     }
@@ -70,6 +79,11 @@ public class MovieController extends BaseController {
         logger.info("to get videoInfo");
         Movie movie = movieService.selectByPrimaryKey(movieid);
         List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
+        //今日热播
+        String date = StringUtil.getTodayDate();
+        List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
+        List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
+        model.addAttribute("movieList",movieLists);
         model.addAttribute("scheduleList",scheduleList);
         model.addAttribute("movie",movie);
         return "/movie/videoInfo";
@@ -266,6 +280,20 @@ public class MovieController extends BaseController {
     @RequestMapping(value = "/getPic",method = RequestMethod.GET)
     public void getVerify(String path,HttpSession session, HttpServletResponse response) throws Exception {
         logger.info("to getPic");
+        //获取验证码接口
+        validateCodeService.outPutToClient(path,response);
+    }
+    /**
+     * 获取图片并输出到界面
+     * @param session
+     * @param response
+     * @throws Exception
+     */
+    @RequestMapping(value = "/getPicById",method = RequestMethod.GET)
+    public void getPicById(String picId,HttpSession session, HttpServletResponse response) throws Exception {
+        logger.info("to getPicById");
+        Pic pic = picService.selectByPrimaryKey(picId);
+        String path = pic.getPicurl();
         //获取验证码接口
         validateCodeService.outPutToClient(path,response);
     }

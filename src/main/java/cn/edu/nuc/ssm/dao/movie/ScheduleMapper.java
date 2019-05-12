@@ -24,4 +24,6 @@ public interface ScheduleMapper {
     List<Schedule> selectScheduleByKey(@Param(value = "start")int start, @Param(value = "offset")int offset);
 
     List<Schedule> selectScheduleByMovieId(@Param(value = "movieid")String movieid);
+
+    List<Schedule> selectScheduleByDate(@Param(value = "date")String date);
 }

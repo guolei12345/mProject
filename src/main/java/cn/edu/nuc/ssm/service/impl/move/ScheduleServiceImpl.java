@@ -78,4 +78,11 @@ public class ScheduleServiceImpl implements ScheduleService {
         scheduleMapper.updateByPrimaryKeySelective(schedule);
         return schedule;
     }
+
+    @Override
+    public List<Schedule> selectScheduleByDate(String date) {
+        return scheduleMapper.selectScheduleByDate(date);
+    }
+
+
 }

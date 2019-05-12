@@ -1,5 +1,7 @@
 package cn.edu.nuc.ssm.entity.movie;
 
+import java.util.Objects;
+
 public class Movie {
     private String moveid;
 
@@ -189,5 +191,18 @@ public class Movie {
 
     public void setColum5(String colum5) {
         this.colum5 = colum5 == null ? null : colum5.trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Movie movie = (Movie) o;
+        return moveid.equals(movie.moveid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(moveid);
     }
 }

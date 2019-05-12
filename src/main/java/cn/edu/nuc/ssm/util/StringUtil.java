@@ -62,6 +62,12 @@ public class StringUtil {
         }
         return date;
     }
+    public static String getTodayDate(){
+        String result1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        System.out.println("10位数的时间戳（秒）--->Date:" + result1);
+        result1 = result1.substring(0,10);
+        return result1;
+    }
 
     public static String removeStr(String col, String setnum) {
         String colum = col.replaceFirst("-"+setnum,"");

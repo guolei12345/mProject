@@ -36,89 +36,26 @@
 <div class="contenter">
   <div class="left">
     <div class="right_4">
-      <h2><span><a href="#"> 更多影片 </a></span>正在上映推荐 </h2>
+      <h2>正在上映推荐 </h2>
       <div class="inner022">
         <table width="100%" cellspacing="0" cellpadding="0" border="0">
           <tbody>
+          <c:forEach items="${movieList}" var="movie">
             <tr>
-              <td width="140" height="135" align="center"><a href="#"><img width="120" height="100" src="/assets/movie/images/index_r_03_seo.gif"></a></td>
-              <td><a href="#">超凡蜘蛛侠</a>
-                <p>主演:成龙、谢霆锋</p></td>
+              <td height="135" align="center" width="140"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
+              <td><a href="#">${movie.movename}</a><p>导演:${movie.actor}</p></td>
             </tr>
-            <tr>
-              <td width="140" height="135" align="center"><a href="#"><img width="120" height="100" src="/assets/movie/images/index_r_03_seo2.gif"></a></td>
-              <td><a href="#">复仇者联盟</a>
-                <p>主演:周星驰、梁朝伟</p></td>
-            </tr>
-            <tr>
-              <td width="140" height="135" align="center"><a href="#"><img width="120" height="100" src="/assets/movie/images/index_r_03_seo3.gif"></a></td>
-              <td><a href="#">枕边凶灵</a>
-                <p>主演:安德鲁·加菲尔德</p></td>
-            </tr>
-            <tr>
-              <td width="140" height="135" align="center"><a href="#"><img width="120" height="100" src="/assets/movie/images/index_r_03_seo4.gif"></a></td>
-              <td><a href="#">疯魔美女2</a>
-                <p>主演:张静初·李冰冰</p></td>
-            </tr>
+          </c:forEach>
           </tbody>
         </table>
       </div>
     </div>
     <div class="ad01"></div>
-    <div class="left_2 top20px">
-      <h2>公司新闻</h2>
-      <div class="left_2_con">
-        <ul class="sub_list">
-          <li><a href="#">领悟科技、悟科技有限公司</a></li>
-          <li><a href="#">河南郑州市金水区活动... </a></li>
-          <li><a href="#">2010-10-30河南... </a></li>
-          <li><a href="#">郑州金城国际广场.研讨会成功... </a></li>
-          <li><a href="#"> 10年11月29日领悟科技... </a></li>
-        </ul>
-      </div>
-    </div>
   </div>
   <div class="right">
-    <div class="pbanner"><script language='javascript'>
-				linkarr = new Array();
-				picarr = new Array();
-				textarr = new Array();
-				var swf_width=728;
-				var swf_height=190;
-				var files = "";
-				var links = "";
-				var texts = "";
-				
-				//这里设置调用标记
-				linkarr[1] = "http://www.baidu.com";
-				picarr[1]  = "/assets/movie/images/b02.jpg";
-				textarr[1] = "";
-				linkarr[2] = "http://www.baidu.com";
-				picarr[2]  = "/assets/movie/images/b01.jpg";
-				textarr[2] = "";
-					linkarr[3] = "http://www.baidu.com";
-				picarr[3]  = "/assets/movie/images/b03.jpg";
-				textarr[3] = "";
-			
-				
-				for(i=1;i<picarr.length;i++){
-				  if(files=="") files = picarr[i];
-				  else files += "|"+picarr[i];
-				}
-				for(i=1;i<linkarr.length;i++){
-				  if(links=="") links = linkarr[i];
-				  else links += "|"+linkarr[i];
-				}
-				for(i=1;i<textarr.length;i++){
-				  if(texts=="") texts = textarr[i];
-				  else texts += "|"+textarr[i];
-				}
-				document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ swf_width +'" height="'+ swf_height +'">');
-				document.write('<param name="movie" value="/assets/movie/images/bcastr3.swf"><param name="quality" value="high">');
-				document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
-				document.write('<param name="FlashVars" value="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'">');
-				document.write('<embed src="/assets/movie/images/bcastr3.swf" wmode="opaque" FlashVars="bcastr_file='+files+'&bcastr_link='+links+'&bcastr_title='+texts+'& menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />'); document.write('</object>'); 
-				</script></div>
+    <div class="pbanner">
+      <img src="/movie/getPicById?picId=${schedule.movie.picid}" width="1100" height="180"/>
+    </div>
     <div class="right_con">
       <div class="curry">当前位置：<a href="#">电影</a>&nbsp;&nbsp;--&nbsp;&nbsp;<a href="#">蝙蝠侠前传3</a> &nbsp;&nbsp;--&nbsp;&nbsp;确认订购</div>
       <div class="right_content">
@@ -131,12 +68,6 @@
             <p><span>选择影厅：</span>${schedule.hall.hallheats}</p>
             <p><span>电影版本：</span>3D</p>
             <p><span>单张票价：</span>${schedule.price}元</p>
-            <%--<p><span>订购张数：</span><select name="" class="xz">--%>
-              <%--<option selected="selected">订购1张</option>--%>
-              <%--<option>订购2张</option>--%>
-              <%--<option>订购3张</option>--%>
-              <%--<option>订购4张</option>--%>
-            <%--</select></p>--%>
             <p><span>选择座位：</span>
               <select name="setNum" id="setNum" class="xz">
                 <c:forEach items="${schedule.hallSetList}" var="hallSet">

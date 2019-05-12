@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <link href="/assets/movie/css/bootstrap.min.css" rel="stylesheet" />
+  <%--<link href="/assets/movie/css/bootstrap.min.css" rel="stylesheet" />--%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>电影售票系统-首页</title>
 <link href="/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
@@ -55,11 +55,6 @@ window.onload = function(){
 <div class="header">
   <div class="top_img">
     <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
-    <%--<div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>--%>
-    <div class="top_nav">
-      <p><a href="#"> 快速订票系统入口</a> </p>
-      <p><a href="#"> 最新优惠活动中心</a></p>
-    </div>
     <div class="clear"></div>
   </div>
   <div class="menu">
@@ -126,21 +121,17 @@ window.onload = function(){
           </div>
         </div>
         <div class="left_1_r">
-          <h3>即将播出影片</h3>
+          <h3>热映大片</h3>
           <dl>
-            <dt><a href="#"><img src="/assets/movie/images/newspic.jpg" width="80" height="65" /></a></dt>
-            <dd><strong>杀人犯杀人游戏</strong> <br />
-              <a href="#">《怒火攻心》不演斯巴达勇士，演绎真人模拟游戏，够血腥够刺激！…</a></dd>
+            <dt><a href="/movie/videoInfo?movieid=${syzklbt[0].moveid}"><img src="/movie/getPic?path=${syzklbt[0].pic.picurl}" width="80" height="65" /></a></dt>
+            <dd><strong>${syzklbt[0].movename}</strong> <br />
+              <a href="/movie/videoInfo?movieid=${syzklbt[0].moveid}">${syzklbt[0].director}</a></dd>
           </dl>
           <div class="clear"></div>
           <ul>
-            <li><a href="#"><span>7月13日首播</span>炫舞天鹅 </a></li>
-            <li><a href="#"><span>8月30日首播</span>蝙蝠侠前传3:黑暗 </a></li>
-            <li><a href="#"><span>7月3日首播</span>灵魂战车2 </a></li>
-            <li><a href="#"><span>7月10日首播</span>非常小特工之时间大盗 </a></li>
-            <li><a href="#"><span>7月13日首播</span>炫舞天鹅 </a></li>
-            <li><a href="#"><span>8月30日首播</span>蝙蝠侠前传3:黑暗 </a></li>
-            <li><a href="#"><span>7月3日首播</span>灵魂战车2 </a></li>
+            <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
+            <li><a href="/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.movename}</span>${movie.language} </a></li>
+            </c:forEach>
           </ul>
         </div>
         <div class="clear"></div>
@@ -149,94 +140,17 @@ window.onload = function(){
     <div class="left_4 top10px" style="height:auto;">
       <h2><a href="#">正在热播电影</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验 </span></h2>
       <div class="inner">
+        <c:forEach items="${syxklbt}" var="movie">
         <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">大武当之天地密码 </a>
-            <p style="font-weight:bold;">07月12日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
+          <dt><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
+          <dd><a href="/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a>
+            <p style="font-weight:bold;">${movie.date}</p>
+            <p>${movie.director}</p>
+            <p>导演：${movie.actor}</p>
+            <p><a href="/movie/videoInfo?movieid=${movie.moveid}"><input type="button" class="dgbg02" value="特惠购票" /></a></p>
           </dd>
         </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al4.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">色熊称霸舞男争雄 </a>
-            <p style="font-weight:bold;">07月12日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">大武当之天地密码 </a>
-            <p style="font-weight:bold;">07月15日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">十二生肖：成龙秀特技 </a>
-            <p style="font-weight:bold;">07月12日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：成龙 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">狂暴飞车3D </a>
-            <p style="font-weight:bold;">08月09日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">吴彦祖限制级影片 </a>
-            <p style="font-weight:bold;">07月19日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al4.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">周星驰精彩剪辑 </a>
-            <p style="font-weight:bold;">07月25日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
-        <dl class="anli_list">
-          <dt><a href="#"><img src="/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
-          <dd><a href="#">大武当之天地密码 </a>
-            <p style="font-weight:bold;">07月12日</p>
-            <p>杨幂赵文卓展夺宝情缘</p>
-            <p>主演：杨幂 赵文卓 樊 ...</p>
-            <p>
-              <input name="" type="button" class="dgbg02" value="特惠购票" />
-            </p>
-          </dd>
-        </dl>
+        </c:forEach>
         <div class="clear"></div>
       </div>
     </div>
@@ -309,39 +223,16 @@ window.onload = function(){
   </div>
   <div class="right">
     <div class="right_1">
-      <h2><span style="color:#000; font-size:14px;">7月18日</span>今日快速订票 </h2>
+      <h2>今日快速订票 </h2>
       <div class="inner02">
-        <dl style="border-bottom:0px #fff solid;">
-          <dt><img src="/assets/movie/images/fa1.gif" width="56" height="45" /></dt>
-          <dd style=" padding-top:10px;">
-            <select name="">
-              <option selected="selected">郑州电影院</option>
-              <option>郑州电影院</option>
-              <option>郑州电影院</option>
-            </select>
-          </dd>
-          <div class="clear"></div>
-        </dl>
         <dl style="border-bottom:0px #fff solid;">
           <dt><img src="/assets/movie/images/fa2.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
-            <select name="">
+            <select name="movieId" id="movieId">
               <option selected="selected">影片搜索</option>
-              <option>蝙蝠侠前传</option>
-              <option>淘金连环计</option>
-              <option>流离失所2</option>
-            </select>
-          </dd>
-          <div class="clear"></div>
-        </dl>
-        <dl  style="border-bottom:0px #fff solid;">
-          <dt><img src="/assets/movie/images/fa3.gif" width="56" height="45" /></dt>
-          <dd style=" padding-top:10px;">
-            <select name="">
-              <option selected="selected">请选择场次</option>
-              <option>166(2号厅)</option>
-              <option>168(3号厅)</option>
-              <option>188(4号厅)</option>
+              <c:forEach items="${movieList}" var="movie">
+                <option value="${movie.moveid}">${movie.movename}</option>
+              </c:forEach>
             </select>
           </dd>
           <div class="clear"></div>
@@ -349,7 +240,7 @@ window.onload = function(){
         <dl>
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
-            <input name="" type="button" class="dgbg" value="立即订购" />
+            <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('/movie/videoInfo?movieid=','movieId')" />
           </dd>
           <div class="clear"></div>
         </dl>
@@ -361,15 +252,9 @@ window.onload = function(){
       <h2>热门影片榜 </h2>
       <div class="inner02">
         <ul class="server_list">
-          <li><a href="#"><span>19888</span>白雪公主与猎人</a></li>
-          <li><a href="#"><span>18667</span>三个火枪手</a></li>
-          <li><a href="#"><span>17558</span>王者之剑</a></li>
-          <li><a href="#"><span>17452</span>南极大冒险</a></li>
-          <li><a href="#"><span>9955</span>肖申克的救赎</a></li>
-          <li><a href="#"><span>9858</span>无法触碰</a></li>
-          <li><a href="#"><span>7522</span>忠犬八公的故事</a></li>
-          <li><a href="#"><span>5200</span>惊悚快感</a></li>
-          <li><a href="#"><span>2777</span>气场大比拼</a></li>
+          <c:forEach items="${syxklbt}" var="movie">
+            <li><a href="/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.language}</span>${movie.movename}</a></li>
+          </c:forEach>
         </ul>
       </div>
     </div>
@@ -377,22 +262,12 @@ window.onload = function(){
       <h2><span><a href="#"> 更多影片 </a></span>今日上映推荐 </h2>
       <div class="inner022">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <c:forEach items="${movieList}" var="movie">
           <tr>
-            <td height="135" align="center" width="140"><a href="#"><img src="/assets/movie/images/index_r_03_seo.gif" width="120" height="100" /></a></td>
-            <td><a href="#">超凡蜘蛛侠</a><p>主演:成龙、谢霆锋</p></td>
+            <td height="135" align="center" width="140"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
+            <td><a href="#">${movie.movename}</a><p>导演:${movie.actor}</p></td>
           </tr>
-          <tr>
-            <td height="135" align="center" width="140"><a href="#"><img src="/assets/movie/images/index_r_03_seo2.gif" width="120" height="100" /></a></td>
-            <td><a href="#">复仇者联盟</a><p>主演:周星驰、梁朝伟</p></td>
-          </tr>
-          <tr>
-            <td height="135" align="center" width="140"><a href="#"><img src="/assets/movie/images/index_r_03_seo3.gif" width="120" height="100" /></a></td>
-            <td><a href="#">枕边凶灵</a><p>主演:安德鲁·加菲尔德</p></td>
-          </tr>
-          <tr>
-            <td height="135" align="center" width="140"><a href="#"><img src="/assets/movie/images/index_r_03_seo4.gif" width="120" height="100" /></a></td>
-            <td><a href="#">疯魔美女2</a><p>主演:张静初·李冰冰</p></td>
-          </tr>
+          </c:forEach>
         </table>
       </div>
     </div>
@@ -401,4 +276,11 @@ window.onload = function(){
   <div class="clear"></div>
 </div>
 </body>
+<script type="text/javascript">
+  function subOrderKs(url,id){
+    var id = $("#"+id).val();
+    var urls = url+id;
+    window.location.href=urls;
+  }
+</script>
 </html>

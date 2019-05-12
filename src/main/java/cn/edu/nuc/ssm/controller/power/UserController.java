@@ -3,6 +3,7 @@ package cn.edu.nuc.ssm.controller.power;
 import cn.edu.nuc.ssm.controller.BaseController;
 import cn.edu.nuc.ssm.entity.PageInfo;
 import cn.edu.nuc.ssm.entity.movie.Movie;
+import cn.edu.nuc.ssm.entity.movie.Schedule;
 import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.entity.power.Role;
 import cn.edu.nuc.ssm.entity.power.User;
@@ -10,15 +11,13 @@ import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
 import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
+import cn.edu.nuc.ssm.service.interfaces.movie.ScheduleService;
 import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import cn.edu.nuc.ssm.service.interfaces.power.PowerService;
 import cn.edu.nuc.ssm.service.interfaces.power.RoleService;
 import cn.edu.nuc.ssm.service.interfaces.power.UserRoleService;
 import cn.edu.nuc.ssm.service.interfaces.power.UserService;
-import cn.edu.nuc.ssm.util.PropertyUtil;
-import cn.edu.nuc.ssm.util.RedisUtil;
-import cn.edu.nuc.ssm.util.StringUtil;
-import cn.edu.nuc.ssm.util.VerifyUtil;
+import cn.edu.nuc.ssm.util.*;
 import cn.edu.nuc.ssm.webService.util.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +49,8 @@ public class UserController extends BaseController {
     private MovieService movieService;
     @Autowired
     private TypeService typeService;
+    @Autowired
+    private ScheduleService scheduleService;
     /**
      * 请求登陆页面
      * @return
@@ -113,6 +114,12 @@ public class UserController extends BaseController {
             movieList = movieService.selectMovieByType(type.getTypeid());
             model.addAttribute(type.getColum2(),movieList);
         }
+        //今日热播
+        String date = StringUtil.getTodayDate();
+        List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
+        List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
+        model.addAttribute("movieList",movieLists);
+        model.addAttribute("scheduleListJR",scheduleListJR);
         return "/movie/index";
     }
     /**

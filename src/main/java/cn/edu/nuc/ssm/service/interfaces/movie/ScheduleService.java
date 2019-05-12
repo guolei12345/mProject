@@ -26,4 +26,6 @@ public interface ScheduleService {
     List<Schedule> selectScheduleByMovieId(String movieid);
 
     Schedule SubOrder(String scheduleid, String setNum);
+
+    List<Schedule> selectScheduleByDate(String date);
 }
