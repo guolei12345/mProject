@@ -44,10 +44,15 @@
                         <c:forEach items="${userScheduleList}" var="userSchedule" varStatus="idx">
                         <tr>
                             <th class="center">
-                                <label>
-                                    <input type="checkbox" name="onlyOne" id="${userSchedule.id}" onclick="orderCheck(this)" class="ace onlyOne" />
-                                    <span class="lbl"></span>
-                                </label>
+                                <c:if test="${userSchedule.colum1=='1'}">
+
+                                </c:if>
+                                <c:if test="${userSchedule.colum1!='1'}">
+                                    <label>
+                                        <input type="checkbox" name="onlyOne" id="${userSchedule.id}" onclick="orderCheck(this)" class="ace onlyOne" />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </c:if>
                             </th>
                             <th class="center">${userSchedule.id}</th>
                             <th>${userSchedule.movie.movename}</th>
