@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <link href="/assets/ace//assets/movie/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/movie/css/bootstrap.min.css" rel="stylesheet" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>电影售票系统-首页</title>
 <link href="/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
@@ -46,7 +46,7 @@ scrollDoor.prototype = {
 }
 window.onload = function(){
 	var SDmodel = new scrollDoor();
-	SDmodel.sd(["m01","m02","m03","m04"],["c01","c02","c03","c04"],"sd01","sd02");
+	SDmodel.sd(["m01","m02","m03"],["c01","c02","c03"],"sd01","sd02");
 
 }
 </script>

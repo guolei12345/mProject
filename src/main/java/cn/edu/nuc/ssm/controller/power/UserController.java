@@ -2,11 +2,15 @@ package cn.edu.nuc.ssm.controller.power;
 
 import cn.edu.nuc.ssm.controller.BaseController;
 import cn.edu.nuc.ssm.entity.PageInfo;
+import cn.edu.nuc.ssm.entity.movie.Movie;
+import cn.edu.nuc.ssm.entity.movie.Type;
 import cn.edu.nuc.ssm.entity.power.Role;
 import cn.edu.nuc.ssm.entity.power.User;
 import cn.edu.nuc.ssm.enums.LoginCodeEnum;
 import cn.edu.nuc.ssm.enums.RegistCodeEnum;
 import cn.edu.nuc.ssm.enums.UpdatePassCodeEnum;
+import cn.edu.nuc.ssm.service.interfaces.movie.MovieService;
+import cn.edu.nuc.ssm.service.interfaces.movie.TypeService;
 import cn.edu.nuc.ssm.service.interfaces.power.PowerService;
 import cn.edu.nuc.ssm.service.interfaces.power.RoleService;
 import cn.edu.nuc.ssm.service.interfaces.power.UserRoleService;
@@ -26,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -41,6 +46,10 @@ public class UserController extends BaseController {
     private UserRoleService userRoleService;
     @Autowired
     private PowerService powerService;
+    @Autowired
+    private MovieService movieService;
+    @Autowired
+    private TypeService typeService;
     /**
      * 请求登陆页面
      * @return
@@ -86,19 +95,32 @@ public class UserController extends BaseController {
         model.addAttribute("msg",msg);
         logger.info(msg);
         if(rtn == LoginCodeEnum.getLoginCode(LoginCodeEnum.登陆成功.toString())){
-            resetUser(user,session,model);
-            return "/index";
+            user = resetUser(user,session,model);
+            if("333".equals(user.getRoleid())){
+                return getindex(model);
+            }else{
+                return "/index";
+            }
         }else{
             return "/user/login";
         }
     }
-
+    public String getindex(Model model){
+        logger.info("to get index");
+        List<Type> typeList = typeService.selectAllType();
+        List<Movie> movieList = new ArrayList<>();
+        for(Type type : typeList){
+            movieList = movieService.selectMovieByType(type.getTypeid());
+            model.addAttribute(type.getColum2(),movieList);
+        }
+        return "/movie/index";
+    }
     /**
      * 重置 user信息
      * @param userInfo
      * @param session
      */
-    private void resetUser(User userInfo, HttpSession session, Model model) {
+    private User resetUser(User userInfo, HttpSession session, Model model) {
         User user = userService.selectByUser(userInfo);
         if(StringUtil.isNotEmpty(user.getRoleid())){
             Role role = roleService.selectByPrimaryKey(user.getRoleid());
@@ -108,6 +130,7 @@ public class UserController extends BaseController {
         session.removeAttribute("user");
         session.setAttribute("user",user);
         model.addAttribute("user",user);
+        return user;
     }
 
     /**
@@ -280,7 +303,7 @@ public class UserController extends BaseController {
         String msg = "";
         int rtn = userService.updateByPrimaryKeySelective(user);
         if(rtn == 1){
-            resetUser(user,session,model);
+            user = resetUser(user,session,model);
             msg = "完善信息成功";
         }else {
             msg = "完善信息失败";

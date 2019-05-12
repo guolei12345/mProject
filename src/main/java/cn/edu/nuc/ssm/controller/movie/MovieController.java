@@ -48,7 +48,7 @@ public class MovieController extends BaseController {
     @Autowired
     private UserScheduleService userScheduleService;
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String getindex(HttpSession session,Model model){
+    public String getindex(Model model){
         logger.info("to get index");
         List<Type> typeList = typeService.selectAllType();
         List<Movie> movieList = new ArrayList<>();
