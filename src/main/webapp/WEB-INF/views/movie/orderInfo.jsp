@@ -70,7 +70,7 @@
                             </th>
                             <th>
                                 <c:if test="${userSchedule.colum1!='1'}">
-                                    <a class="red" href="#" onclick="option('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
+                                    <a class="red" href="#" onclick="deleteOrder('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
                                 </c:if>
@@ -125,7 +125,6 @@
 <script src="/assets/ace/js/ace.min.js"></script>
 <script type="text/javascript">
     function orderCheck(date) {
-        debugger;
         //选中所有
         if(date.id=='checkAll'){
             var checkedList = $(".onlyOne");
@@ -199,6 +198,18 @@
                 location.reload()
             }
         });
+    }
+    function deleteOrder(url,name,value){
+        var urls = url+"?"+name+"="+value;
+        $.ajax({
+            type:"get",
+            url:urls,
+            //data:JSON.stringify(data1),
+            contentType:"application/json;charset=utf-8",
+            success:function(){
+                location.reload()
+            }
+        })
     }
 </script>
 </body>

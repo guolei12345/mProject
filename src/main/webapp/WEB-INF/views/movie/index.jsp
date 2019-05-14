@@ -74,11 +74,15 @@ window.onload = function(){
 <div class="banner">
   <div id="YFocus">
     <div id="YImage">
-      <p id="YPhotos"> <a href="#" title="11"><img src="/assets/movie/images/b5.jpg" alt="11" /></a> <a href="#" title="11"><img src="/assets/movie/images/b1.jpg" alt="111" /></a> <a href="#" title="11"><img src="/assets/movie/images/b3.jpg" alt="22" /></a> <a href="#" title="1"><img src="/assets/movie/images/b4.jpg" alt="22" /></a> </p>
+      <p id="YPhotos">
+          <c:forEach items="${sydklbt}" var="movie">
+          <a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
+              </c:forEach>
+      </p>
     </div>
     <p id="YSamples">
         <c:forEach items="${sydklbt}" var="movie">
-            <a href="#1" class="current" title="2"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
+            <a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
         </c:forEach>
         <%--<a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
   </div>
