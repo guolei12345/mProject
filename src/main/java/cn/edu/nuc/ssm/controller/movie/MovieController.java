@@ -46,7 +46,7 @@ public class MovieController extends BaseController {
     @Autowired
     private UserScheduleService userScheduleService;
     @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String getindex(Model model){
+    public String getindex(Model model,String url){
         logger.info("to get index");
         List<Type> typeList = typeService.selectAllType();
         List<Movie> movieList = new ArrayList<>();
@@ -59,8 +59,13 @@ public class MovieController extends BaseController {
         List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
         List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
         model.addAttribute("movieList",movieLists);
+        model.addAttribute("typeList",typeList);
         model.addAttribute("scheduleListJR",scheduleListJR);
-        return "/movie/index";
+        String returnUrl = "/movie/index";
+        if(StringUtil.isNotEmpty(url)){
+            returnUrl = "/movie/"+url;
+        }
+        return returnUrl;
     }
     @RequestMapping(value = "/selectSet",method = RequestMethod.GET)
     public String selectSet(String scheduleid,HttpSession session,Model model){
@@ -132,6 +137,7 @@ public class MovieController extends BaseController {
         Schedule schedule = scheduleService.SubOrder(scheduleid,setNum);
         User user = (User)session.getAttribute("user");
         boolean flag = userScheduleService.saveUserOrder(scheduleid,setNum,user);
+        model.addAttribute("msg","选座成功，可到我的订单中查看");
         return getBuyMovieInfo(schedule.getMoveid(),model,session);
     }
 

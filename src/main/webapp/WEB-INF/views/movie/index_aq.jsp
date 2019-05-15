@@ -46,7 +46,7 @@ scrollDoor.prototype = {
 }
 window.onload = function(){
 	var SDmodel = new scrollDoor();
-	SDmodel.sd(["m01","m02","m03","m04"],["c01","c02","c03","c04"],"sd01","sd02");
+	SDmodel.sd(["m01","m02","m03"],["c01","c02","c03"],"sd01","sd02");
 
 }
 </script>
@@ -64,8 +64,8 @@ window.onload = function(){
       <li id="a3"><a href="/movie/index?url=index_dz">动作</a></li>
       <li id="a4"><a href="/movie/index?url=index_fz">犯罪</a></li>
       <li id="a5"><a href="/movie/index?url=index_gz">古装</a></li>
-      <li id="a6"><a href="/movie/index?url=index_xj">喜剧</a></li>
-      <li id="a7"><a href="/movie/index?url=index_jq">剧情</a></li>
+        <li id="a6"><a href="/movie/index?url=index_xj">喜剧</a></li>
+        <li id="a7"><a href="/movie/index?url=index_jq">剧情</a></li>
       <li id="a8"><a href="/movie/index?url=index_kh">科幻</a></li>
       <li id="a9"><a href="/movie/index?url=index_kb">恐怖</a></li>
     </ul>
@@ -142,9 +142,9 @@ window.onload = function(){
       </div>
     </div>
     <div class="left_4 top10px" style="height:auto;">
-      <h2><a href="#">正在热播电影</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验 </span></h2>
+      <h2><a href="#">爱情</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验 </span></h2>
       <div class="inner">
-        <c:forEach items="${syxklbt}" var="movie">
+        <c:forEach items="${aq}" var="movie">
         <dl class="anli_list">
           <dt><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
           <dd><a href="/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a>
@@ -234,7 +234,7 @@ window.onload = function(){
           <dd style=" padding-top:10px;">
             <select name="movieId" id="movieId">
               <option selected="selected">影片搜索</option>
-              <c:forEach items="${syxklbt}" var="movie">
+              <c:forEach items="${aq}" var="movie">
                 <option value="${movie.moveid}">${movie.movename}</option>
               </c:forEach>
             </select>
@@ -245,14 +245,6 @@ window.onload = function(){
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
             <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('/movie/videoInfo?movieid=','movieId')" />
-          </dd>
-
-          <div class="clear"></div>
-        </dl>
-        <dl>
-          <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
-          <dd style=" padding-top:10px;">
-            <input name="" type="button" class="dgbg" value="兴趣推荐" onclick="tuijian('/movie/movieTuijian')" />
           </dd>
           <div class="clear"></div>
         </dl>
@@ -293,9 +285,6 @@ window.onload = function(){
     var id = $("#"+id).val();
     var urls = url+id;
     window.location.href=urls;
-  }
-  function tuijian(url) {
-    location.href=url;
   }
 </script>
 </html>
