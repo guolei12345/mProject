@@ -142,7 +142,7 @@ window.onload = function(){
       </div>
     </div>
     <div class="left_4 top10px" style="height:auto;">
-      <h2><a href="#">喜剧</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验 </span></h2>
+      <h2><a href="#">喜剧</a><span> ---- 畅享影业帮助您快速购票、享受便捷网络购票体验 </span></h2>
       <div class="inner">
         <c:forEach items="${xj}" var="movie">
         <dl class="anli_list">
@@ -159,7 +159,7 @@ window.onload = function(){
       </div>
     </div>
     <div class="left_5">
-      <h2><a href="#">获奖影片展</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验</span></h2>
+      <h2><a href="#">获奖影片展</a><span> ---- 畅享影业帮助您快速购票、享受便捷网络购票体验</span></h2>
       <div class="inner">
         <div id="demo" style="overflow:hidden; width:100%; margin:0 auto;">
           <table border="0" align="center" cellpadding="5" cellspacing="0" cellspace="0" >
@@ -248,6 +248,13 @@ window.onload = function(){
           </dd>
           <div class="clear"></div>
         </dl>
+        <dl>
+          <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
+          <dd style=" padding-top:10px;">
+            <input name="" type="button" class="dgbg" value="兴趣推荐" onclick="tuijian('/movie/InterestTuijian')" />
+          </dd>
+          <div class="clear"></div>
+        </dl>
         <%--<div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>--%>
       </div>
     </div>
@@ -285,6 +292,9 @@ window.onload = function(){
     var id = $("#"+id).val();
     var urls = url+id;
     window.location.href=urls;
+  }
+  function tuijian(url) {
+    location.href=url;
   }
 </script>
 </html>

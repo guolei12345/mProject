@@ -142,9 +142,9 @@ window.onload = function(){
       </div>
     </div>
     <div class="left_4 top10px" style="height:auto;">
-      <h2><a href="#">爱情</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验 </span></h2>
+      <h2><a href="#">兴趣推荐</a><span> ---- 畅享影业帮助您快速购票、享受便捷网络购票体验 </span></h2>
       <div class="inner">
-        <c:forEach items="${aq}" var="movie">
+        <c:forEach items="${xqtj}" var="movie">
         <dl class="anli_list">
           <dt><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
           <dd><a href="/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a>
@@ -159,7 +159,7 @@ window.onload = function(){
       </div>
     </div>
     <div class="left_5">
-      <h2><a href="#">获奖影片展</a><span> ---- 付费通帮助您快速购票、享受便捷网络购票体验</span></h2>
+      <h2><a href="#">获奖影片展</a><span> ---- 畅享影业帮助您快速购票、享受便捷网络购票体验</span></h2>
       <div class="inner">
         <div id="demo" style="overflow:hidden; width:100%; margin:0 auto;">
           <table border="0" align="center" cellpadding="5" cellspacing="0" cellspace="0" >
@@ -234,7 +234,7 @@ window.onload = function(){
           <dd style=" padding-top:10px;">
             <select name="movieId" id="movieId">
               <option selected="selected">影片搜索</option>
-              <c:forEach items="${aq}" var="movie">
+              <c:forEach items="${xqtj}" var="movie">
                 <option value="${movie.moveid}">${movie.movename}</option>
               </c:forEach>
             </select>

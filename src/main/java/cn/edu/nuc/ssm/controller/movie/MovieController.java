@@ -84,6 +84,7 @@ public class MovieController extends BaseController {
         logger.info("to get videoInfo");
         Movie movie = movieService.selectByPrimaryKey(movieid);
         List<Schedule> scheduleList = scheduleService.selectScheduleByMovieId(movieid);
+        Map<String,Integer> typeNum = movieService.totalSearchMovieType(session,movie.getTypeid());
         //今日热播
         String date = StringUtil.getTodayDate();
         List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
@@ -91,6 +92,7 @@ public class MovieController extends BaseController {
         model.addAttribute("movieList",movieLists);
         model.addAttribute("scheduleList",scheduleList);
         model.addAttribute("movie",movie);
+        session.setAttribute("typeNum",typeNum);
         return "/movie/videoInfo";
     }
     /**
@@ -156,6 +158,36 @@ public class MovieController extends BaseController {
         model.addAttribute("movie",movie);
         session.setAttribute("typeNum",typeNum);
         return "/movie/buy";
+    }
+    /**
+     * 兴趣推荐
+     * @return
+     */
+    @RequestMapping(value = "/InterestTuijian",method = RequestMethod.GET)
+    public String InterestTuijian(Model model, HttpSession session){
+        logger.info("to get InterestTuijian");
+        List<Type> typeList = typeService.selectAllType();
+        List<Movie> movieList = new ArrayList<Movie>();
+        List<Movie> xqtj = new ArrayList<Movie>();
+        Map<String,Integer> typeNum = (Map<String,Integer>)session.getAttribute("typeNum");
+        String maxNumType = StringUtil.findMaxType(typeNum);
+        if(!StringUtil.isNotEmpty(maxNumType)){
+            maxNumType = typeList.get(0).getTypeid();
+        }
+        xqtj = movieService.selectMovieByType(maxNumType);
+        for(Type type : typeList){
+            movieList = movieService.selectMovieByType(type.getTypeid());
+            model.addAttribute(type.getColum2(),movieList);
+        }
+        //今日热播
+        String date = StringUtil.getTodayDate();
+        List<Schedule> scheduleListJR = scheduleService.selectScheduleByDate(date);
+        List<Movie> movieLists = MovieUtil.getTodayMovieBySchedule(scheduleListJR);
+        model.addAttribute("movieList",movieLists);
+        model.addAttribute("typeList",typeList);
+        model.addAttribute("xqtj",xqtj);
+        model.addAttribute("scheduleListJR",scheduleListJR);
+        return "/movie/index_xqtj";
     }
     /**
      * 电影推荐
