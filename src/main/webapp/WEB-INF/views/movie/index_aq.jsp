@@ -286,7 +286,9 @@
                     </dd>
                     <div class="clear"></div>
                 </dl>
-                <div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
+                <dl style="height: 100px">
+                    <div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
+                </dl>
             </div>
         </div>
 
