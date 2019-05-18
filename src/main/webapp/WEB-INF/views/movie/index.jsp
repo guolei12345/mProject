@@ -241,7 +241,7 @@ window.onload = function(){
           </dd>
           <div class="clear"></div>
         </dl>
-        <dl>
+        <dl style="height: 60px">
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
             <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('/movie/videoInfo?movieid=','movieId')" />
@@ -249,15 +249,15 @@ window.onload = function(){
 
           <div class="clear"></div>
         </dl>
-        <dl>
+        <dl style="height: 60px">
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
             <input name="" type="button" class="dgbg" value="兴趣推荐" onclick="tuijian('/movie/InterestTuijian')" />
           </dd>
           <div class="clear"></div>
         </dl>
-        <dl style="height: 100px">
-        <div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
+        <dl style="height: 150px">
+        <div class="wxpd" style="padding-top:20px;" ><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
         </dl>
       </div>
     </div>
