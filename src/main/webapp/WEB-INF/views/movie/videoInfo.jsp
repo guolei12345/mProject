@@ -74,20 +74,20 @@ window.onload=function(){
 <div class="header">
   <div class="top_img">
     <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
-    <div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>
+    <%--<div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>--%>
     <div class="clear"></div>
   </div>
   <div class="menu">
     <ul>
-      <li id="a1"><a href="index.html">首　页</a></li>
-      <li id="a2"> <a href="websj.html">热门影片</a></li>
-      <li id="a3"><a href="case.html">正在热映</a></li>
-      <li id="a4"><a href="product.html">即将上映</a></li>
-      <li id="a5"><a href="list.html">经典回味</a></li>
-      <li id="a6"><a href="tuiguang.html">全球首映</a></li>
-      <li id="a7"><a href="#">热门活动</a></li>
-      <li id="a8"><a href="sub.html">优惠专区</a></li>
-      <li id="a9"><a href="contact.html">放映时刻表</a></li>
+        <li id="a1"><a href="/movie/index">首　页</a></li>
+        <li id="a2"><a href="/movie/index?url=index_aq">爱情</a></li>
+        <li id="a3"><a href="/movie/index?url=index_dz">动作</a></li>
+        <li id="a4"><a href="/movie/index?url=index_fz">犯罪</a></li>
+        <li id="a5"><a href="/movie/index?url=index_gz">古装</a></li>
+        <li id="a6"><a href="/movie/index?url=index_xj">喜剧</a></li>
+        <li id="a7"><a href="/movie/index?url=index_jq">剧情</a></li>
+        <li id="a8"><a href="/movie/index?url=index_kh">科幻</a></li>
+        <li id="a9"><a href="/movie/index?url=index_kb">恐怖</a></li>
     </ul>
   </div>
 </div>
