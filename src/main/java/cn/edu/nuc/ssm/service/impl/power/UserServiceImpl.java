@@ -224,6 +224,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
             if(user == null){
                 rtn = 4;
             }else{
+                logger.info("发送短信："+code);
                 PhoneUtil.sendCode(code,num);
             }
         }else if(getNumType(num) == NumTypeEnum.邮箱){
@@ -232,6 +233,7 @@ public class UserServiceImpl extends BaseLog implements UserService {
             if(user == null){
                 rtn = 3;
             }else {
+                logger.info("发送邮件："+code);
                 MailUtil.sendMail(user.getEmail(), "pleast input code:" + code);
             }
         }else{

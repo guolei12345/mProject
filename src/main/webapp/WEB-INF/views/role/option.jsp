@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -108,7 +112,7 @@
                     </table>
                 </div>
                 <div class="form-group center">
-                    <button class="btn btn-info" type="button" onclick="savePower('/role/savePower')">
+                    <button class="btn btn-info" type="button" onclick="savePower('<%=basePath%>/role/savePower')">
                         <i class="icon-ok bigger-110"></i>
                         保存
                     </button>

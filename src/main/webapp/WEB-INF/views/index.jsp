@@ -1,5 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html;charset=utf-8; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -245,7 +249,7 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="/assets/ace/avatars/user.jpg" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="/assets/ace/avatars<%=basePath%>/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small> 欢迎光临,</small>
 									${user.username}
@@ -256,14 +260,14 @@
 
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#" onclick="load('/user/update')">
+									<a href="#" onclick="load('<%=basePath%>/user/update')">
 										<i class="icon-cog"></i>
 										修改密码
 									</a>
 								</li>
 
 								<li>
-									<a href="#" onclick="load('/user/userInfo')">
+									<a href="#" onclick="load('<%=basePath%>/user<%=basePath%>/userInfo')">
 										<i class="icon-user"></i>
 										个人资料
 									</a>
@@ -272,7 +276,7 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="/user/login">
+									<a href="<%=basePath%>/user/login">
 										<i class="icon-off"></i>
 										退出
 									</a>
@@ -339,7 +343,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/user/index">首页</a>
+								<a href="<%=basePath%>/user/index">首页</a>
 							</li>
 							<li>
 								${msg}

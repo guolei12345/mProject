@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +74,7 @@
                             </th>
                             <th>
                                 <c:if test="${userSchedule.colum1!='1'}">
-                                    <a class="red" href="#" onclick="deleteOrder('/movie/deleteOrder','userScheduleId',${userSchedule.id})">
+                                    <a class="red" href="#" onclick="deleteOrder('<%=basePath%>/movie/deleteOrder','userScheduleId',${userSchedule.id})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
                                 </c:if>
@@ -155,7 +159,7 @@
             if(id == "checkAll"){
                 continue;
             }
-            var url = "/movie/moviePrice";
+            var url = "<%=basePath%>/movie/moviePrice";
             var price = 0;
             var data = {
                 id:id
@@ -188,7 +192,7 @@
         var data = {
             ids:array
         }
-        var urls = "/movie/pay";
+        var urls = "<%=basePath%>/movie/pay";
         $.ajax({
             type:"post",
             url:urls,

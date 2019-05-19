@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -36,7 +40,7 @@
                             请输入注册信息
                         </h4>
                         <div class="space-6"></div>
-                        <form action="/user/regist" method="post">
+                        <form action="<%=basePath%>/user/regist" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
@@ -68,8 +72,8 @@
                                     <span class="block input-icon input-icon-right input-group">
                                         <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
                                             style="width: 145px"/>
-                                        <img src="/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity" onload="btn.disabled=true;"
-                                             onclick="this.src='/user/getVerify?'+Math.random();"/>
+                                        <img src="<%=basePath%>/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity" onload="btn.disabled=true;"
+                                             onclick="this.src='<%=basePath%>/user/getVerify?'+Math.random();"/>
                                     </span>
                                 </label>
                                 <input type="submit" class="form-control" value="注册" />
@@ -79,7 +83,7 @@
                     <%--注册--%>
                     <div class="toolbar clearfix">
                         <div>
-                            <a href="/user/login" class="user-signup-link">
+                            <a href="<%=basePath%>/user/login" class="user-signup-link">
                                 登陆
                                 <i class="icon-arrow-left"></i>
                             </a>

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
     <div id="login-box" class="login-box visible widget-box no-border">
         <div class="widget-body">
             <div class="widget-main">
-                <form action="/movie/edit" method="post">
+                <form action="<%=basePath%>/movie/edit" method="post">
                     <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label"> 电影名 </label>
                         <div class="col-sm-9">
@@ -69,11 +73,11 @@
                     <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label no-padding-right"> 图片 </label>
                         <%--<div class="col-sm-9">--%>
-                            <input type="image" src="/movie/getPic?path=${movieEdit.pic.picurl}" width="100" height="120" class="input-icon input-icon-right" width="145" height="33" id="identity"/>
+                            <input type="image" src="<%=basePath%>/movie/getPic?path=${movieEdit.pic.picurl}" width="100" height="120" class="input-icon input-icon-right" width="145" height="33" id="identity"/>
                         <%--</div>--%>
                     </div>
                     <div class="form-group center col-sm-7">
-                            <button class="btn btn-info" type="button" onclick="editRole('/movie/edit')">
+                            <button class="btn btn-info" type="button" onclick="editRole('<%=basePath%>/movie/edit')">
                                 <i class="icon-ok bigger-110"></i>
                                 保存
                             </button>

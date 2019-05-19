@@ -1,4 +1,8 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -19,15 +23,15 @@
   </div>
   <div class="menu">
     <ul>
-        <li id="a1"><a href="/movie/index">首　页</a></li>
-        <li id="a2"> <a href="/movie/index?url=index_aq">爱情</a></li>
-        <li id="a3"><a href="/movie/index?url=index_dz">动作</a></li>
-        <li id="a4"><a href="/movie/index?url=index_fz">犯罪</a></li>
-        <li id="a5"><a href="/movie/index?url=index_gz">古装</a></li>
-        <li id="a6"><a href="/movie/index?url=index_gw">国外</a></li>
-        <li id="a7"><a href="/movie/index?url=index_jq">剧情</a></li>
-        <li id="a8"><a href="/movie/index?url=index_kh">科幻</a></li>
-        <li id="a9"><a href="/movie/index?url=index_kb">恐怖</a></li>
+        <li id="a1"><a href="<%=basePath%>/movie/index">首　页</a></li>
+        <li id="a2"> <a href="<%=basePath%>/movie/index?url=index_aq">爱情</a></li>
+        <li id="a3"><a href="<%=basePath%>/movie/index?url=index_dz">动作</a></li>
+        <li id="a4"><a href="<%=basePath%>/movie/index?url=index_fz">犯罪</a></li>
+        <li id="a5"><a href="<%=basePath%>/movie/index?url=index_gz">古装</a></li>
+        <li id="a6"><a href="<%=basePath%>/movie/index?url=index_gw">国外</a></li>
+        <li id="a7"><a href="<%=basePath%>/movie/index?url=index_jq">剧情</a></li>
+        <li id="a8"><a href="<%=basePath%>/movie/index?url=index_kh">科幻</a></li>
+        <li id="a9"><a href="<%=basePath%>/movie/index?url=index_kb">恐怖</a></li>
     </ul>
   </div>
 </div>
@@ -40,7 +44,7 @@
           <tbody>
           <c:forEach items="${movieList}" var="movie">
             <tr>
-              <td height="135" align="center" width="140"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
+              <td height="135" align="center" width="140"><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
               <td><a href="#">${movie.movename}</a><p>导演:${movie.actor}</p></td>
             </tr>
           </c:forEach>
@@ -58,7 +62,7 @@
                 <c:forEach items="${schedule.hallSetList}" var="setNum">
                 <td>
                     <c:if test="${!setNum.isSelect}">
-                        <a style="color: #3e8f3e" href="#"class="btn btn-xs btn-success seatCharts-seat seatCharts-cell available" onclick="optionMovie('/movie/subOrder?scheduleid=${schedule.scheduleid}&setNum=${setNum.num}')">${setNum.num}</a>
+                        <a style="color: #3e8f3e" href="#"class="btn btn-xs btn-success seatCharts-seat seatCharts-cell available" onclick="optionMovie('<%=basePath%>/movie/subOrder?scheduleid=${schedule.scheduleid}&setNum=${setNum.num}')">${setNum.num}</a>
                     </c:if>
                     <c:if test="${setNum.isSelect}">
                         <a style="color: #8a3104" class="btn btn-xs btn-info seatCharts-seat seatCharts-cell available" href="#" >${setNum.num}</a>
@@ -85,7 +89,7 @@
             <p><span>电影版本：</span>3D</p>
             <p><span>单张票价：</span>${schedule.price}元</p>
 
-            <p><input type="button" onclick="orderInfo('/movie/orderInfo')"  class="dgbg022" value="查看订单"></input></p>
+            <p><input type="button" onclick="orderInfo('<%=basePath%>/movie/orderInfo')"  class="dgbg022" value="查看订单"></input></p>
           </dd>
         </dl>
       </div>

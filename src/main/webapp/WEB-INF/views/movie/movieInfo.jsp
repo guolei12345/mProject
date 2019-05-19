@@ -1,5 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -22,7 +26,7 @@
 			</div><!-- /.page-header -->
 			<div class="dataTables_filter">
 				<label>
-					<a href="#" onclick="load('/movie/movieTuijian')" aria-controls="sample-table-2">热门推荐</a>
+					<a href="#" onclick="load('<%=basePath%>/movie/movieTuijian')" aria-controls="sample-table-2">热门推荐</a>
 					电影类型:
 					<select name="movieType" id="movieType" aria-controls="sample-table-2">
 						<option value=""></option>
@@ -32,7 +36,7 @@
 					</select>
 
 					关键字: <input type="text" id="movieInfoKey" aria-controls="sample-table-2">
-					<button class="btn btn-info" onclick="searchMovie('/movie/movieInfo','movieInfoKey','movieType')">
+					<button class="btn btn-info" onclick="searchMovie('<%=basePath%>/movie/movieInfo','movieInfoKey','movieType')">
 						<i class="icon-ok bigger-110"></i>
 						查询
 					</button>
@@ -79,7 +83,7 @@
 							</div>
 							<div>
 								<div>
-									<a href="#" class="btn btn-block btn-success" onclick="option('/movie/buy','movieid',${movie.moveid})">
+									<a href="#" class="btn btn-block btn-success" onclick="option('<%=basePath%>/movie/buy','movieid',${movie.moveid})">
 										<i class="icon-shopping-cart bigger-110"></i>
 										<span>Buy</span>
 									</a>

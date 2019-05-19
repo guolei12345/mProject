@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
     <div id="login-box" class="login-box visible widget-box no-border">
         <div class="widget-body">
             <div class="widget-main">
-                <form action="/role/add" method="post">
+                <form action="<%=basePath%>/role/add" method="post">
                     <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label no-padding-right" for="rolename">角色名</label>
                         <div class="col-sm-9">

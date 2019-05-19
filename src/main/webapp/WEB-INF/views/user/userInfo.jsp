@@ -1,5 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -12,7 +16,7 @@
 		<div class="col-sm-offset-1 col-sm-10">
 			<div class="space"></div>
 
-			<form class="form-horizontal" action="/user/updateUser" method="post" >
+			<form class="form-horizontal" action="<%=basePath%>/user/updateUser" method="post" >
 				<div class="tabbable">
 					<ul class="nav nav-tabs padding-16">
 						<li class="active">
@@ -153,7 +157,7 @@
 				</div>
 			</form>
 		</div><!-- /span -->
-	</div><!-- /user-profile -->
+	</div><!-- <%=basePath%>/user-profile -->
 	<script type="text/javascript">
 		jQuery(function($) {
 			$('#user-profile-3').end().find('.date-picker').datepicker().next().on(ace.click_event, function(){

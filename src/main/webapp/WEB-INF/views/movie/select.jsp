@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -32,7 +36,7 @@
                 <div class="col-sm-6">
                     <div class="dataTables_filter">
                         <label>关键字: <input type="text" id="movieKey" aria-controls="sample-table-2">
-                            <button class="btn btn-info" onclick="searchByKey('/movie/search','movieKey',1)">
+                            <button class="btn btn-info" onclick="searchByKey('<%=basePath%>/movie/search','movieKey',1)">
                                 <i class="icon-ok bigger-110"></i>
                                 查询
                             </button>
@@ -75,20 +79,16 @@
                             <td class="hidden-320">${movie.actor}</td>
                             <td class="hidden-320">${movie.language}</td>
                             <td class="hidden-320">${movie.type.typename}</td>
-                            <td class="hidden-320"><img src="/movie/getPic?path=${movie.pic.picurl}" width="100" height="120" class="input-icon input-icon-right" width="145" height="33" id="identity"/></td>
+                            <td class="hidden-320"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" width="100" height="120" class="input-icon input-icon-right" width="145" height="33" id="identity"/></td>
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/movie/edit','movieid',${movie.moveid})">
+                                    <a class="green" href="#" onclick="option('<%=basePath%>/movie/edit','movieid',${movie.moveid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="option('/movie/delete','moveid',${movie.moveid})">
+                                    <a class="red" href="#" onclick="option('<%=basePath%>/movie/delete','moveid',${movie.moveid})">
                                         <i class="icon-trash bigger-130"></i>
-                                    </a>
-
-                                    <a class="blue" href="#" onclick="option('/movie/option','moveid',${movie.moveid})">
-                                        <i class="icon-edit bigger-130"></i>
                                     </a>
                                 </div>
                             </td>
@@ -102,17 +102,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByKey('/movie/search','movieKey',1)">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/movie/search','movieKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach begin="1" end="${moviePage.total}" var="page">
-                    <li class="prev" onclick="searchByKey('/movie/search','movieKey',${page})">
+                    <li class="prev" onclick="searchByKey('<%=basePath%>/movie/search','movieKey',${page})">
                         <a href="#">${page}</a>
                     </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByKey('/movie/search','movieKey',${moviePage.total})">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/movie/search','movieKey',${moviePage.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>

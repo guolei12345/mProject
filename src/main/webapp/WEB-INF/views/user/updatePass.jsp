@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -36,7 +40,7 @@
                             请输入密码信息
                         </h4>
                         <div class="space-6"></div>
-                        <form action="/user/updatePass" method="post">
+                        <form action="<%=basePath%>/user/updatePass" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
@@ -71,7 +75,7 @@
                     <%--登陆--%>
                     <div class="toolbar clearfix">
                         <div>
-                            <a href="/user/login" class="user-signup-link">
+                            <a href="<%=basePath%>/user/login" class="user-signup-link">
                                 登陆
                                 <i class="icon-arrow-left"></i>
                             </a>
@@ -101,7 +105,7 @@
 <script type="text/javascript">
     function sendCheck(){
         var num = $("#num").val();
-        $.ajax({url:"/user/sendCheck?num="+num,success:function(result){
+        $.ajax({url:"<%=basePath%>/user/sendCheck?num="+num,success:function(result){
                 alert("发送成功！")
             }});
     }

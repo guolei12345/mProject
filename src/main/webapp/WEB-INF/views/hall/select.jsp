@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -32,7 +36,7 @@
                 <div class="col-sm-6">
                     <div class="dataTables_filter">
                         <label>关键字: <input type="text" id="hallKey" aria-controls="sample-table-2">
-                            <button class="btn btn-info" onclick="searchByKey('/hall/search','hallKey',1)">
+                            <button class="btn btn-info" onclick="searchByKey('<%=basePath%>/hall/search','hallKey',1)">
                                 <i class="icon-ok bigger-110"></i>
                                 查询
                             </button>
@@ -72,16 +76,12 @@
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/hall/edit','hallid',${hall.hallid})">
+                                    <a class="green" href="#" onclick="option('<%=basePath%>/hall/edit','hallid',${hall.hallid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="option('/hall/delete','hallid',${hall.hallid})">
+                                    <a class="red" href="#" onclick="option('<%=basePath%>/hall/delete','hallid',${hall.hallid})">
                                         <i class="icon-trash bigger-130"></i>
-                                    </a>
-
-                                    <a class="blue" href="#" onclick="option('/hall/option','hallid',${hall.hallid})">
-                                        <i class="icon-edit bigger-130"></i>
                                     </a>
                                 </div>
                             </td>
@@ -95,17 +95,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByKey('/hall/search','hallKey',1)">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/hall/search','hallKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach begin="1" end="${hallPage.total}" var="page">
-                    <li class="prev" onclick="searchByKey('/hall/search','hallKey',${page})">
+                    <li class="prev" onclick="searchByKey('<%=basePath%>/hall/search','hallKey',${page})">
                         <a href="#">${page}</a>
                     </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByKey('/hall/search','hallKey',${hallPage.total})">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/hall/search','hallKey',${hallPage.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>

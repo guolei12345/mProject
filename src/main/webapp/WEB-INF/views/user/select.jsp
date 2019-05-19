@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -32,7 +36,7 @@
                 <div class="col-sm-6">
                     <div class="dataTables_filter">
                         <label>关键字: <input type="text" id="userKey" aria-controls="sample-table-2">
-                            <button class="btn btn-info" onclick="searchByKey('/user/search','userKey',1)">
+                            <button class="btn btn-info" onclick="searchByKey('<%=basePath%>/user/search','userKey',1)">
                                 <i class="icon-ok bigger-110"></i>
                                 查询
                             </button>
@@ -89,11 +93,11 @@
                             <td>
                                 <div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
 
-                                    <a class="green" href="#" onclick="option('/user/edit','userid',${user.userid})">
+                                    <a class="green" href="#" onclick="option('<%=basePath%>/user/edit','userid',${user.userid})">
                                         <i class="icon-pencil bigger-130"></i>
                                     </a>
 
-                                    <a class="red" href="#" onclick="option('/user/delete','userid',${user.userid})">
+                                    <a class="red" href="#" onclick="option('<%=basePath%>/user/delete','userid',${user.userid})">
                                         <i class="icon-trash bigger-130"></i>
                                     </a>
                                 </div>
@@ -108,17 +112,17 @@
 
         <div class="modal-content">
             <ul class="pagination pull-right no-margin">
-                <li class="prev" onclick="searchByKey('/user/search','userKey',1)">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/user/search','userKey',1)">
                     <a href="#">
                         <i class="icon-double-angle-left"></i>
                     </a>
                 </li>
                 <c:forEach begin="1" end="${pageInfo.total}" var="page">
-                <li class="prev" onclick="searchByKey('/user/search','userKey',${page})">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/user/search','userKey',${page})">
                     <a href="#">${page}</a>
                 </li>
                 </c:forEach>
-                <li class="prev" onclick="searchByKey('/user/search','userKey',${pageInfo.total})">
+                <li class="prev" onclick="searchByKey('<%=basePath%>/user/search','userKey',${pageInfo.total})">
                     <a href="#">
                         <i class="icon-double-angle-right"></i>
                     </a>

@@ -1,4 +1,8 @@
 ﻿<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+  String path = request.getContextPath();
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,7 +15,7 @@
 <script language="javascript" type="text/javascript" src="/assets/movie/css/yao.js"></script>
 
 <!-- 滑动门 -->
-<script  type="text/javascript">   
+<script  type="text/javascript">
 
 function scrollDoor(){
 }
@@ -22,19 +26,19 @@ scrollDoor.prototype = {
 		{
 			alert("菜单层数量和内容层数量不一样!");
 			return false;
-		}				
+		}
 		for(var i = 0 ; i < menus.length ; i++)
-		{	
-			_this.$(menus[i]).value = i;				
+		{
+			_this.$(menus[i]).value = i;
 			_this.$(menus[i]).onmouseover = function(){
-					
+
 				for(var j = 0 ; j < menus.length ; j++)
-				{						
+				{
 					_this.$(menus[j]).className = closeClass;
 					_this.$(divs[j]).style.display = "none";
 				}
-				_this.$(menus[this.value]).className = openClass;	
-				_this.$(divs[this.value]).style.display = "block";				
+				_this.$(menus[this.value]).className = openClass;
+				_this.$(divs[this.value]).style.display = "block";
 			}
 		}
 		},
@@ -67,15 +71,15 @@ window.onload = function(){
   </div>
   <div class="menu">
     <ul>
-      <li id="a1"><a href="/movie/index">首　页</a></li>
-      <li id="a2"> <a href="/movie/index?url=index_aq">爱情</a></li>
-      <li id="a3"><a href="/movie/index?url=index_dz">动作</a></li>
-      <li id="a4"><a href="/movie/index?url=index_fz">犯罪</a></li>
-      <li id="a5"><a href="/movie/index?url=index_gz">古装</a></li>
-      <li id="a6"><a href="/movie/index?url=index_xj">喜剧</a></li>
-      <li id="a7"><a href="/movie/index?url=index_jq">剧情</a></li>
-      <li id="a8"><a href="/movie/index?url=index_kh">科幻</a></li>
-      <li id="a9"><a href="/movie/index?url=index_kb">恐怖</a></li>
+      <li id="a1"><a href="<%=basePath%>/movie/index">首　页</a></li>
+      <li id="a2"> <a href="<%=basePath%>/movie/index?url=index_aq">爱情</a></li>
+      <li id="a3"><a href="<%=basePath%>/movie/index?url=index_dz">动作</a></li>
+      <li id="a4"><a href="<%=basePath%>/movie/index?url=index_fz">犯罪</a></li>
+      <li id="a5"><a href="<%=basePath%>/movie/index?url=index_gz">古装</a></li>
+      <li id="a6"><a href="<%=basePath%>/movie/index?url=index_xj">喜剧</a></li>
+      <li id="a7"><a href="<%=basePath%>/movie/index?url=index_jq">剧情</a></li>
+      <li id="a8"><a href="<%=basePath%>/movie/index?url=index_kh">科幻</a></li>
+      <li id="a9"><a href="<%=basePath%>/movie/index?url=index_kb">恐怖</a></li>
     </ul>
   </div>
 </div>
@@ -84,15 +88,15 @@ window.onload = function(){
     <div id="YImage">
       <p id="YPhotos">
           <c:forEach items="${sydklbt}" var="movie">
-          <a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
+          <a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" alt="22" />
               </c:forEach>
       </p>
     </div>
     <p id="YSamples">
         <c:forEach items="${sydklbt}" var="movie">
-            <a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" alt="22" />
+            <a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" alt="22" />
         </c:forEach>
-        <%--<a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
+        <%--<a href="#1" class="current" title="2"><img src="/assets<%=basePath%>/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets<%=basePath%>/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets<%=basePath%>/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets<%=basePath%>/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
   </div>
   <script language="javascript" type="text/javascript">
 <!--
@@ -104,7 +108,7 @@ window.onload = function(){
 		scrollId: 'YPhotos'
 	});
 //-->
-</script> 
+</script>
 </div>
 <div class="contenter">
   <div class="left">
@@ -117,7 +121,7 @@ window.onload = function(){
               <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
               <li class="sd0${idx.index+1}" id="m0${idx.index+1}"><a href="#">
                 <dl class="hd_list">
-                  <dt><img src="/movie/getPic?path=${movie.pic.picurl}" width="81" height="35" /></dt>
+                  <dt><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" width="81" height="35" /></dt>
                   <dd>${movie.movename}</dd>
                   <dd>${movie.language}</dd>
                 </dl>
@@ -127,7 +131,7 @@ window.onload = function(){
             </ul>
             <div class="cont">
               <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
-                <div id="c0${idx.index+1}"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="449" height="193" /></a></div>
+                <div id="c0${idx.index+1}"><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" width="449" height="193" /></a></div>
                 </c:forEach>
             </div>
           </div>
@@ -135,14 +139,14 @@ window.onload = function(){
         <div class="left_1_r">
           <h3>热映大片</h3>
           <dl>
-            <dt><a href="/movie/videoInfo?movieid=${syzklbt[0].moveid}"><img src="/movie/getPic?path=${syzklbt[0].pic.picurl}" width="80" height="65" /></a></dt>
+            <dt><a href="<%=basePath%>/movie/videoInfo?movieid=${syzklbt[0].moveid}"><img src="<%=basePath%>/movie/getPic?path=${syzklbt[0].pic.picurl}" width="80" height="65" /></a></dt>
             <dd><strong>${syzklbt[0].movename}</strong> <br />
-              <a href="/movie/videoInfo?movieid=${syzklbt[0].moveid}">${syzklbt[0].director}</a></dd>
+              <a href="<%=basePath%>/movie/videoInfo?movieid=${syzklbt[0].moveid}">${syzklbt[0].director}</a></dd>
           </dl>
           <div class="clear"></div>
           <ul>
             <c:forEach items="${syzklbt}" var="movie" varStatus="idx">
-            <li><a href="/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.movename}</span>${movie.language} </a></li>
+            <li><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.movename}</span>${movie.language} </a></li>
             </c:forEach>
           </ul>
         </div>
@@ -154,12 +158,12 @@ window.onload = function(){
       <div class="inner">
         <c:forEach items="${syxklbt}" var="movie">
         <dl class="anli_list">
-          <dt><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
-          <dd><a href="/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a>
+          <dt><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
+          <dd><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a>
             <p style="font-weight:bold;">${movie.date}</p>
             <p>${movie.director}</p>
             <p>导演：${movie.actor}</p>
-            <p><a href="/movie/videoInfo?movieid=${movie.moveid}"><input type="button" class="dgbg02" value="特惠购票" /></a></p>
+            <p><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><input type="button" class="dgbg02" value="特惠购票" /></a></p>
           </dd>
         </dl>
         </c:forEach>
@@ -210,24 +214,24 @@ window.onload = function(){
                                     var demo1 = $("#demo1");
                                     var demo2 = $("#demo2");
                                     demo2.html(demo1.html());
-                                    function Marquee(){ 
+                                    function Marquee(){
                                         if(demo.scrollLeft()>=demo1.width())
-                                            demo.scrollLeft(0); 
+                                            demo.scrollLeft(0);
                                         else{
                                             demo.scrollLeft(demo.scrollLeft()+1);
                                         }
-                                    } 
-                                    var MyMar=setInterval(Marquee,speed) 
+                                    }
+                                    var MyMar=setInterval(Marquee,speed)
                                     demo.mouseover(function() {
                                         clearInterval(MyMar);
                                     } )
                                     demo.mouseout(function() {
                                         MyMar=setInterval(Marquee,speed);
-                                    } )		
-                            </script> 
-        <!-- 
-          
-         
+                                    } )
+                            </script>
+        <!--
+
+
         -->
         <div class="clear"></div>
       </div>
@@ -252,7 +256,7 @@ window.onload = function(){
         <dl style="height: 60px">
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
-            <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('/movie/videoInfo?movieid=','movieId')" />
+            <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('<%=basePath%>/movie/videoInfo?movieid=','movieId')" />
           </dd>
 
           <div class="clear"></div>
@@ -260,7 +264,7 @@ window.onload = function(){
         <dl style="height: 60px">
           <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
-            <input name="" type="button" class="dgbg" value="兴趣推荐" onclick="tuijian('/movie/InterestTuijian')" />
+            <input name="" type="button" class="dgbg" value="兴趣推荐" onclick="tuijian('<%=basePath%>/movie/InterestTuijian')" />
           </dd>
           <div class="clear"></div>
         </dl>
@@ -275,7 +279,7 @@ window.onload = function(){
       <div class="inner02">
         <ul class="server_list">
           <c:forEach items="${syxklbt}" var="movie">
-            <li><a href="/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.language}</span>${movie.movename}</a></li>
+            <li><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><span>${movie.language}</span>${movie.movename}</a></li>
           </c:forEach>
         </ul>
       </div>
@@ -286,7 +290,7 @@ window.onload = function(){
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
           <c:forEach items="${movieList}" var="movie">
           <tr>
-            <td height="135" align="center" width="140"><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
+            <td height="135" align="center" width="140"><a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPicById?picId=${movie.picid}" width="120" height="100" /></a></td>
             <td><a href="#">${movie.movename}</a><p>导演:${movie.actor}</p></td>
           </tr>
           </c:forEach>

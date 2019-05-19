@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -10,6 +14,7 @@
     <!-- ace styles -->
     <link rel="stylesheet" href="/assets/ace/css/ace.min.css" />
     <link rel="stylesheet" href="/assets/ace/css/ace-rtl.min.css" />
+    <c:set var="cp" value="<%=basePath%>" />
 </head>
 
 <body class="login-layout">
@@ -36,7 +41,7 @@
                             请输入用户名跟密码
                         </h4>
                         <div class="space-6"></div>
-                        <form action="/user/login" method="post">
+                        <form action="<%=basePath%>/user/login" method="post">
                             <fieldset>
                                 <label class="block clearfix">
                                     <span class="block input-icon input-icon-right">
@@ -55,8 +60,8 @@
                                     <span class="block input-icon input-icon-right input-group">
                                         <input type="text" id="code" name="code" class="form-control" placeholder="验证码"
                                             style="width: 145px"/>
-                                        <img src="/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity"
-                                             onclick="this.src='/user/getVerify?'+Math.random();"/>
+                                        <img src="<%=basePath%>/user/getVerify?" class="input-icon input-icon-right" width="145" height="33" id="identity"
+                                             onclick="this.src='<%=basePath%>/user/getVerify?'+Math.random();"/>
                                     </span>
                                 </label>
                                 <input type="submit" class="form-control" value="登录" />
@@ -66,13 +71,13 @@
                     <%--忘记密码 / 注册--%>
                     <div class="toolbar clearfix">
                         <div>
-                            <a href="/user/updatePass" class="forgot-password-link">
+                            <a href="<%=basePath%>/user/updatePass" class="forgot-password-link">
                                 <i class="icon-arrow-left"></i>
                                 忘记密码
                             </a>
                         </div>
                         <div>
-                            <a href="/user/regist" class="user-signup-link">
+                            <a href="<%=basePath%>/user/regist" class="user-signup-link">
                                 注册
                                 <i class="icon-arrow-right"></i>
                             </a>
