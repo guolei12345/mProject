@@ -79,11 +79,11 @@
               <%--<img src="/assets/movie/images/order.jpg" width="400" height="80" />--%>
             <input type="hidden" name="scheduleid" id="scheduleid" value="${schedule.scheduleid}"/>
             <p><span>选择影片：</span>${schedule.movie.movename}</p>
-            <p><span>放映时间：</span>${schedule.time}</p>
+            <p><span>放映日期：</span>${schedule.time}</p>
+            <p><span>具体时间：</span>${schedule.colum1}--${schedule.colum2}</p>
             <p><span>选择影厅：</span>${schedule.hall.hallheats}</p>
             <p><span>电影版本：</span>3D</p>
             <p><span>单张票价：</span>${schedule.price}元</p>
-            <p><span>选择座位：</span>
 
             <p><input type="button" onclick="orderInfo('/movie/orderInfo')"  class="dgbg022" value="查看订单"></input></p>
           </dd>

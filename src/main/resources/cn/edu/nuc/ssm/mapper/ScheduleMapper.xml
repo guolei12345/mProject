@@ -9,9 +9,9 @@
     <result column="time" property="time" jdbcType="VARCHAR" />
     <result column="scolum1" property="colum1" jdbcType="VARCHAR" />
     <result column="scolum2" property="colum2" jdbcType="VARCHAR" />
-    <result column="colum3" property="colum3" jdbcType="VARCHAR" />
-    <result column="colum4" property="colum4" jdbcType="VARCHAR" />
-    <result column="colum5" property="colum5" jdbcType="VARCHAR" />
+    <result column="scolum3" property="colum3" jdbcType="VARCHAR" />
+    <result column="scolum4" property="colum4" jdbcType="VARCHAR" />
+    <result column="scolum5" property="colum5" jdbcType="VARCHAR" />
     <association property="movie" javaType="cn.edu.nuc.ssm.entity.movie.Movie">
       <id column="moveId" property="moveid" jdbcType="VARCHAR" />
       <result column="moveName" property="movename" jdbcType="VARCHAR" />
@@ -25,22 +25,22 @@
       <result column="picId" property="picid" jdbcType="VARCHAR" />
       <result column="keyChinese" property="keychinese" jdbcType="VARCHAR" />
       <result column="routeId" property="routeid" jdbcType="VARCHAR" />
-      <result column="colum1" property="colum1" jdbcType="VARCHAR" />
-      <result column="colum2" property="colum2" jdbcType="VARCHAR" />
-      <result column="colum3" property="colum3" jdbcType="VARCHAR" />
-      <result column="colum4" property="colum4" jdbcType="VARCHAR" />
-      <result column="colum5" property="colum5" jdbcType="VARCHAR" />
+      <result column="mcolum1" property="colum1" jdbcType="VARCHAR" />
+      <result column="mcolum2" property="colum2" jdbcType="VARCHAR" />
+      <result column="mcolum3" property="colum3" jdbcType="VARCHAR" />
+      <result column="mcolum4" property="colum4" jdbcType="VARCHAR" />
+      <result column="mcolum5" property="colum5" jdbcType="VARCHAR" />
     </association>
     <association property="hall" javaType="cn.edu.nuc.ssm.entity.movie.Hall">
       <id column="hallId" property="hallid" jdbcType="VARCHAR" />
       <result column="hallHeats" property="hallheats" jdbcType="VARCHAR" />
       <result column="hallDescription" property="halldescription" jdbcType="VARCHAR" />
       <result column="hallsetNum" property="hallsetnum" jdbcType="VARCHAR" />
-      <result column="colum1" property="colum1" jdbcType="VARCHAR" />
-      <result column="colum2" property="colum2" jdbcType="VARCHAR" />
-      <result column="colum3" property="colum3" jdbcType="VARCHAR" />
-      <result column="colum4" property="colum4" jdbcType="VARCHAR" />
-      <result column="colum5" property="colum5" jdbcType="VARCHAR" />
+      <result column="hcolum1" property="colum1" jdbcType="VARCHAR" />
+      <result column="hcolum2" property="colum2" jdbcType="VARCHAR" />
+      <result column="hcolum3" property="colum3" jdbcType="VARCHAR" />
+      <result column="hcolum4" property="colum4" jdbcType="VARCHAR" />
+      <result column="hcolum5" property="colum5" jdbcType="VARCHAR" />
     </association>
   </resultMap>
   <sql id="Base_Column_List" >
@@ -54,24 +54,175 @@
     from schedule
   </select>
   <select id="selectScheduleByDate" resultMap="BaseResultMap">
-    select s.*,m.*,h.*
+    select s.scheduleid,
+          s.moveid,
+          s.hallid,
+          s.price,
+          s.time,
+          s.colum1 as scolum1,
+          s.colum2 as scolum2,
+          s.colum3 as scolum3,
+          s.colum4 as scolum4,
+          s.colum5 as scolum5,
+
+          m.moveid,
+          m.movename,
+          m.director,
+          m.actor,
+          m.language,
+          m.typeid,
+          m.distrit,
+          m.date,
+          m.keyword,
+          m.picid,
+          m.keychinese,
+          m.routeid,
+          m.colum1 as mcolum1,
+          m.colum2 as mcolum2,
+          m.colum3 as mcolum3,
+          m.colum4 as mcolum4,
+          m.colum5 as mcolum5,
+
+          h.hallid,
+          h.hallheats,
+          h.halldescription,
+          h.hallsetnum,
+          h.colum1 as hcolum1,
+          h.colum2 as hcolum2,
+          h.colum3 as hcolum3,
+          h.colum4 as hcolum4,
+          h.colum5 as hcolum5
     from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
     where s.time = #{date}
   </select>
   <!--查询电影的排片信息-->
   <select id="selectScheduleByMovieId" resultMap="BaseResultMap">
-    select s.*,m.*,h.*
+    select
+    s.scheduleid,
+    s.moveid,
+    s.hallid,
+    s.price,
+    s.time,
+    s.colum1 as scolum1,
+    s.colum2 as scolum2,
+    s.colum3 as scolum3,
+    s.colum4 as scolum4,
+    s.colum5 as scolum5,
+
+    m.moveid,
+    m.movename,
+    m.director,
+    m.actor,
+    m.language,
+    m.typeid,
+    m.distrit,
+    m.date,
+    m.keyword,
+    m.picid,
+    m.keychinese,
+    m.routeid,
+    m.colum1 as mcolum1,
+    m.colum2 as mcolum2,
+    m.colum3 as mcolum3,
+    m.colum4 as mcolum4,
+    m.colum5 as mcolum5,
+
+    h.hallid,
+    h.hallheats,
+    h.halldescription,
+    h.hallsetnum,
+    h.colum1 as hcolum1,
+    h.colum2 as hcolum2,
+    h.colum3 as hcolum3,
+    h.colum4 as hcolum4,
+    h.colum5 as hcolum5
     from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
     where s.moveId = #{movieid}
   </select>
   <!--模糊查询分页显示-->
   <select id="selectScheduleByKey" resultMap="BaseResultMap">
-    select s.*,m.*,h.*
+    select
+    s.scheduleid,
+    s.moveid,
+    s.hallid,
+    s.price,
+    s.time,
+    s.colum1 as scolum1,
+    s.colum2 as scolum2,
+    s.colum3 as scolum3,
+    s.colum4 as scolum4,
+    s.colum5 as scolum5,
+
+    m.moveid,
+    m.movename,
+    m.director,
+    m.actor,
+    m.language,
+    m.typeid,
+    m.distrit,
+    m.date,
+    m.keyword,
+    m.picid,
+    m.keychinese,
+    m.routeid,
+    m.colum1 as mcolum1,
+    m.colum2 as mcolum2,
+    m.colum3 as mcolum3,
+    m.colum4 as mcolum4,
+    m.colum5 as mcolum5,
+
+    h.hallid,
+    h.hallheats,
+    h.halldescription,
+    h.hallsetnum,
+    h.colum1 as hcolum1,
+    h.colum2 as hcolum2,
+    h.colum3 as hcolum3,
+    h.colum4 as hcolum4,
+    h.colum5 as hcolum5
     from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
     limit #{start},#{offset}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select s.*,m.*,h.*
+    select
+    s.scheduleid,
+    s.moveid,
+    s.hallid,
+    s.price,
+    s.time,
+    s.colum1 as scolum1,
+    s.colum2 as scolum2,
+    s.colum3 as scolum3,
+    s.colum4 as scolum4,
+    s.colum5 as scolum5,
+
+    m.moveid,
+    m.movename,
+    m.director,
+    m.actor,
+    m.language,
+    m.typeid,
+    m.distrit,
+    m.date,
+    m.keyword,
+    m.picid,
+    m.keychinese,
+    m.routeid,
+    m.colum1 as mcolum1,
+    m.colum2 as mcolum2,
+    m.colum3 as mcolum3,
+    m.colum4 as mcolum4,
+    m.colum5 as mcolum5,
+
+    h.hallid,
+    h.hallheats,
+    h.halldescription,
+    h.hallsetnum,
+    h.colum1 as hcolum1,
+    h.colum2 as hcolum2,
+    h.colum3 as hcolum3,
+    h.colum4 as hcolum4,
+    h.colum5 as hcolum5
     from schedule s left join movie m on s.moveId = m.moveId left join hall h on h.hallid = s.hallid
     where scheduleId = #{scheduleid,jdbcType=VARCHAR}
   </select>

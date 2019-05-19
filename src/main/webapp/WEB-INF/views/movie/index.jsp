@@ -56,6 +56,14 @@ window.onload = function(){
   <div class="top_img">
     <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
     <div class="clear"></div>
+    <div class="top_nav">
+      <c:if test="${user==null}">
+      <p><a href="/user/login">登录或者注册</a></p>
+      </c:if>
+      <c:if test="${user!=null}">
+        ${user.username}
+      </c:if>
+    </div>
   </div>
   <div class="menu">
     <ul>
