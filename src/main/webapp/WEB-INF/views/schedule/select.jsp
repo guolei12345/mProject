@@ -127,24 +127,24 @@
     </div><!-- /.main-container-inner -->
 </div><!-- /.main-container -->
 
-<script src="/assets/ace/js/jquery.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.min.js"></script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='<%=basePath%>/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 </script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets/ace/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='<%=basePath%>/assets/ace/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
 </script>
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if("ontouchend" in document) document.write("<script src='<%=basePath%>/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
-<script src="/assets/ace/js/bootstrap.min.js"></script>
-<script src="/assets/ace/js/typeahead-bs2.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/bootstrap.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/typeahead-bs2.min.js"></script>
 
-<script src="/assets/ace/js/jquery.dataTables.min.js"></script>
-<script src="/assets/ace/js/jquery.dataTables.bootstrap.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.dataTables.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.dataTables.bootstrap.js"></script>
 
-<script src="/assets/ace/js/ace-elements.min.js"></script>
-<script src="/assets/ace/js/ace.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/ace-elements.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/ace.min.js"></script>
 
 <script type="text/javascript">
 

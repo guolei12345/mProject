@@ -8,17 +8,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>选座</title>
-<link href="/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/assets/movie/css/jquery.js"></script>
-<link href="/assets/movie/css/sub.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="/assets/movie/css/reset.css" />
-    <script type="text/javascript" src="/assets/movie/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/movie/js/jquery.seat-charts.min.js"></script>
+<link href="<%=basePath%>/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=basePath%>/assets/movie/css/jquery.js"></script>
+<link href="<%=basePath%>/assets/movie/css/sub.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="<%=basePath%>/assets/movie/css/reset.css" />
+    <script type="text/javascript" src="<%=basePath%>/assets/movie/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<%=basePath%>/assets/movie/js/jquery.seat-charts.min.js"></script>
 </head>
 <body>
 <div class="header">
   <div class="top_img">
-    <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
+    <div class="logo"><a href="#"><img src="<%=basePath%>/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
     <div class="clear"></div>
   </div>
   <div class="menu">
@@ -78,9 +78,9 @@
       <div class="curry">当前位置：<a href="#">电影</a>&nbsp;&nbsp;--&nbsp;&nbsp;<a href="#">${schedule.movie.movename}</a> &nbsp;&nbsp;--&nbsp;&nbsp;${msg}</div>
       <div class="right_content">
         <dl class="contact_list">
-          <dt><img src="/assets/movie/images/contact_l.jpg" width="201" height="219" /></dt>
+          <dt><img src="<%=basePath%>/assets/movie/images/contact_l.jpg" width="201" height="219" /></dt>
           <dd>
-              <%--<img src="/assets/movie/images/order.jpg" width="400" height="80" />--%>
+              <%--<img src="<%=basePath%>/assets/movie/images/order.jpg" width="400" height="80" />--%>
             <input type="hidden" name="scheduleid" id="scheduleid" value="${schedule.scheduleid}"/>
             <p><span>选择影片：</span>${schedule.movie.movename}</p>
             <p><span>放映日期：</span>${schedule.time}</p>

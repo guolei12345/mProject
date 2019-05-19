@@ -6,13 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <%--<link href="/assets/movie/css/bootstrap.min.css" rel="stylesheet" />--%>
+  <%--<link href="<%=basePath%>/assets/movie/css/bootstrap.min.css" rel="stylesheet" />--%>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>电影售票系统-首页</title>
-<link href="/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
-<link href="/assets/movie/css/index.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="/assets/movie/css/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/assets/movie/css/yao.js"></script>
+<link href="<%=basePath%>/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>/assets/movie/css/index.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="<%=basePath%>/assets/movie/css/jquery.js"></script>
+<script language="javascript" type="text/javascript" src="<%=basePath%>/assets/movie/css/yao.js"></script>
 
 <!-- 滑动门 -->
 <script  type="text/javascript">   
@@ -58,7 +58,7 @@ window.onload = function(){
 <body>
 <div class="header">
   <div class="top_img">
-    <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
+    <div class="logo"><a href="#"><img src="<%=basePath%>/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
     <div class="clear"></div>
   </div>
   <div class="menu">
@@ -88,7 +88,7 @@ window.onload = function(){
         <c:forEach items="${sydklbt}" var="movie">
             <a href="<%=basePath%>/movie/videoInfo?movieid=${movie.moveid}"><img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" alt="22" />
         </c:forEach>
-        <%--<a href="#1" class="current" title="2"><img src="/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
+        <%--<a href="#1" class="current" title="2"><img src="<%=basePath%>/assets/movie/images/bx5.jpg" alt="22" /></a> <a href="#1" title="2"><img src="<%=basePath%>/assets/movie/images/bx1.jpg" alt="2" /></a> <a href="#1" title="2"><img src="<%=basePath%>/assets/movie/images/bx3.jpg" alt="2" /></a> <a href="#1" title="2"><img src="<%=basePath%>/assets/movie/images/bx4.jpg" alt="2" /></a> </p>--%>
   </div>
   <script language="javascript" type="text/javascript">
 <!--
@@ -171,27 +171,27 @@ window.onload = function(){
               <td id="demo1" valign="top"><table border="0"  cellpadding="0">
                   <tr>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">十二生肖</a></dd>
                       </dl></td>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">青春期3</a></dd>
                       </dl></td>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">王者风范3</a></dd>
                       </dl></td>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al4.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al4.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">重来电影节</a></dd>
                       </dl></td>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">灵魂战车</a></dd>
                       </dl></td>
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
+                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
                         <dd><a href="#">重来电影</a></dd>
                       </dl></td>
                   </tr>
@@ -234,7 +234,7 @@ window.onload = function(){
       <h2>快速订票入口 </h2>
       <div class="inner02">
         <dl style="border-bottom:0px #fff solid;">
-          <dt><img src="/assets/movie/images/fa2.gif" width="56" height="45" /></dt>
+          <dt><img src="<%=basePath%>/assets/movie/images/fa2.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
             <select name="movieId" id="movieId">
               <option selected="selected">影片搜索</option>
@@ -246,14 +246,14 @@ window.onload = function(){
           <div class="clear"></div>
         </dl>
         <dl style="height: 60px">
-          <dt><img src="/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
+          <dt><img src="<%=basePath%>/assets/movie/images/fa4.gif" width="56" height="45" /></dt>
           <dd style=" padding-top:10px;">
             <input name="" type="button" class="dgbg" value="立即订购" onclick="subOrderKs('<%=basePath%>/movie/videoInfo?movieid=','movieId')" />
           </dd>
           <div class="clear"></div>
         </dl>
         <dl style="height: 150px">
-          <div class="wxpd"><a href="#"><img src="/assets/movie/images/104.jpg" /></a></div>
+          <div class="wxpd"><a href="#"><img src="<%=basePath%>/assets/movie/images/104.jpg" /></a></div>
         </dl>
       </div>
     </div>

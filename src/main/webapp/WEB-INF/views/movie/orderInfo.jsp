@@ -9,14 +9,14 @@
 <head>
     <meta charset="utf-8" />
     <title>订单信息</title>
-    <link href="/assets/ace/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/assets/ace/css/font-awesome.min.css" />
+    <link href="<%=basePath%>/assets/ace/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<%=basePath%>/assets/ace/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="/assets/ace/css/ace.min.css" />
-    <link rel="stylesheet" href="/assets/ace/css/ace-rtl.min.css" />
-    <link rel="stylesheet" href="/assets/ace/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>/assets/ace/css/ace.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>/assets/ace/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="<%=basePath%>/assets/ace/css/ace-skins.min.css" />
 
-    <script src="/assets/ace/js/ace-extra.min.js"></script>
+    <script src="<%=basePath%>/assets/ace/js/ace-extra.min.js"></script>
 </head>
 
 <body><%--增加电影信息--%>
@@ -104,29 +104,29 @@
         </div><!-- /widget-body -->
     </div><!-- /login-box -->
 </div><!-- /position-relative -->
-<script src="/assets/ace/js/jquery.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.min.js"></script>
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+    window.jQuery || document.write("<script src='<%=basePath%>/assets/ace/js/jquery-2.0.3.min.js'>"+"<"+"script>");
 </script>
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+    if("ontouchend" in document) document.write("<script src='<%=basePath%>/assets/ace/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 </script>
-<script src="/assets/ace/js/bootstrap.min.js"></script>
-<script src="/assets/ace/js/typeahead-bs2.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/bootstrap.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/typeahead-bs2.min.js"></script>
 
-<script src="/assets/ace/js/jquery-ui-1.10.3.custom.min.js"></script>
-<script src="/assets/ace/js/jquery.ui.touch-punch.min.js"></script>
-<script src="/assets/ace/js/jquery.slimscroll.min.js"></script>
-<script src="/assets/ace/js/jquery.easy-pie-chart.min.js"></script>
-<!--<script src="/assets/ace/js/jquery.sparkline.min.js"></script>-->
-<script src="/assets/ace/js/flot/jquery.flot.min.js"></script>
-<script src="/assets/ace/js/flot/jquery.flot.pie.min.js"></script>
-<script src="/assets/ace/js/flot/jquery.flot.resize.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery-ui-1.10.3.custom.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.ui.touch-punch.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.slimscroll.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/jquery.easy-pie-chart.min.js"></script>
+<!--<script src="<%=basePath%>/assets/ace/js/jquery.sparkline.min.js"></script>-->
+<script src="<%=basePath%>/assets/ace/js/flot/jquery.flot.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/flot/jquery.flot.pie.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/flot/jquery.flot.resize.min.js"></script>
 
-<script src="/assets/ace/js/ace-elements.min.js"></script>
-<script src="/assets/ace/js/ace.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/ace-elements.min.js"></script>
+<script src="<%=basePath%>/assets/ace/js/ace.min.js"></script>
 <script type="text/javascript">
     function orderCheck(date) {
         //选中所有

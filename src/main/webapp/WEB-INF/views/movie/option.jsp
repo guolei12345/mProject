@@ -112,7 +112,7 @@
                     </table>
                 </div>
                 <div class="form-group center">
-                    <button class="btn btn-info" type="button" onclick="savePower('<%=basePath%>/role/savePower')">
+                    <button class="btn btn-info" type="button" onclick="savePower('/role/savePower')">
                         <i class="icon-ok bigger-110"></i>
                         保存
                     </button>

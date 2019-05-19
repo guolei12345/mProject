@@ -8,8 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>电影简介</title>
-<link href="/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
-<link href="/assets/movie/css/sub.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>/assets/movie/css/default.css" rel="stylesheet" type="text/css" />
+<link href="<%=basePath%>/assets/movie/css/sub.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 #nav_content table{ margin:0 auto;  border: 1px solid #ccc; border-collapse: collapse;}
 #nav_content th,#nav_content td {border: 1px solid #ccc; height: 42px; line-height: 42px; text-align:center;}
@@ -77,8 +77,8 @@ window.onload=function(){
 <body>
 <div class="header">
   <div class="top_img">
-    <div class="logo"><a href="#"><img src="/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
-    <%--<div class="rx"><img src="/assets/movie/images/topad.gif" width="500" height="100" /></div>--%>
+    <div class="logo"><a href="#"><img src="<%=basePath%>/assets/movie/images/logo.gif" width="300" height="80" /></a></div>
+    <%--<div class="rx"><img src="<%=basePath%>/assets/movie/images/topad.gif" width="500" height="100" /></div>--%>
     <div class="clear"></div>
   </div>
   <div class="menu">
