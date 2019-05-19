@@ -120,11 +120,11 @@ window.onload=function(){
             <div class="lineh_255" style="padding-left:10px;">
             <div class="t_14">${movie.movename}</div>
               <p><span>导演：</span>${movie.actor}</p>
-              <p><span>主演：</span>${movie.actor}</p>
+              <p><span>主演：</span>${movie.colum1}</p>
               <p><span>类型：</span>${movie.type.typename}</p>
               <p><span>国家：</span>${movie.language}</p>
-              <p><span>片长：</span>118分钟</p>
-              <p><span>上映日期：</span></p>
+              <p><span>片长：</span>${movie.colum2}</p>
+              <p><span>上映日期：</span>${movie.colum3}</p>
               <p><span>剧情简介：</span>${movie.director}</p>
             </div>
           </div>

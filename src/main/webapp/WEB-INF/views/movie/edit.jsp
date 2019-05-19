@@ -33,6 +33,24 @@
                         </div>
                     </div>
                     <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right"> 主演 </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="colum1" name="colum1" value="${movieEdit.colum1}" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
+                    <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right"> 片长 </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="colum2" name="colum2" value="${movieEdit.colum2}" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
+                    <div class="form-group center col-sm-12">
+                        <label class="col-sm-3 control-label no-padding-right"> 上映时间 </label>
+                        <div class="col-sm-9">
+                            <input type="text" id="colum3" name="colum3" value="${movieEdit.colum3}" class="col-xs-10 col-sm-5" />
+                        </div>
+                    </div>
+                    <div class="form-group center col-sm-12">
                         <label class="col-sm-3 control-label no-padding-right"> 语言 </label>
                         <div class="col-sm-9">
                             <input type="text" id="language" name="language" value="${movieEdit.language}" class="col-xs-10 col-sm-5" />
