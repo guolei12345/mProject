@@ -267,7 +267,7 @@
 								</li>
 
 								<li>
-									<a href="#" onclick="load('<%=basePath%>/user<%=basePath%>/userInfo')">
+									<a href="#" onclick="load('<%=basePath%>/user/userInfo')">
 										<i class="icon-user"></i>
 										个人资料
 									</a>
