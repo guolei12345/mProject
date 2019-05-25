@@ -120,7 +120,7 @@ window.onload=function(){
       <div class="right_content">
         <div class="product_info">
           <div class="product_info_xx">
-            <div class="product_info_img" align="center"> <img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}"  /> </div>
+            <div align="center"> <img src="<%=basePath%>/movie/getPic?path=${movie.pic.picurl}" class="product_info_img" /> </div>
             <div class="lineh_255" style="padding-left:10px;">
             <div class="t_14">${movie.movename}</div>
               <p><span>导演：</span>${movie.actor}</p>

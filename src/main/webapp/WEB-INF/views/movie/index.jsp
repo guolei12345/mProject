@@ -177,33 +177,15 @@ window.onload = function(){
           <table border="0" align="center" cellpadding="5" cellspacing="0" cellspace="0" >
             <tr>
               <td id="demo1" valign="top"><table border="0"  cellpadding="0">
-                  <tr>
+                <tr>
+                  <c:forEach items="${syhjdy}" var="movie">
                     <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al1.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">十二生肖</a></dd>
-                      </dl></td>
-                    <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">青春期3</a></dd>
-                      </dl></td>
-                    <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">王者风范3</a></dd>
-                      </dl></td>
-                    <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al4.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">重来电影节</a></dd>
-                      </dl></td>
-                    <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al2.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">灵魂战车</a></dd>
-                      </dl></td>
-                    <td align="center"><dl class="anli_list">
-                        <dt><a href="#"><img src="<%=basePath%>/assets/movie/images/al3.jpg" width="150" height="100" /></a></dt>
-                        <dd><a href="#">重来电影</a></dd>
-                      </dl></td>
-                  </tr>
-                </table></td>
+                      <dt><a href="/movie/videoInfo?movieid=${movie.moveid}"><img src="/movie/getPic?path=${movie.pic.picurl}" width="150" height="100" /></a></dt>
+                      <dd><a href="/movie/videoInfo?movieid=${movie.moveid}">${movie.movename}</a></dd>
+                    </dl></td>
+                  </c:forEach>
+                </tr>
+              </table></td>
               <td id="demo2" valign="top"></td>
             </tr>
           </table>
